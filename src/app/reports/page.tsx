@@ -10,6 +10,7 @@ type CostCenter = { id: string; name: string; code: string };
 type TBRow = { account_id: string; code: string; name_ar: string; account_type: string; nature: string; level: number; total_debit: number; total_credit: number; balance: number };
 type ISRow = { acc_code: string; acc_name: string; account_type: string; nature: string; total_debit: number; total_credit: number; amount: number; compare_amount: number; diff: number; diff_pct: string | null };
 type CCPRow = { id: string; name: string; code: string; revenue: number; expense: number; profit: number };
+type RevByActRow = { activity_id: string; activity_name: string; activity_code: string; revenue: number };
 
 function exportCSV(rows: Record<string, unknown>[], filename: string, columns: { key: string; label: string }[]) {
   const bom = "\uFEFF";
@@ -58,18 +59,25 @@ export default function ReportsPage() {
   const [ccTo, setCcTo] = useState("");
   const [ccRows, setCcRows] = useState<CCPRow[]>([]);
 
+  // Revenues by Activity filters
+  const [revActivity, setRevActivity] = useState("");
+  const [revFrom, setRevFrom] = useState("");
+  const [revTo, setRevTo] = useState("");
+  const [revRows, setRevRows] = useState<RevByActRow[]>([]);
+  const [revTotal, setRevTotal] = useState(0);
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch("/api/activities").then(r => r.json()).then(d => {
       setActivities(d.activities);
-      if (d.activities.length > 0) { setTbActivity(d.activities[0].id); setIsActivity(d.activities[0].id); setCcActivity(d.activities[0].id); }
+      if (d.activities.length > 0) { setTbActivity(d.activities[0].id); setIsActivity(d.activities[0].id); setCcActivity(d.activities[0].id); setRevActivity(d.activities[0].id); }
     }).catch(() => setError("Failed to load activities"));
   }, []);
 
   useEffect(() => {
-    const act = tab === "trial" ? tbActivity : tab === "income" ? isActivity : ccActivity;
+    const act = tab === "trial" ? tbActivity : tab === "income" ? isActivity : tab === "cc" ? ccActivity : revActivity;
     if (!act) return;
     fetch(`/api/fiscal-years?activity_id=${act}`).then(r => r.json()).then(d => setFiscalYears(d.fiscal_years || [])).catch(() => {});
     fetch(`/api/cost-centers?activity_id=${act}`).then(r => r.json()).then(d => setCostCenters(d.centers || [])).catch(() => {});
@@ -127,6 +135,21 @@ export default function ReportsPage() {
     setLoading(false);
   }
 
+  async function loadRev() {
+    setLoading(true); setError("");
+    try {
+      const params = new URLSearchParams();
+      if (revActivity) params.set("activity_id", revActivity);
+      if (revFrom) params.set("from", revFrom);
+      if (revTo) params.set("to", revTo);
+      const r = await fetch(`/api/reports/revenues-by-activity?${params}`);
+      const d = await r.json();
+      if (!r.ok) { setError(d.error); return; }
+      setRevRows(d.rows); setRevTotal(d.total_revenue);
+    } catch { setError("Failed to load revenues by activity"); }
+    setLoading(false);
+  }
+
   const filteredTB = tbRows.filter(r => r.level > 1);
 
   return (
@@ -144,6 +167,7 @@ export default function ReportsPage() {
             <button onClick={() => setTab("trial")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "trial" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ميزان المراجعة</button>
             <button onClick={() => setTab("income")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "income" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>قائمة الدخل</button>
             <button onClick={() => setTab("cc")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "cc" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ربحية مراكز التكلفة</button>
+            <button onClick={() => setTab("revenue")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "revenue" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>إيرادات حسب النشاط</button>
           </div>
 
           {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
@@ -319,6 +343,76 @@ export default function ReportsPage() {
                       </tbody>
                     </table>
                   </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ====== Revenues by Activity ====== */}
+          {tab === "revenue" && (
+            <div>
+              <div className="flex items-center gap-4 flex-wrap mb-6">
+                <select value={revActivity} onChange={e => setRevActivity(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
+                  <option value="">كل الأنشطة</option>
+                  {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
+                </select>
+                <input type="date" value={revFrom} onChange={e => setRevFrom(e.target.value)} className="input-field max-w-[160px]" placeholder="من" />
+                <input type="date" value={revTo} onChange={e => setRevTo(e.target.value)} className="input-field max-w-[160px]" placeholder="إلى" />
+                <GlassButton onClick={loadRev} disabled={loading}>{loading ? "..." : "تشغيل التقرير"}</GlassButton>
+              </div>
+
+              {revRows.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between mb-4 px-2">
+                    <div className="text-sm text-gray-600"><span className="font-semibold text-emerald-700">{revTotal.toFixed(2)}</span> إجمالي الإيرادات</div>
+                    <GlassButton onClick={() => exportCSV(revRows, "eeradat-7asab-elnashaat.csv", [
+                      { key: "activity_code", label: "كود النشاط" }, { key: "activity_name", label: "النشاط" },
+                      { key: "revenue", label: "الإيرادات" },
+                    ])} className="text-xs">تصدير Excel</GlassButton>
+                  </div>
+
+                  <div className="overflow-x-auto rounded-2xl bg-black/10">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="bg-gray-100">
+                          <th className="text-right px-4 py-3 text-gray-600 font-medium">الكود</th>
+                          <th className="text-right px-4 py-3 text-gray-600 font-medium">النشاط</th>
+                          <th className="text-left px-4 py-3 text-gray-600 font-medium">الإيرادات</th>
+                          <th className="text-left px-4 py-3 text-gray-600 font-medium">%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {revRows.map((r, i) => {
+                          const pct = revTotal > 0 ? (r.revenue / revTotal * 100) : 0;
+                          return (
+                            <tr key={r.activity_id} className={i < revRows.length - 1 ? "border-b border-gray-200" : ""}>
+                              <td className="px-4 py-3 font-mono text-xs text-gray-500">{r.activity_code}</td>
+                              <td className="px-4 py-3 text-gray-800">{r.activity_name}</td>
+                              <td className="px-4 py-3 font-mono text-emerald-700 font-semibold text-left">{r.revenue.toFixed(2)}</td>
+                              <td className="px-4 py-3 font-mono text-xs text-gray-500 text-left">{pct.toFixed(1)}%</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {revRows.length > 1 && (
+                    <div className="mt-6 flex flex-col gap-2">
+                      {revRows.map(r => {
+                        const pct = revTotal > 0 ? (r.revenue / revTotal * 100) : 0;
+                        return (
+                          <div key={r.activity_id} className="flex items-center gap-4">
+                            <span className="text-xs text-gray-500 w-20 truncate">{r.activity_name}</span>
+                            <div className="flex-1 h-6 rounded-lg bg-gray-100 overflow-hidden">
+                              <div className="h-full rounded-lg bg-indigo-500 transition-all" style={{ width: `${pct}%` }} />
+                            </div>
+                            <span className="text-xs font-mono text-gray-600 w-24 text-left">{r.revenue.toFixed(2)}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
