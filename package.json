@@ -7,13 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:seed": "prisma db seed",
-    "db:studio": "prisma studio",
-    "db:setup": "prisma db push && prisma db seed",
-    "db:migrate": "prisma migrate dev",
-    "db:reset": "prisma migrate reset --force"
+    "add-super-admin": "node scripts/add-super-admin.cjs"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.2",
