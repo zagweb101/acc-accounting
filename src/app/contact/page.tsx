@@ -77,7 +77,7 @@ export default function Contact() {
 
         <div className="flex flex-col gap-6">
           <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-violet-500/20 flex items-center justify-center text-violet-700">@</div>
+            <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-violet-700">@</div>
             <h3 className="text-gray-900 font-semibold">Email</h3>
             <p className="text-gray-600 text-sm">hello@acc.design</p>
           </GlassCard>

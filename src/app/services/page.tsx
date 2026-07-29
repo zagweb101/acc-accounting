@@ -6,7 +6,7 @@ const services = [
     icon: "â—ˆ",
     title: "UI/UX Design",
     desc: "Crafting intuitive and visually stunning user interfaces that delight users and drive engagement.",
-    color: "text-violet-700 bg-violet-500/20",
+    color: "text-violet-700 bg-indigo-500/20",
   },
   {
     icon: "â—‰",
@@ -24,7 +24,7 @@ const services = [
     icon: "â—‹",
     title: "Mobile Design",
     desc: "Designing elegant mobile experiences that feel native and intuitive on every device.",
-    color: "text-violet-700 bg-violet-500/20",
+    color: "text-violet-700 bg-indigo-500/20",
   },
   {
     icon: "â–¡",
@@ -72,7 +72,7 @@ export default function Services() {
           <div className="overflow-hidden rounded-2xl bg-black/10">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 backdrop-blur-xl">
+                <tr className="bg-gray-50">
                   <th className="text-left px-6 py-4 text-gray-600 font-medium">Plan</th>
                   <th className="text-left px-6 py-4 text-gray-600 font-medium">Features</th>
                   <th className="text-left px-6 py-4 text-gray-600 font-medium">Timeline</th>

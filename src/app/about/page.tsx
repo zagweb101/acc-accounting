@@ -56,7 +56,7 @@ export default function About() {
           <div className="overflow-hidden rounded-2xl bg-black/10">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-gray-50 backdrop-blur-xl">
+                <tr className="bg-gray-50">
                   <th className="text-left px-6 py-4 text-gray-600 font-medium">Name</th>
                   <th className="text-left px-6 py-4 text-gray-600 font-medium">Role</th>
                   <th className="text-left px-6 py-4 text-gray-600 font-medium">Experience</th>

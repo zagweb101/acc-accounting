@@ -1,6 +1,7 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
+import BackgroundLights from "@/components/BackgroundLights";
 import ClientShell from "@/components/ClientShell";
 
 const cairo = Cairo({
@@ -10,7 +11,7 @@ const cairo = Cairo({
 
 export const metadata: Metadata = {
   title: "ACC",
-  description: "Ù†Ø¸Ø§Ù… Ù…Ø­Ø§Ø³Ø¨Ø© Ù…ØªÙƒØ§Ù…Ù„",
+  description: "نظام محاسبة متكامل",
 };
 
 export default function RootLayout({
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ar" className={`${cairo.variable} h-full antialiased`}>
       <body className="min-h-full flex bg-white text-gray-900" style={{ fontFamily: "var(--font-cairo), sans-serif" }}>
+        <BackgroundLights />
         <ClientShell>{children}</ClientShell>
       </body>
     </html>

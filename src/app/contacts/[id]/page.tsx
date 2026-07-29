@@ -242,7 +242,7 @@ export default function ContactDetailPage() {
       </section>
 
       {showPayment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <GlassCard className="p-8 w-full max-w-lg mx-4">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">تسديد دفعة</h2>
             <div className="flex flex-col gap-4">
@@ -282,7 +282,7 @@ export default function ContactDetailPage() {
               <div className="text-xs text-gray-400">سيتم إنشاء قيد محاسبي تلقائي من حـ/ الصندوق إلى حـ/ العميل</div>
               <div className="flex items-center gap-3 mt-2">
                 <GlassButton onClick={handlePayment} disabled={paying || !payAmount || payAmount <= 0}>{paying ? "جاري التنفيذ..." : "تأكيد الدفع"}</GlassButton>
-                <GlassButton onClick={() => setShowPayment(false)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+                <GlassButton onClick={() => setShowPayment(false)} className="">إلغاء</GlassButton>
               </div>
             </div>
           </GlassCard>

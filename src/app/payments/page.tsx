@@ -83,8 +83,8 @@ export default function PaymentsPage() {
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø§Ù„Ù…Ø¯ÙÙˆØ¹Ø§Øª</h1>
-          <p className="text-gray-600">ØªØ³Ø¬ÙŠÙ„ Ø¯ÙØ¹Ø§Øª Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ â€” Ù…Ø¹ Ù‚ÙŠØ¯ Ù…Ø­Ø§Ø³Ø¨ÙŠ ØªÙ„Ù‚Ø§Ø¦ÙŠ</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900">المدفوعات</h1>
+          <p className="text-gray-600">تسجيل دفعات العملاء — مع قيد محاسبي تلقائي</p>
         </GlassCard>
       </section>
 
@@ -95,24 +95,24 @@ export default function PaymentsPage() {
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
             <div className="flex-1" />
-            <GlassButton onClick={openAdd}>+ Ø¯ÙØ¹Ø© Ø¬Ø¯ÙŠØ¯Ø©</GlassButton>
+            <GlassButton onClick={openAdd}>+ دفعة جديدة</GlassButton>
           </div>
 
           {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
 
           {payments.length === 0 ? (
-            <p className="text-gray-400 text-center py-12">Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ø¯ÙÙˆØ¹Ø§Øª. Ø³Ø¬Ù„ Ø¯ÙØ¹Ø© Ø¬Ø¯ÙŠØ¯Ø©</p>
+            <p className="text-gray-400 text-center py-12">لا توجد مدفوعات. سجل دفعة جديدة</p>
           ) : (
             <div className="overflow-hidden rounded-2xl bg-black/10">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-gray-50 backdrop-blur-xl">
-                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„ØªØ§Ø±ÙŠØ®</th>
-                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø¹Ù…ÙŠÙ„</th>
-                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„ÙØ§ØªÙˆØ±Ø©</th>
-                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ù…Ø¨Ù„Øº</th>
-                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„Ø¯ÙØ¹</th>
-                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ù…Ù„Ø§Ø­Ø¸Ø§Øª</th>
+                  <tr className="bg-gray-50">
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">التاريخ</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">العميل</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">الفاتورة</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">المبلغ</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">طريقة الدفع</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">ملاحظات</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -120,14 +120,14 @@ export default function PaymentsPage() {
                     <tr key={p.id} className={i < payments.length - 1 ? "border-b border-gray-200" : ""}>
                       <td className="px-4 py-3 text-gray-700 font-mono text-xs">{p.payment_date}</td>
                       <td className="px-4 py-3 text-gray-900">{p.contact_name}</td>
-                      <td className="px-4 py-3 text-gray-500 font-mono text-xs">{p.invoice_number || "â€”"}</td>
+                      <td className="px-4 py-3 text-gray-500 font-mono text-xs">{p.invoice_number || "—"}</td>
                       <td className="px-4 py-3 text-emerald-700 font-mono font-semibold text-xs">{p.amount.toFixed(2)}</td>
                       <td className="px-4 py-3">
                         <span className={`px-2 py-0.5 rounded-full text-xs ${p.method === "cash" ? "bg-blue-50 text-blue-700" : p.method === "bank" ? "bg-violet-50 text-violet-700" : "bg-cyan-500/15 text-cyan-300"}`}>
-                          {p.method === "cash" ? "Ù†Ù‚Ø¯Ø§Ù‹" : p.method === "bank" ? "ØªØ­ÙˆÙŠÙ„ Ø¨Ù†ÙƒÙŠ" : "Ø­ÙˆØ§Ù„Ø©"}
+                          {p.method === "cash" ? "نقداً" : p.method === "bank" ? "تحويل بنكي" : "حوالة"}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-gray-400 text-xs">{p.notes || "â€”"}</td>
+                      <td className="px-4 py-3 text-gray-400 text-xs">{p.notes || "—"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -138,54 +138,54 @@ export default function PaymentsPage() {
       </section>
 
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <GlassCard className="p-8 w-full max-w-lg mx-4">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">ØªØ³Ø¯ÙŠØ¯ Ø¯ÙØ¹Ø© Ø¬Ø¯ÙŠØ¯Ø©</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">تسديد دفعة جديدة</h2>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ø§Ù„Ø¹Ù…ÙŠÙ„</label>
+                <label className="text-gray-600 text-sm">العميل</label>
                 <select value={formContact} onChange={e => { setFormContact(e.target.value); setFormInvoice(""); }} className="input-field cursor-pointer">
-                  <option value="">Ø§Ø®ØªØ± Ø¹Ù…ÙŠÙ„Ø§Ù‹</option>
+                  <option value="">اختر عميلاً</option>
                   {filteredContacts.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ø§Ù„ÙØ§ØªÙˆØ±Ø© (Ø§Ø®ØªÙŠØ§Ø±ÙŠ)</label>
+                <label className="text-gray-600 text-sm">الفاتورة (اختياري)</label>
                 <select value={formInvoice} onChange={e => setFormInvoice(e.target.value)} className="input-field cursor-pointer">
-                  <option value="">â€” Ø¯ÙØ¹Ø© Ø¹Ø§Ù…Ø© â€”</option>
+                  <option value="">— دفعة عامة —</option>
                   {invoices.filter(i => i.contact_id === formContact).map(inv => (
                     <option key={inv.id} value={inv.id}>
-                      {inv.invoice_number} â€” Ø§Ù„Ù…ØªØ¨Ù‚ÙŠ: {(inv.total_amount - inv.paid_amount).toFixed(2)}
+                      {inv.invoice_number} — المتبقي: {(inv.total_amount - inv.paid_amount).toFixed(2)}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <label className="text-gray-600 text-sm">Ø§Ù„Ù…Ø¨Ù„Øº</label>
+                  <label className="text-gray-600 text-sm">المبلغ</label>
                   <input type="number" step="0.01" min="0" value={formAmount || ""} onChange={e => setFormAmount(parseFloat(e.target.value) || 0)} className="input-field" placeholder="0.00" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-gray-600 text-sm">Ø§Ù„ØªØ§Ø±ÙŠØ®</label>
+                  <label className="text-gray-600 text-sm">التاريخ</label>
                   <input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} className="input-field" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„Ø¯ÙØ¹</label>
+                <label className="text-gray-600 text-sm">طريقة الدفع</label>
                 <select value={formMethod} onChange={e => setFormMethod(e.target.value)} className="input-field cursor-pointer">
-                  <option value="cash">Ù†Ù‚Ø¯Ø§Ù‹</option>
-                  <option value="bank">ØªØ­ÙˆÙŠÙ„ Ø¨Ù†ÙƒÙŠ</option>
-                  <option value="transfer">Ø­ÙˆØ§Ù„Ø©</option>
+                  <option value="cash">نقداً</option>
+                  <option value="bank">تحويل بنكي</option>
+                  <option value="transfer">حوالة</option>
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ù…Ù„Ø§Ø­Ø¸Ø§Øª</label>
-                <GlassInput value={formNotes} onChange={e => setFormNotes(e.target.value)} placeholder="Ø§Ø®ØªÙŠØ§Ø±ÙŠ" />
+                <label className="text-gray-600 text-sm">ملاحظات</label>
+                <GlassInput value={formNotes} onChange={e => setFormNotes(e.target.value)} placeholder="اختياري" />
               </div>
-              <div className="text-xs text-gray-400">Ø³ÙŠØªÙ… Ø¥Ù†Ø´Ø§Ø¡ Ù‚ÙŠØ¯ Ù…Ø­Ø§Ø³Ø¨ÙŠ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ù…Ù† Ø­Ù€/ Ø§Ù„ØµÙ†Ø¯ÙˆÙ‚ (1100) Ø¥Ù„Ù‰ Ø­Ù€/ Ø§Ù„Ø°Ù…Ù… Ø§Ù„Ù…Ø¯ÙŠÙ†Ø© (1200)</div>
+              <div className="text-xs text-gray-400">سيتم إنشاء قيد محاسبي تلقائي من حـ/ الصندوق (1100) إلى حـ/ الذمم المدينة (1200)</div>
               <div className="flex items-center gap-3 mt-2">
-                <GlassButton onClick={savePayment} disabled={saving || !formContact || !formAmount || formAmount <= 0}>{saving ? "Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªÙ†ÙÙŠØ°..." : "ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø¯ÙØ¹"}</GlassButton>
-                <GlassButton onClick={() => setShowForm(false)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
+                <GlassButton onClick={savePayment} disabled={saving || !formContact || !formAmount || formAmount <= 0}>{saving ? "جاري التنفيذ..." : "تأكيد الدفع"}</GlassButton>
+                <GlassButton onClick={() => setShowForm(false)} className="">إلغاء</GlassButton>
               </div>
             </div>
           </GlassCard>

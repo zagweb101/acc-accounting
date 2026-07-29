@@ -94,8 +94,8 @@ export default function ContactsPage() {
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø¬Ù‡Ø§Øª Ø§Ù„Ø§ØªØµØ§Ù„</h1>
-          <p className="text-gray-600">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ ÙˆØ§Ù„Ù…ÙˆØ±Ø¯ÙŠÙ† â€” Ø§Ù„Ø£Ø±ØµØ¯Ø© ÙˆØ§Ù„Ø­Ø¯ÙˆØ¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†ÙŠØ©</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900">جهات الاتصال</h1>
+          <p className="text-gray-600">إدارة العملاء والموردين — الأرصدة والحدود الائتمانية</p>
         </GlassCard>
       </section>
 
@@ -108,18 +108,18 @@ export default function ContactsPage() {
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
               {["all", "customer", "supplier", "both"].map(t => (
                 <button key={t} onClick={() => setFilter(t)} className={`px-4 py-1.5 rounded-xl text-sm font-medium transition-all ${filter === t ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>
-                  {t === "all" ? "Ø§Ù„ÙƒÙ„" : t === "customer" ? "Ø¹Ù…Ù„Ø§Ø¡" : t === "supplier" ? "Ù…ÙˆØ±Ø¯ÙŠÙ†" : "Ø§Ù„Ø§Ø«Ù†ÙŠÙ†"}
+                  {t === "all" ? "الكل" : t === "customer" ? "عملاء" : t === "supplier" ? "موردين" : "الاثنين"}
                 </button>
               ))}
             </div>
-            <div className="flex-1 min-w-[180px]"><GlassInput placeholder="Ø¨Ø­Ø« Ø¨Ø§Ù„Ø§Ø³Ù… Ø£Ùˆ Ø§Ù„Ø±Ù‚Ù… Ø§Ù„Ø¶Ø±ÙŠØ¨ÙŠ..." value={search} onChange={e => setSearch(e.target.value)} /></div>
-            <GlassButton onClick={openAdd}>+ Ø¬Ù‡Ø© Ø§ØªØµØ§Ù„</GlassButton>
+            <div className="flex-1 min-w-[180px]"><GlassInput placeholder="بحث بالاسم أو الرقم الضريبي..." value={search} onChange={e => setSearch(e.target.value)} /></div>
+            <GlassButton onClick={openAdd}>+ جهة اتصال</GlassButton>
           </div>
 
           {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
 
           {filtered.length === 0 ? (
-            <p className="text-gray-400 text-center py-12">Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¬Ù‡Ø§Øª Ø§ØªØµØ§Ù„. Ø£Ø¶Ù ÙˆØ§Ø­Ø¯Ø© Ù„Ù„Ø¨Ø¯Ø£</p>
+            <p className="text-gray-400 text-center py-12">لا توجد جهات اتصال. أضف واحدة للبدأ</p>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map(c => {
@@ -131,31 +131,31 @@ export default function ContactsPage() {
                       <div>
                         <h3 className="text-gray-900 font-semibold text-base">{c.name}</h3>
                         <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${c.type === "customer" ? "bg-emerald-50 text-emerald-700" : c.type === "supplier" ? "bg-amber-50 text-amber-700" : "bg-violet-50 text-violet-700"}`}>
-                          {c.type === "customer" ? "Ø¹Ù…ÙŠÙ„" : c.type === "supplier" ? "Ù…ÙˆØ±Ø¯" : "Ø¹Ù…ÙŠÙ„ ÙˆÙ…ÙˆØ±Ø¯"}
+                          {c.type === "customer" ? "عميل" : c.type === "supplier" ? "مورد" : "عميل ومورد"}
                         </span>
                       </div>
                       <div className="flex gap-1">
-                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); openEdit(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs">âš™</button>
-                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); setDeleteConfirm(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs">âœ•</button>
+                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); openEdit(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs">⚙</button>
+                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); setDeleteConfirm(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs">✕</button>
                       </div>
                     </div>
-                    {c.tax_number && <p className="text-gray-400 text-xs font-mono mb-1">Ø¶Ø±ÙŠØ¨ÙŠ: {c.tax_number}</p>}
+                    {c.tax_number && <p className="text-gray-400 text-xs font-mono mb-1">ضريبي: {c.tax_number}</p>}
                     {c.phone && <p className="text-gray-400 text-xs mb-3">{c.phone}</p>}
                     <div className="flex items-center justify-between pt-3 border-t border-gray-200">
                       <div>
-                        <p className="text-gray-400 text-xs">Ø§Ù„Ù…Ø³ØªØ­Ù‚</p>
+                        <p className="text-gray-400 text-xs">المستحق</p>
                         <p className={`font-mono text-sm font-semibold ${overLimit ? "text-red-300" : overdue ? "text-amber-700" : "text-emerald-700"}`}>
                           {c.outstanding.toFixed(2)}
                         </p>
                       </div>
                       {c.credit_limit > 0 && (
                         <div className="text-left">
-                          <p className="text-gray-400 text-xs">Ø§Ù„Ø­Ø¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†ÙŠ</p>
+                          <p className="text-gray-400 text-xs">الحد الائتماني</p>
                           <p className="font-mono text-sm text-gray-700">{c.credit_limit.toFixed(2)}</p>
                         </div>
                       )}
                     </div>
-                    {overLimit && <p className="text-red-300/70 text-xs mt-2">ØªØ¬Ø§ÙˆØ² Ø§Ù„Ø­Ø¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†ÙŠ</p>}
+                    {overLimit && <p className="text-red-300/70 text-xs mt-2">تجاوز الحد الائتماني</p>}
                   </a>
                 );
               })}
@@ -165,39 +165,39 @@ export default function ContactsPage() {
       </section>
 
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <GlassCard className="p-8 w-full max-w-lg mx-4">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">{editTarget ? `ØªØ¹Ø¯ÙŠÙ„ ${editTarget.name}` : "Ø¥Ø¶Ø§ÙØ© Ø¬Ù‡Ø© Ø§ØªØµØ§Ù„"}</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">{editTarget ? `تعديل ${editTarget.name}` : "إضافة جهة اتصال"}</h2>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ø§Ù„Ø§Ø³Ù…</label>
-                <GlassInput value={formName} onChange={e => setFormName(e.target.value)} placeholder="Ø§Ø³Ù… Ø¬Ù‡Ø© Ø§Ù„Ø§ØªØµØ§Ù„" />
+                <label className="text-gray-600 text-sm">الاسم</label>
+                <GlassInput value={formName} onChange={e => setFormName(e.target.value)} placeholder="اسم جهة الاتصال" />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ø§Ù„Ù†ÙˆØ¹</label>
+                <label className="text-gray-600 text-sm">النوع</label>
                 <select value={formType} onChange={e => setFormType(e.target.value)} className="input-field cursor-pointer">
-                  <option value="customer">Ø¹Ù…ÙŠÙ„</option>
-                  <option value="supplier">Ù…ÙˆØ±Ø¯</option>
-                  <option value="both">Ø¹Ù…ÙŠÙ„ ÙˆÙ…ÙˆØ±Ø¯</option>
+                  <option value="customer">عميل</option>
+                  <option value="supplier">مورد</option>
+                  <option value="both">عميل ومورد</option>
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <label className="text-gray-600 text-sm">Ø§Ù„Ø±Ù‚Ù… Ø§Ù„Ø¶Ø±ÙŠØ¨ÙŠ</label>
+                  <label className="text-gray-600 text-sm">الرقم الضريبي</label>
                   <GlassInput value={formTax} onChange={e => setFormTax(e.target.value)} placeholder="123456789" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-gray-600 text-sm">Ø±Ù‚Ù… Ø§Ù„Ø¬ÙˆØ§Ù„</label>
+                  <label className="text-gray-600 text-sm">رقم الجوال</label>
                   <GlassInput value={formPhone} onChange={e => setFormPhone(e.target.value)} placeholder="0555123456" />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Ø§Ù„Ø­Ø¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†ÙŠ</label>
+                <label className="text-gray-600 text-sm">الحد الائتماني</label>
                 <input type="number" step="0.01" min="0" value={formCredit} onChange={e => setFormCredit(parseFloat(e.target.value) || 0)} className="input-field" />
               </div>
               <div className="flex items-center gap-3 mt-2">
-                <GlassButton onClick={save} disabled={saving || !formName}>{saving ? "Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø­ÙØ¸..." : editTarget ? "Ø­ÙØ¸ Ø§Ù„ØªØ¹Ø¯ÙŠÙ„Ø§Øª" : "Ø¥Ø¶Ø§ÙØ©"}</GlassButton>
-                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); }} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
+                <GlassButton onClick={save} disabled={saving || !formName}>{saving ? "جاري الحفظ..." : editTarget ? "حفظ التعديلات" : "إضافة"}</GlassButton>
+                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); }} className="">إلغاء</GlassButton>
               </div>
             </div>
           </GlassCard>
@@ -205,13 +205,13 @@ export default function ContactsPage() {
       )}
 
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <GlassCard className="p-8 w-full max-w-md mx-4 text-center">
-            <p className="text-gray-900 text-lg mb-2">Ø­Ø°Ù Ø¬Ù‡Ø© Ø§ØªØµØ§Ù„</p>
-            <p className="text-gray-600 mb-6">{`Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù "${deleteConfirm.name}"ØŸ`}</p>
+            <p className="text-gray-900 text-lg mb-2">حذف جهة اتصال</p>
+            <p className="text-gray-600 mb-6">{`هل أنت متأكد من حذف "${deleteConfirm.name}"؟`}</p>
             <div className="flex items-center justify-center gap-3">
-              <GlassButton onClick={() => deleteContact(deleteConfirm.id)} className="bg-red-500/20 hover:bg-red-500/30">ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù</GlassButton>
-              <GlassButton onClick={() => setDeleteConfirm(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
+              <GlassButton onClick={() => deleteContact(deleteConfirm.id)} className="bg-red-500/20 hover:bg-red-500/30">تأكيد الحذف</GlassButton>
+              <GlassButton onClick={() => setDeleteConfirm(null)} className="">إلغاء</GlassButton>
             </div>
           </GlassCard>
         </div>
