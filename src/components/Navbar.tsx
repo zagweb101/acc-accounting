@@ -7,19 +7,19 @@ export default function Navbar() {
         ACC
       </Link>
       <div className="flex items-center gap-6 text-sm">
-        <Link href="/" className="text-white/60 hover:text-white/90 transition-colors duration-300">
+        <Link href="/" className="text-white/50 hover:text-white/80 transition-colors duration-200">
           Home
         </Link>
-        <Link href="/about" className="text-white/60 hover:text-white/90 transition-colors duration-300">
+        <Link href="/about" className="text-white/50 hover:text-white/80 transition-colors duration-200">
           About
         </Link>
-        <Link href="/services" className="text-white/60 hover:text-white/90 transition-colors duration-300">
+        <Link href="/services" className="text-white/50 hover:text-white/80 transition-colors duration-200">
           Services
         </Link>
-        <Link href="/contact" className="text-white/60 hover:text-white/90 transition-colors duration-300">
+        <Link href="/contact" className="text-white/50 hover:text-white/80 transition-colors duration-200">
           Contact
         </Link>
-        <Link href="/reviews" className="text-white/60 hover:text-white/90 transition-colors duration-300">
+        <Link href="/reviews" className="text-white/50 hover:text-white/80 transition-colors duration-200">
           Reviews
         </Link>
       </div>

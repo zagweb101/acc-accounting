@@ -20,7 +20,8 @@ type DashData = {
   agingBuckets: AgingBucket[];
 };
 
-const CHART_COLORS = ["#a78bfa", "#60a5fa", "#34d399", "#fbbf24"];
+const ACCENT = "#818cf8";
+const ACCENT_OPTS = ["#818cf8", "#6366f1", "#a5b4fc", "#4f46e5"];
 
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: { name: string; value: number; color: string }[]; label?: string }) {
   if (!active || !payload) return null;
@@ -37,13 +38,11 @@ function CustomTooltip({ active, payload, label }: { active?: boolean; payload?:
 }
 
 function KpiCard({ kpi }: { kpi: KPI }) {
-  const colorMap: Record<string, string> = { violet: "from-violet-500/10 to-violet-500/5 border-violet-500/10", blue: "from-blue-500/10 to-blue-500/5 border-blue-500/10", amber: "from-amber-500/10 to-amber-500/5 border-amber-500/10", emerald: "from-emerald-500/10 to-emerald-500/5 border-emerald-500/10" };
-  const iconBg: Record<string, string> = { violet: "bg-violet-500/20 text-violet-300", blue: "bg-blue-500/20 text-blue-300", amber: "bg-amber-500/20 text-amber-300", emerald: "bg-emerald-500/20 text-emerald-300" };
   return (
-    <div className={`glass rounded-2xl p-5 border bg-gradient-to-br ${colorMap[kpi.color] || ""}`}>
+    <div className="glass rounded-2xl p-5">
       <div className="flex items-start justify-between mb-4">
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${iconBg[kpi.color] || "bg-white/10"}`}>{kpi.icon}</div>
-        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${kpi.change >= 0 ? "bg-emerald-500/20 border border-emerald-500/30 text-emerald-300" : "bg-red-500/20 border border-red-500/30 text-red-300"}`}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-accent-subtle text-accent" style={{ backgroundColor: "rgba(129,140,248,0.15)", color: "#818cf8" }}>{kpi.icon}</div>
+        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${kpi.change >= 0 ? "bg-white/10 text-white/70" : "bg-red-500/20 border border-red-500/30 text-red-300"}`}>
           {kpi.change >= 0 ? "↑" : "↓"} {Math.abs(kpi.change)}%
         </span>
       </div>
@@ -89,7 +88,7 @@ export default function DashboardPage() {
       <section className="max-w-7xl w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-white/90">لوحة التحكم</h1>
-          <p className="text-white/60">المؤشرات المالية الرئيسية — نظرة شاملة على الأداء</p>
+          <p className="text-white/50">المؤشرات المالية الرئيسية — نظرة شاملة على الأداء</p>
         </GlassCard>
       </section>
 
@@ -126,10 +125,10 @@ export default function DashboardPage() {
                 <ResponsiveContainer width="100%" height={280}>
                   <PieChart>
                     <Pie data={data.revenueByActivity} cx="50%" cy="50%" innerRadius={50} outerRadius={90} paddingAngle={4} dataKey="value" nameKey="name">
-                      {data.revenueByActivity.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}
+                      {data.revenueByActivity.map((_, i) => <Cell key={i} fill={ACCENT_OPTS[i % ACCENT_OPTS.length]} />)}
                     </Pie>
                     <Tooltip content={<CustomTooltip />} />
-                    <Legend formatter={(value: string) => <span className="text-white/60 text-xs">{value}</span>} />
+                    <Legend formatter={(value: string) => <span className="text-white/50 text-xs">{value}</span>} />
                   </PieChart>
                 </ResponsiveContainer>
               )}
@@ -146,9 +145,9 @@ export default function DashboardPage() {
                     <XAxis dataKey="month" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
                     <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
-                    <Legend formatter={(value: string) => <span className="text-white/60 text-xs">{value}</span>} />
+                    <Legend formatter={(value: string) => <span className="text-white/50 text-xs">{value}</span>} />
                     {activities.filter(a => !filterActivity || a.id === filterActivity).map((a, i) => (
-                      <Bar key={a.id} dataKey={a.name} name={a.name} fill={CHART_COLORS[i % CHART_COLORS.length]} radius={[6, 6, 0, 0]} maxBarSize={40} />
+                      <Bar key={a.id} dataKey={a.name} name={a.name} fill={ACCENT_OPTS[i % ACCENT_OPTS.length]} radius={[6, 6, 0, 0]} maxBarSize={40} />
                     ))}
                   </BarChart>
                 </ResponsiveContainer>
@@ -170,7 +169,7 @@ export default function DashboardPage() {
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
                     <Bar dataKey="value" name="المستحق" radius={[8, 8, 0, 0]} maxBarSize={60}>
                       {data.agingBuckets.map((b, i) => (
-                        <Cell key={i} fill={["#34d399", "#fbbf24", "#fb923c", "#f87171"][i]} />
+                        <Cell key={i} fill={[ACCENT, "#6366f1", "#a5b4fc", "#4f46e5"][i]} />
                       ))}
                     </Bar>
                   </BarChart>

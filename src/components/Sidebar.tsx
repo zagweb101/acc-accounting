@@ -39,7 +39,7 @@ export default function Sidebar() {
   const items = allItems.filter(i => user ? i.roles.includes(user.role) : false);
 
   return (
-    <aside className="w-64 min-h-screen bg-black/20 backdrop-blur-2xl border-r border-white/[0.08] flex flex-col py-8 px-4 gap-2 fixed top-0 left-0 z-40">
+    <aside className="w-64 min-h-screen bg-black/20 backdrop-blur-2xl border-l border-white/[0.06] flex flex-col py-8 px-4 gap-2 fixed top-0 right-0 z-40">
       <div className="px-3 mb-8">
         <Link href="/dashboard" className="text-white/90 font-semibold tracking-tight text-xl">
           ACC
@@ -53,10 +53,10 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-300 ${
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-200 ${
                 isActive
-                  ? "bg-white/[0.10] border border-white/[0.12] shadow-[0_0_20px_rgba(139,92,246,0.15)] text-white/90"
-                  : "text-white/60 hover:text-white/90 hover:bg-white/[0.06] border border-transparent"
+                  ? "bg-white/[0.08] border border-white/[0.1] text-white/90"
+                  : "text-white/50 hover:text-white/80 hover:bg-white/[0.04] border border-transparent"
               }`}
             >
               <span className="text-lg">{item.icon}</span>

@@ -78,7 +78,7 @@ export default function ContactDetailPage() {
               <h1 className="text-3xl font-semibold tracking-tight text-white/90">{contact.name as string}</h1>
               <span className={`inline-block mt-2 px-3 py-0.5 rounded-full text-xs font-medium ${typeColor}`}>{typeLabel}</span>
             </div>
-            <GlassButton onClick={() => setShowPayment(true)} className="from-emerald-500/20 to-emerald-500/10 hover:from-emerald-500/30 hover:to-emerald-500/20">+ تسديد</GlassButton>
+            <GlassButton onClick={() => setShowPayment(true)}>+ تسديد</GlassButton>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-6">
             <div>

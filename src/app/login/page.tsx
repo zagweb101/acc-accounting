@@ -24,7 +24,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-sm bg-black/20 backdrop-blur-2xl border border-white/[0.08] rounded-3xl p-8 shadow-[0_0_60px_rgba(139,92,246,0.1)]">
+      <div className="w-full max-w-sm bg-black/20 backdrop-blur-2xl border border-white/[0.08] rounded-3xl p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-semibold tracking-tight text-white/90">ACC</h1>
           <p className="text-white/40 text-sm mt-1">تسجيل الدخول إلى النظام</p>
@@ -33,17 +33,17 @@ export default function LoginPage() {
           <input
             value={username} onChange={e => setUsername(e.target.value)}
             placeholder="اسم المستخدم"
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/[0.10] text-white/90 placeholder:text-white/30 outline-none focus:border-violet-500/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/[0.10] text-white/90 placeholder:text-white/30 outline-none focus:border-[#818cf8]/50 transition-all"
           />
           <input
             type="password" value={password} onChange={e => setPassword(e.target.value)}
             placeholder="كلمة المرور"
-            className="w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/[0.10] text-white/90 placeholder:text-white/30 outline-none focus:border-violet-500/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.06] border border-white/[0.10] text-white/90 placeholder:text-white/30 outline-none focus:border-[#818cf8]/50 transition-all"
           />
           {error && <p className="text-red-400 text-sm text-center">{error}</p>}
           <button
             type="submit" disabled={loading}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-medium hover:from-violet-500 hover:to-blue-500 disabled:opacity-50 transition-all"
+            className="w-full py-3 rounded-xl bg-[#818cf8] text-white font-medium hover:bg-[#6366f1] disabled:opacity-50 transition-all"
           >
             {loading ? "...جاري" : "تسجيل الدخول"}
           </button>

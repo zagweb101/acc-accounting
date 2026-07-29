@@ -1,70 +1,70 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0a0a0f;
+  --color-background: #0c0c10;
   --color-foreground: #ffffff;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: #818cf8;
+  --color-accent-subtle: rgba(129, 140, 248, 0.15);
+  --font-sans: "Cairo", sans-serif;
+  --font-mono: "Cairo", sans-serif;
 }
 
 @utility glass {
-  background-color: rgb(255 255 255 / 0.07);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgb(255 255 255 / 0.12);
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1rem;
-  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.1);
 }
 
 @utility glass-hover {
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .glass-hover:hover {
-  background-color: rgb(255 255 255 / 0.10);
-  border-color: rgb(255 255 255 / 0.18);
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 @utility glass-btn {
-  background-image: linear-gradient(to bottom right, rgb(139 92 246 / 0.2), rgb(59 130 246 / 0.2));
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgb(255 255 255 / 0.2);
-  border-radius: 9999px;
-  padding: 0.75rem 1.5rem;
-  color: rgb(255 255 255);
+  background-color: rgba(129, 140, 248, 0.12);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  color: #ffffff;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .glass-btn:hover {
-  background-image: linear-gradient(to bottom right, rgb(139 92 246 / 0.3), rgb(59 130 246 / 0.3));
-  border-color: rgb(255 255 255 / 0.3);
+  background-color: rgba(129, 140, 248, 0.22);
+  border-color: rgba(129, 140, 248, 0.35);
 }
 
 @utility glass-input {
-  background-color: rgb(0 0 0 / 0.2);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgb(255 255 255 / 0.1);
-  border-radius: 1rem;
-  padding: 0.75rem 1rem;
-  color: rgb(255 255 255);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+  color: #ffffff;
   outline: none;
   width: 100%;
 }
 
 .glass-input::placeholder {
-  color: rgb(255 255 255 / 0.4);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .glass-input:focus {
-  border-color: rgb(167 139 250 / 0.5);
+  border-color: rgba(129, 140, 248, 0.4);
 }
 
 body {
-  background-color: #0a0a0f;
-  color: rgb(255 255 255);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0c0c10;
+  color: #ffffff;
+  font-family: "Cairo", sans-serif;
 }
-
