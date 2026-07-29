@@ -39,12 +39,12 @@ export default function Sidebar() {
   const items = allItems.filter(i => user ? i.roles.includes(user.role) : false);
 
   return (
-    <aside className="w-64 min-h-screen bg-black/20 backdrop-blur-2xl border-l border-white/[0.06] flex flex-col py-8 px-4 gap-2 fixed top-0 right-0 z-40">
+    <aside className="w-64 min-h-screen bg-white border-l border-gray-200 flex flex-col py-8 px-4 gap-2 fixed top-0 right-0 z-40">
       <div className="px-3 mb-8">
-        <Link href="/dashboard" className="text-white/90 font-semibold tracking-tight text-xl">
+        <Link href="/dashboard" className="text-gray-900 font-semibold tracking-tight text-xl">
           ACC
         </Link>
-        <p className="text-white/40 text-xs mt-1">{user?.name || ""}</p>
+        <p className="text-gray-400 text-xs mt-1">{user?.name || ""}</p>
       </div>
       <nav className="flex flex-col gap-1">
         {items.map((item) => {
@@ -55,8 +55,8 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-200 ${
                 isActive
-                  ? "bg-white/[0.08] border border-white/[0.1] text-white/90"
-                  : "text-white/50 hover:text-white/80 hover:bg-white/[0.04] border border-transparent"
+                  ? "bg-indigo-50 border border-indigo-100 text-indigo-700 font-medium"
+                  : "text-gray-500 hover:text-gray-800 hover:bg-gray-50 border border-transparent"
               }`}
             >
               <span className="text-lg">{item.icon}</span>
@@ -68,7 +68,7 @@ export default function Sidebar() {
       <div className="mt-auto px-3 pt-8 flex flex-col gap-2">
         <button
           onClick={() => { fetch("/api/auth/logout", { method: "POST" }).then(() => { window.location.href = "/login"; }); }}
-          className="text-white/40 hover:text-white/70 text-xs text-right transition-all"
+          className="text-gray-400 hover:text-gray-700 text-xs text-right transition-all"
         >
           تسجيل الخروج
         </button>

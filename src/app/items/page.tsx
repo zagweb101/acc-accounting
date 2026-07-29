@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import GlassCard from "@/components/GlassCard";
@@ -21,7 +21,7 @@ const defaultProduct = () => ({
 
 const defaultService = () => ({
   name: "", sku: "", sale_price: 0, hourly_rate: 0,
-  unit_of_measure: "ساعة", vat_rate: 15,
+  unit_of_measure: "Ø³Ø§Ø¹Ø©", vat_rate: 15,
 });
 
 export default function ItemsPage() {
@@ -74,7 +74,7 @@ export default function ItemsPage() {
     if (item.type === "product") {
       setFormProd({ name: item.name, sku: item.sku || "", cost_price: item.cost_price, sale_price: item.sale_price, vat_rate: item.vat_rate, stock_quantity: item.stock_quantity, reorder_level: item.reorder_level });
     } else {
-      setFormSvc({ name: item.name, sku: item.sku || "", sale_price: item.sale_price, hourly_rate: item.hourly_rate, unit_of_measure: item.unit_of_measure || "ساعة", vat_rate: item.vat_rate });
+      setFormSvc({ name: item.name, sku: item.sku || "", sale_price: item.sale_price, hourly_rate: item.hourly_rate, unit_of_measure: item.unit_of_measure || "Ø³Ø§Ø¹Ø©", vat_rate: item.vat_rate });
     }
     setShowForm(true);
   }
@@ -133,71 +133,71 @@ export default function ItemsPage() {
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
       <section className="max-w-6xl w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
-          <h1 className="text-4xl font-semibold tracking-tight text-white/90">الأصناف</h1>
-          <p className="text-white/60">إدارة المنتجات والخدمات — مخزون، تسعير، وتكلفة</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø§Ù„Ø£ØµÙ†Ø§Ù</h1>
+          <p className="text-gray-600">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª â€” Ù…Ø®Ø²ÙˆÙ†ØŒ ØªØ³Ø¹ÙŠØ±ØŒ ÙˆØªÙƒÙ„ÙØ©</p>
         </GlassCard>
       </section>
 
       <section className="max-w-6xl w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
-            <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="glass-input max-w-[250px] cursor-pointer">
+            <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => setTab("product")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "product" ? "bg-white/10 text-white/90 shadow-sm" : "text-white/40 hover:text-white/70"}`}>منتجات</button>
-              <button onClick={() => setTab("service")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "service" ? "bg-white/10 text-white/90 shadow-sm" : "text-white/40 hover:text-white/70"}`}>خدمات</button>
+              <button onClick={() => setTab("product")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "product" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>Ù…Ù†ØªØ¬Ø§Øª</button>
+              <button onClick={() => setTab("service")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "service" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>Ø®Ø¯Ù…Ø§Øª</button>
             </div>
-            <div className="flex-1 min-w-[180px]"><GlassInput placeholder="بحث بالاسم أو SKU..." value={search} onChange={e => setSearch(e.target.value)} /></div>
-            <GlassButton onClick={openAdd}>+ {tab === "product" ? "منتج" : "خدمة"}</GlassButton>
+            <div className="flex-1 min-w-[180px]"><GlassInput placeholder="Ø¨Ø­Ø« Ø¨Ø§Ù„Ø§Ø³Ù… Ø£Ùˆ SKU..." value={search} onChange={e => setSearch(e.target.value)} /></div>
+            <GlassButton onClick={openAdd}>+ {tab === "product" ? "Ù…Ù†ØªØ¬" : "Ø®Ø¯Ù…Ø©"}</GlassButton>
           </div>
 
-          {error && <div className="glass mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
 
           {items.length === 0 ? (
-            <p className="text-white/40 text-center py-12">لا توجد {tab === "product" ? "منتجات" : "خدمات"}. أضف واحداً للبدأ</p>
+            <p className="text-gray-400 text-center py-12">Ù„Ø§ ØªÙˆØ¬Ø¯ {tab === "product" ? "Ù…Ù†ØªØ¬Ø§Øª" : "Ø®Ø¯Ù…Ø§Øª"}. Ø£Ø¶Ù ÙˆØ§Ø­Ø¯Ø§Ù‹ Ù„Ù„Ø¨Ø¯Ø£</p>
           ) : (
             <div className="overflow-hidden rounded-2xl bg-black/10">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-white/[0.05] backdrop-blur-xl">
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الاسم</th>
-                    {tab === "product" && <th className="text-right px-4 py-3 text-white/60 font-medium">SKU</th>}
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">سعر البيع</th>
-                    {tab === "product" && <th className="text-right px-4 py-3 text-white/60 font-medium">سعر التكلفة</th>}
-                    {tab === "product" && <th className="text-right px-4 py-3 text-white/60 font-medium">المخزون</th>}
-                    {tab === "product" && <th className="text-right px-4 py-3 text-white/60 font-medium">الحد الأدنى</th>}
-                    {tab === "service" && <th className="text-right px-4 py-3 text-white/60 font-medium">سعر الساعة</th>}
-                    {tab === "service" && <th className="text-right px-4 py-3 text-white/60 font-medium">وحدة القياس</th>}
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">ضريبة</th>
-                    <th className="text-center px-4 py-3 text-white/60 font-medium">إجراءات</th>
+                  <tr className="bg-gray-50 backdrop-blur-xl">
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø§Ø³Ù…</th>
+                    {tab === "product" && <th className="text-right px-4 py-3 text-gray-600 font-medium">SKU</th>}
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø³Ø¹Ø± Ø§Ù„Ø¨ÙŠØ¹</th>
+                    {tab === "product" && <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø³Ø¹Ø± Ø§Ù„ØªÙƒÙ„ÙØ©</th>}
+                    {tab === "product" && <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ù…Ø®Ø²ÙˆÙ†</th>}
+                    {tab === "product" && <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø­Ø¯ Ø§Ù„Ø£Ø¯Ù†Ù‰</th>}
+                    {tab === "service" && <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø³Ø¹Ø± Ø§Ù„Ø³Ø§Ø¹Ø©</th>}
+                    {tab === "service" && <th className="text-right px-4 py-3 text-gray-600 font-medium">ÙˆØ­Ø¯Ø© Ø§Ù„Ù‚ÙŠØ§Ø³</th>}
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø¶Ø±ÙŠØ¨Ø©</th>
+                    <th className="text-center px-4 py-3 text-gray-600 font-medium">Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filtered.map((item, i) => (
-                    <tr key={item.id} className={i < filtered.length - 1 ? "border-b border-white/[0.06]" : ""}>
-                      <td className="px-4 py-3 text-white/90">{item.name}</td>
-                      {tab === "product" && <td className="px-4 py-3 text-white/50 font-mono text-xs">{item.sku || "—"}</td>}
-                      <td className="px-4 py-3 text-emerald-300 font-mono text-xs">{item.sale_price.toFixed(2)}</td>
-                      {tab === "product" && <td className="px-4 py-3 text-amber-300 font-mono text-xs">{item.cost_price.toFixed(2)}</td>}
+                    <tr key={item.id} className={i < filtered.length - 1 ? "border-b border-gray-200" : ""}>
+                      <td className="px-4 py-3 text-gray-900">{item.name}</td>
+                      {tab === "product" && <td className="px-4 py-3 text-gray-500 font-mono text-xs">{item.sku || "â€”"}</td>}
+                      <td className="px-4 py-3 text-emerald-700 font-mono text-xs">{item.sale_price.toFixed(2)}</td>
+                      {tab === "product" && <td className="px-4 py-3 text-amber-700 font-mono text-xs">{item.cost_price.toFixed(2)}</td>}
                       {tab === "product" && (
                         <td className="px-4 py-3">
-                          <span className={`font-mono text-xs ${item.stock_quantity <= item.reorder_level ? "text-red-300" : "text-white/80"}`}>
+                          <span className={`font-mono text-xs ${item.stock_quantity <= item.reorder_level ? "text-red-300" : "text-gray-800"}`}>
                             {item.stock_quantity}
                           </span>
                         </td>
                       )}
-                      {tab === "product" && <td className="px-4 py-3 text-white/40 font-mono text-xs">{item.reorder_level}</td>}
+                      {tab === "product" && <td className="px-4 py-3 text-gray-400 font-mono text-xs">{item.reorder_level}</td>}
                       {tab === "service" && <td className="px-4 py-3 text-cyan-300 font-mono text-xs">{item.hourly_rate.toFixed(2)}</td>}
-                      {tab === "service" && <td className="px-4 py-3 text-white/50 text-xs">{item.unit_of_measure || "—"}</td>}
-                      <td className="px-4 py-3 text-white/40 text-xs">%{item.vat_rate}</td>
+                      {tab === "service" && <td className="px-4 py-3 text-gray-500 text-xs">{item.unit_of_measure || "â€”"}</td>}
+                      <td className="px-4 py-3 text-gray-400 text-xs">%{item.vat_rate}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-1">
-                          <button onClick={() => openEdit(item)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white/90 transition-all text-xs" title="تعديل">⚙</button>
+                          <button onClick={() => openEdit(item)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs" title="ØªØ¹Ø¯ÙŠÙ„">âš™</button>
                           {item.type === "product" && (
-                            <button onClick={() => { setShowStock(item); setStockMove({ quantity: 0, move_type: "adjustment", description: "" }); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-500/10 hover:bg-blue-500/25 text-blue-300 transition-all text-xs" title="حركة مخزون">📦</button>
+                            <button onClick={() => { setShowStock(item); setStockMove({ quantity: 0, move_type: "adjustment", description: "" }); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-500/10 hover:bg-blue-500/25 text-blue-700 transition-all text-xs" title="Ø­Ø±ÙƒØ© Ù…Ø®Ø²ÙˆÙ†">ðŸ“¦</button>
                           )}
-                          <button onClick={() => setDeleteConfirm(item)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-red-500/20 text-white/60 hover:text-red-300 transition-all text-xs" title="حذف">✕</button>
+                          <button onClick={() => setDeleteConfirm(item)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs" title="Ø­Ø°Ù">âœ•</button>
                         </div>
                       </td>
                     </tr>
@@ -212,49 +212,49 @@ export default function ItemsPage() {
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <GlassCard className="p-8 w-full max-w-lg mx-4">
-            <h2 className="text-xl font-semibold text-white/90 mb-6">
-              {editTarget ? `تعديل ${editTarget.name}` : `إضافة ${tab === "product" ? "منتج" : "خدمة"}`}
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              {editTarget ? `ØªØ¹Ø¯ÙŠÙ„ ${editTarget.name}` : `Ø¥Ø¶Ø§ÙØ© ${tab === "product" ? "Ù…Ù†ØªØ¬" : "Ø®Ø¯Ù…Ø©"}`}
             </h2>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">الاسم</label>
-                <GlassInput value={tab === "product" ? formProd.name : formSvc.name} onChange={e => tab === "product" ? setFormProd({ ...formProd, name: e.target.value }) : setFormSvc({ ...formSvc, name: e.target.value })} placeholder="اسم الصنف" />
+                <label className="text-gray-600 text-sm">Ø§Ù„Ø§Ø³Ù…</label>
+                <GlassInput value={tab === "product" ? formProd.name : formSvc.name} onChange={e => tab === "product" ? setFormProd({ ...formProd, name: e.target.value }) : setFormSvc({ ...formSvc, name: e.target.value })} placeholder="Ø§Ø³Ù… Ø§Ù„ØµÙ†Ù" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <label className="text-white/60 text-sm">{tab === "product" ? "SKU" : "كود الخدمة"}</label>
+                  <label className="text-gray-600 text-sm">{tab === "product" ? "SKU" : "ÙƒÙˆØ¯ Ø§Ù„Ø®Ø¯Ù…Ø©"}</label>
                   <GlassInput value={tab === "product" ? formProd.sku : formSvc.sku} onChange={e => tab === "product" ? setFormProd({ ...formProd, sku: e.target.value }) : setFormSvc({ ...formSvc, sku: e.target.value })} placeholder={tab === "product" ? "RT-100" : "SV-001"} />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-white/60 text-sm">نسبة الضريبة %</label>
-                  <input type="number" step="0.01" min="0" max="100" value={tab === "product" ? formProd.vat_rate : formSvc.vat_rate} onChange={e => tab === "product" ? setFormProd({ ...formProd, vat_rate: parseFloat(e.target.value) || 0 }) : setFormSvc({ ...formSvc, vat_rate: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                  <label className="text-gray-600 text-sm">Ù†Ø³Ø¨Ø© Ø§Ù„Ø¶Ø±ÙŠØ¨Ø© %</label>
+                  <input type="number" step="0.01" min="0" max="100" value={tab === "product" ? formProd.vat_rate : formSvc.vat_rate} onChange={e => tab === "product" ? setFormProd({ ...formProd, vat_rate: parseFloat(e.target.value) || 0 }) : setFormSvc({ ...formSvc, vat_rate: parseFloat(e.target.value) || 0 })} className="input-field" />
                 </div>
               </div>
               {tab === "product" && (
                 <>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/60 text-sm">سعر التكلفة</label>
-                      <input type="number" step="0.01" min="0" value={formProd.cost_price} onChange={e => setFormProd({ ...formProd, cost_price: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                      <label className="text-gray-600 text-sm">Ø³Ø¹Ø± Ø§Ù„ØªÙƒÙ„ÙØ©</label>
+                      <input type="number" step="0.01" min="0" value={formProd.cost_price} onChange={e => setFormProd({ ...formProd, cost_price: parseFloat(e.target.value) || 0 })} className="input-field" />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/60 text-sm">سعر البيع</label>
-                      <input type="number" step="0.01" min="0" value={formProd.sale_price} onChange={e => setFormProd({ ...formProd, sale_price: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                      <label className="text-gray-600 text-sm">Ø³Ø¹Ø± Ø§Ù„Ø¨ÙŠØ¹</label>
+                      <input type="number" step="0.01" min="0" value={formProd.sale_price} onChange={e => setFormProd({ ...formProd, sale_price: parseFloat(e.target.value) || 0 })} className="input-field" />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/60 text-sm">كمية المخزون</label>
-                      <input type="number" step="1" min="0" value={formProd.stock_quantity} onChange={e => setFormProd({ ...formProd, stock_quantity: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                      <label className="text-gray-600 text-sm">ÙƒÙ…ÙŠØ© Ø§Ù„Ù…Ø®Ø²ÙˆÙ†</label>
+                      <input type="number" step="1" min="0" value={formProd.stock_quantity} onChange={e => setFormProd({ ...formProd, stock_quantity: parseFloat(e.target.value) || 0 })} className="input-field" />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/60 text-sm">حد إعادة الطلب</label>
-                      <input type="number" step="1" min="0" value={formProd.reorder_level} onChange={e => setFormProd({ ...formProd, reorder_level: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                      <label className="text-gray-600 text-sm">Ø­Ø¯ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ø·Ù„Ø¨</label>
+                      <input type="number" step="1" min="0" value={formProd.reorder_level} onChange={e => setFormProd({ ...formProd, reorder_level: parseFloat(e.target.value) || 0 })} className="input-field" />
                     </div>
                   </div>
                   {formProd.cost_price > 0 && formProd.sale_price > 0 && (
-                    <div className="text-xs text-white/40">
-                      الهامش: <span className="text-emerald-300 font-mono">{((formProd.sale_price - formProd.cost_price) / formProd.sale_price * 100).toFixed(1)}%</span>
+                    <div className="text-xs text-gray-400">
+                      Ø§Ù„Ù‡Ø§Ù…Ø´: <span className="text-emerald-700 font-mono">{((formProd.sale_price - formProd.cost_price) / formProd.sale_price * 100).toFixed(1)}%</span>
                     </div>
                   )}
                 </>
@@ -263,33 +263,33 @@ export default function ItemsPage() {
                 <>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/60 text-sm">سعر البيع</label>
-                      <input type="number" step="0.01" min="0" value={formSvc.sale_price} onChange={e => setFormSvc({ ...formSvc, sale_price: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                      <label className="text-gray-600 text-sm">Ø³Ø¹Ø± Ø§Ù„Ø¨ÙŠØ¹</label>
+                      <input type="number" step="0.01" min="0" value={formSvc.sale_price} onChange={e => setFormSvc({ ...formSvc, sale_price: parseFloat(e.target.value) || 0 })} className="input-field" />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-white/60 text-sm">سعر الساعة</label>
-                      <input type="number" step="0.01" min="0" value={formSvc.hourly_rate} onChange={e => setFormSvc({ ...formSvc, hourly_rate: parseFloat(e.target.value) || 0 })} className="glass-input" />
+                      <label className="text-gray-600 text-sm">Ø³Ø¹Ø± Ø§Ù„Ø³Ø§Ø¹Ø©</label>
+                      <input type="number" step="0.01" min="0" value={formSvc.hourly_rate} onChange={e => setFormSvc({ ...formSvc, hourly_rate: parseFloat(e.target.value) || 0 })} className="input-field" />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-white/60 text-sm">وحدة القياس</label>
-                    <select value={formSvc.unit_of_measure} onChange={e => setFormSvc({ ...formSvc, unit_of_measure: e.target.value })} className="glass-input cursor-pointer">
-                      <option value="ساعة">ساعة</option>
-                      <option value="يوم">يوم</option>
-                      <option value="شهر">شهر</option>
-                      <option value="سنة">سنة</option>
-                      <option value="وحدة">وحدة</option>
-                      <option value="استشارة">استشارة</option>
-                      <option value="عقد">عقد</option>
+                    <label className="text-gray-600 text-sm">ÙˆØ­Ø¯Ø© Ø§Ù„Ù‚ÙŠØ§Ø³</label>
+                    <select value={formSvc.unit_of_measure} onChange={e => setFormSvc({ ...formSvc, unit_of_measure: e.target.value })} className="input-field cursor-pointer">
+                      <option value="Ø³Ø§Ø¹Ø©">Ø³Ø§Ø¹Ø©</option>
+                      <option value="ÙŠÙˆÙ…">ÙŠÙˆÙ…</option>
+                      <option value="Ø´Ù‡Ø±">Ø´Ù‡Ø±</option>
+                      <option value="Ø³Ù†Ø©">Ø³Ù†Ø©</option>
+                      <option value="ÙˆØ­Ø¯Ø©">ÙˆØ­Ø¯Ø©</option>
+                      <option value="Ø§Ø³ØªØ´Ø§Ø±Ø©">Ø§Ø³ØªØ´Ø§Ø±Ø©</option>
+                      <option value="Ø¹Ù‚Ø¯">Ø¹Ù‚Ø¯</option>
                     </select>
                   </div>
                 </>
               )}
               <div className="flex items-center gap-3 mt-2">
                 <GlassButton onClick={saveItem} disabled={saving || (tab === "product" ? !formProd.name : !formSvc.name)}>
-                  {saving ? "جاري الحفظ..." : editTarget ? "حفظ التعديلات" : "إضافة"}
+                  {saving ? "Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø­ÙØ¸..." : editTarget ? "Ø­ÙØ¸ Ø§Ù„ØªØ¹Ø¯ÙŠÙ„Ø§Øª" : "Ø¥Ø¶Ø§ÙØ©"}
                 </GlassButton>
-                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); }} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); }} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
               </div>
             </div>
           </GlassCard>
@@ -299,37 +299,37 @@ export default function ItemsPage() {
       {showStock && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <GlassCard className="p-8 w-full max-w-md mx-4">
-            <h2 className="text-xl font-semibold text-white/90 mb-2">حركة مخزون</h2>
-            <p className="text-white/50 text-sm mb-6">{showStock.name} <span className="font-mono">(المخزون الحالي: {showStock.stock_quantity})</span></p>
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">Ø­Ø±ÙƒØ© Ù…Ø®Ø²ÙˆÙ†</h2>
+            <p className="text-gray-500 text-sm mb-6">{showStock.name} <span className="font-mono">(Ø§Ù„Ù…Ø®Ø²ÙˆÙ† Ø§Ù„Ø­Ø§Ù„ÙŠ: {showStock.stock_quantity})</span></p>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">نوع الحركة</label>
-                <select value={stockMove.move_type} onChange={e => setStockMove({ ...stockMove, move_type: e.target.value })} className="glass-input cursor-pointer">
-                  <option value="adjustment">تسوية</option>
-                  <option value="purchase">مشتريات</option>
-                  <option value="sale">مبيعات</option>
-                  <option value="return_in">مرتجع وارد</option>
-                  <option value="return_out">مرتجع صادر</option>
+                <label className="text-gray-600 text-sm">Ù†ÙˆØ¹ Ø§Ù„Ø­Ø±ÙƒØ©</label>
+                <select value={stockMove.move_type} onChange={e => setStockMove({ ...stockMove, move_type: e.target.value })} className="input-field cursor-pointer">
+                  <option value="adjustment">ØªØ³ÙˆÙŠØ©</option>
+                  <option value="purchase">Ù…Ø´ØªØ±ÙŠØ§Øª</option>
+                  <option value="sale">Ù…Ø¨ÙŠØ¹Ø§Øª</option>
+                  <option value="return_in">Ù…Ø±ØªØ¬Ø¹ ÙˆØ§Ø±Ø¯</option>
+                  <option value="return_out">Ù…Ø±ØªØ¬Ø¹ ØµØ§Ø¯Ø±</option>
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">الكمية</label>
-                <input type="number" step="1" min="0" value={stockMove.quantity || ""} onChange={e => setStockMove({ ...stockMove, quantity: parseFloat(e.target.value) || 0 })} className="glass-input" placeholder="0" />
+                <label className="text-gray-600 text-sm">Ø§Ù„ÙƒÙ…ÙŠØ©</label>
+                <input type="number" step="1" min="0" value={stockMove.quantity || ""} onChange={e => setStockMove({ ...stockMove, quantity: parseFloat(e.target.value) || 0 })} className="input-field" placeholder="0" />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">الوصف (اختياري)</label>
-                <GlassInput value={stockMove.description} onChange={e => setStockMove({ ...stockMove, description: e.target.value })} placeholder="سبب الحركة" />
+                <label className="text-gray-600 text-sm">Ø§Ù„ÙˆØµÙ (Ø§Ø®ØªÙŠØ§Ø±ÙŠ)</label>
+                <GlassInput value={stockMove.description} onChange={e => setStockMove({ ...stockMove, description: e.target.value })} placeholder="Ø³Ø¨Ø¨ Ø§Ù„Ø­Ø±ÙƒØ©" />
               </div>
               {["sale", "return_out"].includes(stockMove.move_type) && showStock.cost_price > 0 && (
-                <div className="text-xs text-amber-300/70">
-                  سيتم إنشاء قيد تكلفة تلقائي: {(showStock.cost_price * stockMove.quantity).toFixed(2)} د.ك
+                <div className="text-xs text-amber-700/70">
+                  Ø³ÙŠØªÙ… Ø¥Ù†Ø´Ø§Ø¡ Ù‚ÙŠØ¯ ØªÙƒÙ„ÙØ© ØªÙ„Ù‚Ø§Ø¦ÙŠ: {(showStock.cost_price * stockMove.quantity).toFixed(2)} Ø¯.Ùƒ
                 </div>
               )}
               <div className="flex items-center gap-3 mt-2">
                 <GlassButton onClick={() => handleStockMove(showStock.id)} disabled={stocking || stockMove.quantity <= 0}>
-                  {stocking ? "جاري التنفيذ..." : "تنفيذ"}
+                  {stocking ? "Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªÙ†ÙÙŠØ°..." : "ØªÙ†ÙÙŠØ°"}
                 </GlassButton>
-                <GlassButton onClick={() => setShowStock(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+                <GlassButton onClick={() => setShowStock(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
               </div>
             </div>
           </GlassCard>
@@ -339,11 +339,11 @@ export default function ItemsPage() {
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <GlassCard className="p-8 w-full max-w-md mx-4 text-center">
-            <p className="text-white/90 text-lg mb-2">حذف الصنف</p>
-            <p className="text-white/60 mb-6">{`هل أنت متأكد من حذف "${deleteConfirm.name}"؟`}</p>
+            <p className="text-gray-900 text-lg mb-2">Ø­Ø°Ù Ø§Ù„ØµÙ†Ù</p>
+            <p className="text-gray-600 mb-6">{`Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù "${deleteConfirm.name}"ØŸ`}</p>
             <div className="flex items-center justify-center gap-3">
-              <GlassButton onClick={() => deleteItem(deleteConfirm.id)} className="bg-red-500/20 hover:bg-red-500/30">تأكيد الحذف</GlassButton>
-              <GlassButton onClick={() => setDeleteConfirm(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+              <GlassButton onClick={() => deleteItem(deleteConfirm.id)} className="bg-red-500/20 hover:bg-red-500/30">ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù</GlassButton>
+              <GlassButton onClick={() => setDeleteConfirm(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
             </div>
           </GlassCard>
         </div>

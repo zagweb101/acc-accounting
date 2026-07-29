@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import GlassCard from "@/components/GlassCard";
@@ -32,10 +32,10 @@ export default function Contact() {
     <div className="flex flex-col items-center px-8 py-16 gap-16">
       <section className="max-w-3xl w-full">
         <GlassCard className="flex flex-col items-center text-center p-12 gap-6">
-          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white/90">
+          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-gray-900">
             Get in Touch
           </h1>
-          <p className="text-lg text-white/60 max-w-xl leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-xl leading-relaxed">
             Have a project in mind? We would love to hear from you. Send us a message and we will respond as soon as possible.
           </p>
         </GlassCard>
@@ -43,26 +43,26 @@ export default function Contact() {
 
       <section className="max-w-4xl w-full grid sm:grid-cols-2 gap-6">
         <GlassCard className="p-8">
-          <h2 className="text-2xl font-semibold text-white/90 mb-6">Send a Message</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Send a Message</h2>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">Name</label>
+                <label className="text-gray-600 text-sm">Name</label>
                 <GlassInput type="text" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} required />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">Email</label>
+                <label className="text-gray-600 text-sm">Email</label>
                 <GlassInput type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-white/60 text-sm">Subject</label>
+              <label className="text-gray-600 text-sm">Subject</label>
               <GlassInput type="text" placeholder="How can we help?" value={subject} onChange={e => setSubject(e.target.value)} required />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-white/60 text-sm">Message</label>
+              <label className="text-gray-600 text-sm">Message</label>
               <textarea
-                className="glass-input min-h-[120px] resize-none"
+                className="input-field min-h-[120px] resize-none"
                 placeholder="Tell us about your project..."
                 rows={4}
                 value={message}
@@ -70,26 +70,26 @@ export default function Contact() {
                 required
               />
             </div>
-            {success && <p className="text-emerald-300 text-sm">{success}</p>}
+            {success && <p className="text-emerald-700 text-sm">{success}</p>}
             <GlassButton type="submit" disabled={loading} className="mt-2 self-start">{loading ? "Sending..." : "Send Message"}</GlassButton>
           </form>
         </GlassCard>
 
         <div className="flex flex-col gap-6">
           <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-violet-500/20 flex items-center justify-center text-violet-300">@</div>
-            <h3 className="text-white/90 font-semibold">Email</h3>
-            <p className="text-white/60 text-sm">hello@acc.design</p>
+            <div className="w-10 h-10 rounded-2xl bg-violet-500/20 flex items-center justify-center text-violet-700">@</div>
+            <h3 className="text-gray-900 font-semibold">Email</h3>
+            <p className="text-gray-600 text-sm">hello@acc.design</p>
           </GlassCard>
           <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-300">⌂</div>
-            <h3 className="text-white/90 font-semibold">Location</h3>
-            <p className="text-white/60 text-sm">San Francisco, CA</p>
+            <div className="w-10 h-10 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-700">âŒ‚</div>
+            <h3 className="text-gray-900 font-semibold">Location</h3>
+            <p className="text-gray-600 text-sm">San Francisco, CA</p>
           </GlassCard>
           <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-300">☏</div>
-            <h3 className="text-white/90 font-semibold">Phone</h3>
-            <p className="text-white/60 text-sm">+1 (555) 123-4567</p>
+            <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-300">â˜</div>
+            <h3 className="text-gray-900 font-semibold">Phone</h3>
+            <p className="text-gray-600 text-sm">+1 (555) 123-4567</p>
           </GlassCard>
         </div>
       </section>

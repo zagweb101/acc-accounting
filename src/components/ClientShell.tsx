@@ -23,23 +23,23 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   }, [isAuthPage, router]);
 
   if (isAuthPage) {
-    return <div className="min-h-screen flex bg-[#0a0a0f] text-white">{children}</div>;
+    return <div className="min-h-screen flex bg-white text-gray-900">{children}</div>;
   }
 
   if (checking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f] text-white/60">
+      <div className="min-h-screen flex items-center justify-center bg-white text-gray-400">
         <div className="animate-pulse">جاري التحميل...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex bg-[#0a0a0f] text-white">
+    <div className="min-h-screen flex bg-gray-50 text-gray-900">
       <Sidebar />
-      <div className="flex-1 ml-64 min-h-screen flex flex-col">
+      <div className="flex-1 mr-64 min-h-screen flex flex-col">
         <div className="flex-1">{children}</div>
-        <footer className="glass mx-8 mb-8 px-8 py-6 text-center text-white/40 text-sm">
+        <footer className="border-t border-gray-200 mx-0 px-8 py-4 text-center text-gray-400 text-sm bg-white">
           &copy; {new Date().getFullYear()} ACC. All rights reserved.
         </footer>
       </div>

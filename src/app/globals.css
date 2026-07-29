@@ -1,36 +1,33 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0c0c10;
-  --color-foreground: #ffffff;
-  --color-accent: #818cf8;
-  --color-accent-subtle: rgba(129, 140, 248, 0.15);
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+  --color-accent: #6366f1;
+  --color-accent-subtle: rgba(99, 102, 241, 0.1);
   --font-sans: "Cairo", sans-serif;
   --font-mono: "Cairo", sans-serif;
 }
 
-@utility glass {
-  background-color: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+@utility card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-@utility glass-hover {
+@utility card-hover {
   transition: all 0.2s;
 }
 
-.glass-hover:hover {
-  background-color: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.1);
+.card-hover:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-@utility glass-btn {
-  background-color: rgba(129, 140, 248, 0.12);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(129, 140, 248, 0.2);
+@utility btn {
+  background-color: #6366f1;
+  border: 1px solid #6366f1;
   border-radius: 0.75rem;
   padding: 0.625rem 1.25rem;
   color: #ffffff;
@@ -38,33 +35,32 @@
   transition: all 0.2s;
 }
 
-.glass-btn:hover {
-  background-color: rgba(129, 140, 248, 0.22);
-  border-color: rgba(129, 140, 248, 0.35);
+.btn:hover {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
 }
 
-@utility glass-input {
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+@utility input-field {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
   padding: 0.625rem 1rem;
-  color: #ffffff;
+  color: #111827;
   outline: none;
   width: 100%;
 }
 
-.glass-input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+.input-field::placeholder {
+  color: #9ca3af;
 }
 
-.glass-input:focus {
-  border-color: rgba(129, 140, 248, 0.4);
+.input-field:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 body {
-  background-color: #0c0c10;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #111827;
   font-family: "Cairo", sans-serif;
 }

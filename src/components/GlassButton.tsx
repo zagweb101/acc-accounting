@@ -5,7 +5,7 @@ type GlassButtonProps = {
 
 export default function GlassButton({ children, className = "", ...props }: GlassButtonProps) {
   return (
-    <button className={`glass-btn ${className}`} {...props}>
+    <button className={`btn ${className}`} {...props}>
       {children}
     </button>
   );

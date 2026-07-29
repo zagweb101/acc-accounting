@@ -4,6 +4,6 @@ type GlassInputProps = {
 
 export default function GlassInput({ className = "", ...props }: GlassInputProps) {
   return (
-    <input className={`glass-input ${className}`} {...props} />
+    <input className={`input-field ${className}`} {...props} />
   );
 }

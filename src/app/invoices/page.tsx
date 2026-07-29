@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import GlassCard from "@/components/GlassCard";
@@ -197,7 +197,7 @@ export default function InvoicesPage() {
     if (!printRef.current) return;
     const win = window.open("", "_blank");
     if (!win) return;
-    win.document.write(`<html dir="rtl"><head><title>فاتورة</title><style>
+    win.document.write(`<html dir="rtl"><head><title>ÙØ§ØªÙˆØ±Ø©</title><style>
       body { font-family: 'Segoe UI', sans-serif; padding: 40px; direction: rtl; }
       table { width: 100%; border-collapse: collapse; margin: 20px 0; }
       th, td { border: 1px solid #ccc; padding: 10px; text-align: right; }
@@ -214,80 +214,80 @@ export default function InvoicesPage() {
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
       <section className="max-w-6xl w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
-          <h1 className="text-4xl font-semibold tracking-tight text-white/90">الفواتير</h1>
-          <p className="text-white/60">إدارة فواتير المبيعات والمشتريات مع الترحيل المحاسبي و QR</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø§Ù„ÙÙˆØ§ØªÙŠØ±</h1>
+          <p className="text-gray-600">Ø¥Ø¯Ø§Ø±Ø© ÙÙˆØ§ØªÙŠØ± Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙˆØ§Ù„Ù…Ø´ØªØ±ÙŠØ§Øª Ù…Ø¹ Ø§Ù„ØªØ±Ø­ÙŠÙ„ Ø§Ù„Ù…Ø­Ø§Ø³Ø¨ÙŠ Ùˆ QR</p>
         </GlassCard>
       </section>
 
       <section className="max-w-6xl w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
-            <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="glass-input max-w-[250px] cursor-pointer">
+            <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => setTab("sales")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-white/10 text-white/90 shadow-sm" : "text-white/40 hover:text-white/70"}`}>مبيعات</button>
-              <button onClick={() => setTab("purchase")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-white/10 text-white/90 shadow-sm" : "text-white/40 hover:text-white/70"}`}>مشتريات</button>
+              <button onClick={() => setTab("sales")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>Ù…Ø¨ÙŠØ¹Ø§Øª</button>
+              <button onClick={() => setTab("purchase")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>Ù…Ø´ØªØ±ÙŠØ§Øª</button>
             </div>
-            <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="glass-input max-w-[140px] cursor-pointer">
-              <option value="">كل الحالات</option>
-              <option value="draft">مسودة</option>
-              <option value="unpaid">غير مدفوعة</option>
-              <option value="paid">مدفوعة</option>
+            <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="input-field max-w-[140px] cursor-pointer">
+              <option value="">ÙƒÙ„ Ø§Ù„Ø­Ø§Ù„Ø§Øª</option>
+              <option value="draft">Ù…Ø³ÙˆØ¯Ø©</option>
+              <option value="unpaid">ØºÙŠØ± Ù…Ø¯ÙÙˆØ¹Ø©</option>
+              <option value="paid">Ù…Ø¯ÙÙˆØ¹Ø©</option>
             </select>
-            <input type="date" value={filterFrom} onChange={e => setFilterFrom(e.target.value)} className="glass-input max-w-[170px]" />
-            <span className="text-white/30">–</span>
-            <input type="date" value={filterTo} onChange={e => setFilterTo(e.target.value)} className="glass-input max-w-[170px]" />
-            <GlassButton onClick={openAdd}>+ {tab === "sales" ? "فاتورة مبيعات" : "فاتورة مشتريات"}</GlassButton>
+            <input type="date" value={filterFrom} onChange={e => setFilterFrom(e.target.value)} className="input-field max-w-[170px]" />
+            <span className="text-gray-300">â€“</span>
+            <input type="date" value={filterTo} onChange={e => setFilterTo(e.target.value)} className="input-field max-w-[170px]" />
+            <GlassButton onClick={openAdd}>+ {tab === "sales" ? "ÙØ§ØªÙˆØ±Ø© Ù…Ø¨ÙŠØ¹Ø§Øª" : "ÙØ§ØªÙˆØ±Ø© Ù…Ø´ØªØ±ÙŠØ§Øª"}</GlassButton>
           </div>
 
-          {error && <div className="glass mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
 
           {invoices.length === 0 ? (
-            <p className="text-white/40 text-center py-12">لا توجد فواتير</p>
+            <p className="text-gray-400 text-center py-12">Ù„Ø§ ØªÙˆØ¬Ø¯ ÙÙˆØ§ØªÙŠØ±</p>
           ) : (
             <div className="overflow-hidden rounded-2xl bg-black/10">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-white/[0.05] backdrop-blur-xl">
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الرقم</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">العميل / المورد</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">التاريخ</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">استحقاق</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الصافي</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الضريبة</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الإجمالي</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الحالة</th>
-                    <th className="text-center px-4 py-3 text-white/60 font-medium"></th>
+                  <tr className="bg-gray-50 backdrop-blur-xl">
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø±Ù‚Ù…</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø¹Ù…ÙŠÙ„ / Ø§Ù„Ù…ÙˆØ±Ø¯</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„ØªØ§Ø±ÙŠØ®</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ø³ØªØ­Ù‚Ø§Ù‚</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„ØµØ§ÙÙŠ</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø¶Ø±ÙŠØ¨Ø©</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø­Ø§Ù„Ø©</th>
+                    <th className="text-center px-4 py-3 text-gray-600 font-medium"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoices.map((inv, i) => (
-                    <tr key={inv.id} className={i < invoices.length - 1 ? "border-b border-white/[0.06]" : ""}>
-                      <td className="px-4 py-3 text-white/90 font-mono text-xs">{inv.invoice_number}</td>
-                      <td className="px-4 py-3 text-white/70">{inv.contact_name}</td>
-                      <td className="px-4 py-3 text-white/60 text-xs">{inv.invoice_date}</td>
-                      <td className="px-4 py-3 text-white/60 text-xs">{inv.due_date}</td>
-                      <td className="px-4 py-3 text-white/80 font-mono text-xs">{inv.subtotal.toFixed(2)}</td>
-                      <td className="px-4 py-3 text-amber-300 font-mono text-xs">{inv.vat_amount.toFixed(2)}</td>
-                      <td className="px-4 py-3 text-emerald-300 font-mono text-xs font-medium">{inv.total_amount.toFixed(2)}</td>
+                    <tr key={inv.id} className={i < invoices.length - 1 ? "border-b border-gray-200" : ""}>
+                      <td className="px-4 py-3 text-gray-900 font-mono text-xs">{inv.invoice_number}</td>
+                      <td className="px-4 py-3 text-gray-700">{inv.contact_name}</td>
+                      <td className="px-4 py-3 text-gray-600 text-xs">{inv.invoice_date}</td>
+                      <td className="px-4 py-3 text-gray-600 text-xs">{inv.due_date}</td>
+                      <td className="px-4 py-3 text-gray-800 font-mono text-xs">{inv.subtotal.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-amber-700 font-mono text-xs">{inv.vat_amount.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-emerald-700 font-mono text-xs font-medium">{inv.total_amount.toFixed(2)}</td>
                       <td className="px-4 py-3">
                         <span className={`text-[11px] px-2 py-0.5 rounded-full border ${
-                          inv.status === "draft" ? "text-amber-300 bg-amber-500/15 border-amber-500/20" :
-                          inv.status === "paid" ? "text-emerald-300 bg-emerald-500/15 border-emerald-500/20" :
-                          "text-blue-300 bg-blue-500/15 border-blue-500/20"
+                          inv.status === "draft" ? "text-amber-700 bg-amber-500/15 border-amber-500/20" :
+                          inv.status === "paid" ? "text-emerald-700 bg-emerald-500/15 border-emerald-500/20" :
+                          "text-blue-700 bg-blue-500/15 border-blue-500/20"
                         }`}>
-                          {inv.status === "draft" ? "مسودة" : inv.status === "paid" ? "مدفوعة" : "غير مدفوعة"}
+                          {inv.status === "draft" ? "Ù…Ø³ÙˆØ¯Ø©" : inv.status === "paid" ? "Ù…Ø¯ÙÙˆØ¹Ø©" : "ØºÙŠØ± Ù…Ø¯ÙÙˆØ¹Ø©"}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-1">
-                          <button onClick={() => openView(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white/90 transition-all text-xs" title="عرض">👁</button>
+                          <button onClick={() => openView(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs" title="Ø¹Ø±Ø¶">ðŸ‘</button>
                           {inv.status === "draft" && (
                             <>
-                              <button onClick={() => { setPostedResult(null); postInvoice(inv.id); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-emerald-500/10 hover:bg-emerald-500/25 text-emerald-300 transition-all text-xs" title="ترحيل">✓</button>
-                              <button onClick={() => openEdit(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white/90 transition-all text-xs" title="تعديل">⚙</button>
-                              <button onClick={() => setDeleteConfirm(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-red-500/20 text-white/60 hover:text-red-300 transition-all text-xs" title="حذف">✕</button>
+                              <button onClick={() => { setPostedResult(null); postInvoice(inv.id); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-emerald-500/10 hover:bg-emerald-500/25 text-emerald-700 transition-all text-xs" title="ØªØ±Ø­ÙŠÙ„">âœ“</button>
+                              <button onClick={() => openEdit(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs" title="ØªØ¹Ø¯ÙŠÙ„">âš™</button>
+                              <button onClick={() => setDeleteConfirm(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs" title="Ø­Ø°Ù">âœ•</button>
                             </>
                           )}
                         </div>
@@ -304,55 +304,55 @@ export default function InvoicesPage() {
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto py-8">
           <GlassCard className="p-8 w-full max-w-5xl mx-4 my-auto">
-            <h2 className="text-xl font-semibold text-white/90 mb-6">
-              {editTarget ? `تعديل ${editTarget.invoice_number}` : `فاتورة ${tab === "sales" ? "مبيعات" : "مشتريات"} جديدة`}
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              {editTarget ? `ØªØ¹Ø¯ÙŠÙ„ ${editTarget.invoice_number}` : `ÙØ§ØªÙˆØ±Ø© ${tab === "sales" ? "Ù…Ø¨ÙŠØ¹Ø§Øª" : "Ù…Ø´ØªØ±ÙŠØ§Øª"} Ø¬Ø¯ÙŠØ¯Ø©`}
             </h2>
             <div className="flex flex-col gap-4">
               <div className="grid grid-cols-4 gap-4">
                 <div className="flex flex-col gap-2">
-                  <label className="text-white/60 text-sm">* {tab === "sales" ? "العميل" : "المورد"}</label>
-                  <select value={formContact} onChange={e => setFormContact(e.target.value)} className="glass-input cursor-pointer">
-                    <option value="">-- اختر --</option>
+                  <label className="text-gray-600 text-sm">* {tab === "sales" ? "Ø§Ù„Ø¹Ù…ÙŠÙ„" : "Ø§Ù„Ù…ÙˆØ±Ø¯"}</label>
+                  <select value={formContact} onChange={e => setFormContact(e.target.value)} className="input-field cursor-pointer">
+                    <option value="">-- Ø§Ø®ØªØ± --</option>
                     {contactFiltered.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-white/60 text-sm">* تاريخ الفاتورة</label>
-                  <input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} className="glass-input" />
+                  <label className="text-gray-600 text-sm">* ØªØ§Ø±ÙŠØ® Ø§Ù„ÙØ§ØªÙˆØ±Ø©</label>
+                  <input type="date" value={formDate} onChange={e => setFormDate(e.target.value)} className="input-field" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-white/60 text-sm">* تاريخ الاستحقاق</label>
-                  <input type="date" value={formDue} onChange={e => setFormDue(e.target.value)} className="glass-input" />
+                  <label className="text-gray-600 text-sm">* ØªØ§Ø±ÙŠØ® Ø§Ù„Ø§Ø³ØªØ­Ù‚Ø§Ù‚</label>
+                  <input type="date" value={formDue} onChange={e => setFormDue(e.target.value)} className="input-field" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-white/60 text-sm">مركز التكلفة</label>
-                  <select value={formCC} onChange={e => setFormCC(e.target.value)} className="glass-input cursor-pointer">
-                    <option value="">—</option>
+                  <label className="text-gray-600 text-sm">Ù…Ø±ÙƒØ² Ø§Ù„ØªÙƒÙ„ÙØ©</label>
+                  <select value={formCC} onChange={e => setFormCC(e.target.value)} className="input-field cursor-pointer">
+                    <option value="">â€”</option>
                     {costCenters.map(cc => <option key={cc.id} value={cc.id}>{cc.name}</option>)}
                   </select>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-white/60 text-sm">ملاحظات</label>
+                <label className="text-gray-600 text-sm">Ù…Ù„Ø§Ø­Ø¸Ø§Øª</label>
                 <GlassInput value={formNotes} onChange={e => setFormNotes(e.target.value)} placeholder="..." />
               </div>
 
               <div className="mt-2">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-white/80 text-sm font-medium">بنود الفاتورة</h3>
-                  <GlassButton onClick={() => setFormLines(p => [...p, newLine()])} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10 text-xs !px-3 !py-1">+ بند</GlassButton>
+                  <h3 className="text-gray-800 text-sm font-medium">Ø¨Ù†ÙˆØ¯ Ø§Ù„ÙØ§ØªÙˆØ±Ø©</h3>
+                  <GlassButton onClick={() => setFormLines(p => [...p, newLine()])} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10 text-xs !px-3 !py-1">+ Ø¨Ù†Ø¯</GlassButton>
                 </div>
                 <div className="overflow-x-auto rounded-2xl bg-black/10">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-white/[0.05] backdrop-blur-xl">
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">الصنف</th>
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">الوصف</th>
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">الكمية</th>
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">سعر الوحدة</th>
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">الخصم</th>
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">ضريبة %</th>
-                        <th className="text-right px-3 py-2 text-white/60 font-medium text-xs">الإجمالي</th>
+                      <tr className="bg-gray-50 backdrop-blur-xl">
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø§Ù„ØµÙ†Ù</th>
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø§Ù„ÙˆØµÙ</th>
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø§Ù„ÙƒÙ…ÙŠØ©</th>
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø³Ø¹Ø± Ø§Ù„ÙˆØ­Ø¯Ø©</th>
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø§Ù„Ø®ØµÙ…</th>
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø¶Ø±ÙŠØ¨Ø© %</th>
+                        <th className="text-right px-3 py-2 text-gray-600 font-medium text-xs">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</th>
                         <th className="px-3 py-2 w-8"></th>
                       </tr>
                     </thead>
@@ -360,9 +360,9 @@ export default function InvoicesPage() {
                       {formLines.map(line => {
                         const c = calcLine(line);
                         return (
-                          <tr key={line._key} className="border-b border-white/[0.06]">
+                          <tr key={line._key} className="border-b border-gray-200">
                             <td className="px-3 py-1.5">
-                              <select value={line.item_id} onChange={e => updateLineItem(line._key, e.target.value)} className="glass-input text-xs cursor-pointer max-w-[180px]">
+                              <select value={line.item_id} onChange={e => updateLineItem(line._key, e.target.value)} className="input-field text-xs cursor-pointer max-w-[180px]">
                                 <option value="">--</option>
                                 {itemFiltered.map(it => <option key={it.id} value={it.id}>{it.name}</option>)}
                               </select>
@@ -371,21 +371,21 @@ export default function InvoicesPage() {
                               <GlassInput value={line.description} onChange={e => updateLine(line._key, "description", e.target.value)} className="text-xs min-w-[100px]" placeholder="..." />
                             </td>
                             <td className="px-3 py-1.5">
-                              <input type="number" step="1" min="0" value={line.quantity || ""} onChange={e => updateLine(line._key, "quantity", parseFloat(e.target.value) || 0)} className="glass-input text-xs w-[70px]" />
+                              <input type="number" step="1" min="0" value={line.quantity || ""} onChange={e => updateLine(line._key, "quantity", parseFloat(e.target.value) || 0)} className="input-field text-xs w-[70px]" />
                             </td>
                             <td className="px-3 py-1.5">
-                              <input type="number" step="0.01" min="0" value={line.unit_price || ""} onChange={e => updateLine(line._key, "unit_price", parseFloat(e.target.value) || 0)} className="glass-input text-xs w-[100px]" />
+                              <input type="number" step="0.01" min="0" value={line.unit_price || ""} onChange={e => updateLine(line._key, "unit_price", parseFloat(e.target.value) || 0)} className="input-field text-xs w-[100px]" />
                             </td>
                             <td className="px-3 py-1.5">
-                              <input type="number" step="0.01" min="0" value={line.discount || ""} onChange={e => updateLine(line._key, "discount", parseFloat(e.target.value) || 0)} className="glass-input text-xs w-[90px]" />
+                              <input type="number" step="0.01" min="0" value={line.discount || ""} onChange={e => updateLine(line._key, "discount", parseFloat(e.target.value) || 0)} className="input-field text-xs w-[90px]" />
                             </td>
                             <td className="px-3 py-1.5">
-                              <input type="number" step="1" min="0" max="100" value={line.vat_rate} onChange={e => updateLine(line._key, "vat_rate", parseFloat(e.target.value) || 0)} className="glass-input text-xs w-[70px]" />
+                              <input type="number" step="1" min="0" max="100" value={line.vat_rate} onChange={e => updateLine(line._key, "vat_rate", parseFloat(e.target.value) || 0)} className="input-field text-xs w-[70px]" />
                             </td>
-                            <td className="px-3 py-1.5 text-white/80 font-mono text-xs">{c.total.toFixed(2)}</td>
+                            <td className="px-3 py-1.5 text-gray-800 font-mono text-xs">{c.total.toFixed(2)}</td>
                             <td className="px-3 py-1.5">
                               {formLines.length > 1 && (
-                                <button onClick={() => setFormLines(p => p.filter(l => l._key !== line._key))} className="w-6 h-6 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-red-500/20 text-white/40 hover:text-red-300 transition-all text-xs">✕</button>
+                                <button onClick={() => setFormLines(p => p.filter(l => l._key !== line._key))} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-400 hover:text-red-300 transition-all text-xs">âœ•</button>
                               )}
                             </td>
                           </tr>
@@ -393,28 +393,28 @@ export default function InvoicesPage() {
                       })}
                     </tbody>
                     <tfoot>
-                      <tr className="bg-white/[0.03]">
-                        <td colSpan={4} className="px-3 py-2 text-white/60 text-xs font-medium">الإجمالي</td>
-                        <td className="px-3 py-2 text-white/40 font-mono text-xs">{totals.disc > 0 ? totals.disc.toFixed(2) : "—"}</td>
-                        <td className="px-3 py-2 text-amber-300 font-mono text-xs">{totals.vat.toFixed(2)}</td>
-                        <td className="px-3 py-2 text-emerald-300 font-mono text-xs font-medium">{totals.total.toFixed(2)}</td>
+                      <tr className="bg-gray-50">
+                        <td colSpan={4} className="px-3 py-2 text-gray-600 text-xs font-medium">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</td>
+                        <td className="px-3 py-2 text-gray-400 font-mono text-xs">{totals.disc > 0 ? totals.disc.toFixed(2) : "â€”"}</td>
+                        <td className="px-3 py-2 text-amber-700 font-mono text-xs">{totals.vat.toFixed(2)}</td>
+                        <td className="px-3 py-2 text-emerald-700 font-mono text-xs font-medium">{totals.total.toFixed(2)}</td>
                         <td></td>
                       </tr>
                     </tfoot>
                   </table>
                 </div>
                 <div className="flex items-center justify-end gap-6 mt-3 text-sm">
-                  <div><span className="text-white/40">الصافي: </span><span className="text-white/80 font-mono">{totals.sub.toFixed(2)}</span></div>
-                  <div><span className="text-white/40">الضريبة: </span><span className="text-amber-300 font-mono">{totals.vat.toFixed(2)}</span></div>
-                  <div><span className="text-white/60 font-medium">الإجمالي: </span><span className="text-emerald-300 font-mono font-semibold text-lg">{totals.total.toFixed(2)}</span></div>
+                  <div><span className="text-gray-400">Ø§Ù„ØµØ§ÙÙŠ: </span><span className="text-gray-800 font-mono">{totals.sub.toFixed(2)}</span></div>
+                  <div><span className="text-gray-400">Ø§Ù„Ø¶Ø±ÙŠØ¨Ø©: </span><span className="text-amber-700 font-mono">{totals.vat.toFixed(2)}</span></div>
+                  <div><span className="text-gray-600 font-medium">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ: </span><span className="text-emerald-700 font-mono font-semibold text-lg">{totals.total.toFixed(2)}</span></div>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 mt-4">
                 <GlassButton onClick={saveInvoice} disabled={saving || !formContact || !formDate || !formDue || formLines.some(l => l.quantity <= 0)}>
-                  {saving ? "جاري الحفظ..." : editTarget ? "حفظ التعديلات" : "حفظ مسودة"}
+                  {saving ? "Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø­ÙØ¸..." : editTarget ? "Ø­ÙØ¸ Ø§Ù„ØªØ¹Ø¯ÙŠÙ„Ø§Øª" : "Ø­ÙØ¸ Ù…Ø³ÙˆØ¯Ø©"}
                 </GlassButton>
-                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); }} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); }} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
               </div>
             </div>
           </GlassCard>
@@ -425,61 +425,61 @@ export default function InvoicesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto py-8">
           <GlassCard className="p-8 w-full max-w-4xl mx-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-white/90">فاتورة: {viewInvoice.invoice_number}</h2>
-              <button onClick={() => setViewInvoice(null)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white/90 transition-all">✕</button>
+              <h2 className="text-xl font-semibold text-gray-900">ÙØ§ØªÙˆØ±Ø©: {viewInvoice.invoice_number}</h2>
+              <button onClick={() => setViewInvoice(null)} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all">âœ•</button>
             </div>
             <div className="grid grid-cols-3 gap-4 mb-6 text-sm">
-              <div><span className="text-white/40">{tab === "sales" ? "العميل" : "المورد"}:</span> <span className="text-white/80">{viewInvoice.contact_name}</span></div>
-              <div><span className="text-white/40">التاريخ:</span> <span className="text-white/80">{viewInvoice.invoice_date}</span></div>
-              <div><span className="text-white/40">استحقاق:</span> <span className="text-white/80">{viewInvoice.due_date}</span></div>
-              <div><span className="text-white/40">الحالة:</span> <span className={`text-[11px] px-2 py-0.5 rounded-full border ${
-                viewInvoice.status === "draft" ? "text-amber-300 bg-amber-500/15 border-amber-500/20" :
-                viewInvoice.status === "paid" ? "text-emerald-300 bg-emerald-500/15 border-emerald-500/20" : "text-blue-300 bg-blue-500/15 border-blue-500/20"
-              }`}>{viewInvoice.status === "draft" ? "مسودة" : viewInvoice.status === "paid" ? "مدفوعة" : "غير مدفوعة"}</span></div>
-              {viewInvoice.zatca_uuid && <div className="col-span-2"><span className="text-white/40">ZATCA UUID:</span> <span className="text-white/50 text-xs font-mono">{viewInvoice.zatca_uuid}</span></div>}
-              {viewInvoice.notes && <div className="col-span-3"><span className="text-white/40">ملاحظات:</span> <span className="text-white/70">{viewInvoice.notes}</span></div>}
+              <div><span className="text-gray-400">{tab === "sales" ? "Ø§Ù„Ø¹Ù…ÙŠÙ„" : "Ø§Ù„Ù…ÙˆØ±Ø¯"}:</span> <span className="text-gray-800">{viewInvoice.contact_name}</span></div>
+              <div><span className="text-gray-400">Ø§Ù„ØªØ§Ø±ÙŠØ®:</span> <span className="text-gray-800">{viewInvoice.invoice_date}</span></div>
+              <div><span className="text-gray-400">Ø§Ø³ØªØ­Ù‚Ø§Ù‚:</span> <span className="text-gray-800">{viewInvoice.due_date}</span></div>
+              <div><span className="text-gray-400">Ø§Ù„Ø­Ø§Ù„Ø©:</span> <span className={`text-[11px] px-2 py-0.5 rounded-full border ${
+                viewInvoice.status === "draft" ? "text-amber-700 bg-amber-500/15 border-amber-500/20" :
+                viewInvoice.status === "paid" ? "text-emerald-700 bg-emerald-500/15 border-emerald-500/20" : "text-blue-700 bg-blue-500/15 border-blue-500/20"
+              }`}>{viewInvoice.status === "draft" ? "Ù…Ø³ÙˆØ¯Ø©" : viewInvoice.status === "paid" ? "Ù…Ø¯ÙÙˆØ¹Ø©" : "ØºÙŠØ± Ù…Ø¯ÙÙˆØ¹Ø©"}</span></div>
+              {viewInvoice.zatca_uuid && <div className="col-span-2"><span className="text-gray-400">ZATCA UUID:</span> <span className="text-gray-500 text-xs font-mono">{viewInvoice.zatca_uuid}</span></div>}
+              {viewInvoice.notes && <div className="col-span-3"><span className="text-gray-400">Ù…Ù„Ø§Ø­Ø¸Ø§Øª:</span> <span className="text-gray-700">{viewInvoice.notes}</span></div>}
             </div>
             <div className="overflow-hidden rounded-2xl bg-black/10">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-white/[0.05] backdrop-blur-xl">
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الصنف</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الكمية</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">سعر الوحدة</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الخصم</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الضريبة</th>
-                    <th className="text-right px-4 py-3 text-white/60 font-medium">الإجمالي</th>
+                  <tr className="bg-gray-50 backdrop-blur-xl">
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„ØµÙ†Ù</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„ÙƒÙ…ÙŠØ©</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø³Ø¹Ø± Ø§Ù„ÙˆØ­Ø¯Ø©</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø®ØµÙ…</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø¶Ø±ÙŠØ¨Ø©</th>
+                    <th className="text-right px-4 py-3 text-gray-600 font-medium">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</th>
                   </tr>
                 </thead>
                 <tbody>
                   {(viewInvoice.lines || []).map((line, i) => (
-                    <tr key={line.id || i} className={i < (viewInvoice.lines?.length || 0) - 1 ? "border-b border-white/[0.06]" : ""}>
-                      <td className="px-4 py-3 text-white/80">{line.item_name || "—"}</td>
-                      <td className="px-4 py-3 text-white/60">{line.quantity}</td>
-                      <td className="px-4 py-3 text-white/70 font-mono text-xs">{line.unit_price.toFixed(2)}</td>
-                      <td className="px-4 py-3 text-white/50 font-mono text-xs">{line.discount > 0 ? line.discount.toFixed(2) : "—"}</td>
-                      <td className="px-4 py-3 text-amber-300 font-mono text-xs">%{line.vat_rate}</td>
-                      <td className="px-4 py-3 text-emerald-300 font-mono text-xs">{line.total.toFixed(2)}</td>
+                    <tr key={line.id || i} className={i < (viewInvoice.lines?.length || 0) - 1 ? "border-b border-gray-200" : ""}>
+                      <td className="px-4 py-3 text-gray-800">{line.item_name || "â€”"}</td>
+                      <td className="px-4 py-3 text-gray-600">{line.quantity}</td>
+                      <td className="px-4 py-3 text-gray-700 font-mono text-xs">{line.unit_price.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-gray-500 font-mono text-xs">{line.discount > 0 ? line.discount.toFixed(2) : "â€”"}</td>
+                      <td className="px-4 py-3 text-amber-700 font-mono text-xs">%{line.vat_rate}</td>
+                      <td className="px-4 py-3 text-emerald-700 font-mono text-xs">{line.total.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr className="bg-white/[0.03]">
-                    <td colSpan={3} className="px-4 py-3 text-white/60 text-xs font-medium">الإجمالي</td>
-                    <td className="px-4 py-3 text-white/50 font-mono text-xs">{viewInvoice.discount_total > 0 ? viewInvoice.discount_total.toFixed(2) : "—"}</td>
-                    <td className="px-4 py-3 text-amber-300 font-mono text-xs">{viewInvoice.vat_amount.toFixed(2)}</td>
-                    <td className="px-4 py-3 text-emerald-300 font-mono text-xs font-medium">{viewInvoice.total_amount.toFixed(2)}</td>
+                  <tr className="bg-gray-50">
+                    <td colSpan={3} className="px-4 py-3 text-gray-600 text-xs font-medium">Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ</td>
+                    <td className="px-4 py-3 text-gray-500 font-mono text-xs">{viewInvoice.discount_total > 0 ? viewInvoice.discount_total.toFixed(2) : "â€”"}</td>
+                    <td className="px-4 py-3 text-amber-700 font-mono text-xs">{viewInvoice.vat_amount.toFixed(2)}</td>
+                    <td className="px-4 py-3 text-emerald-700 font-mono text-xs font-medium">{viewInvoice.total_amount.toFixed(2)}</td>
                   </tr>
                 </tfoot>
               </table>
             </div>
             <div className="flex items-center gap-3 mt-6">
-              <GlassButton onClick={() => setViewInvoice(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إغلاق</GlassButton>
+              <GlassButton onClick={() => setViewInvoice(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥ØºÙ„Ø§Ù‚</GlassButton>
               {viewInvoice.status === "draft" && (
-                <GlassButton onClick={() => postInvoice(viewInvoice.id)} disabled={posting}>{posting ? "جاري الترحيل..." : "ترحيل الفاتورة"}</GlassButton>
+                <GlassButton onClick={() => postInvoice(viewInvoice.id)} disabled={posting}>{posting ? "Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ±Ø­ÙŠÙ„..." : "ØªØ±Ø­ÙŠÙ„ Ø§Ù„ÙØ§ØªÙˆØ±Ø©"}</GlassButton>
               )}
               {viewInvoice.status !== "draft" && viewInvoice.zatca_qr && (
-                <GlassButton onClick={() => { setPostedResult({ zatca_qr_image: "", zatca_uuid: viewInvoice.zatca_uuid || "", journal_entry_id: viewInvoice.journal_entry_id || "" }); setTimeout(() => printInvoice(), 100); }}>طباعة</GlassButton>
+                <GlassButton onClick={() => { setPostedResult({ zatca_qr_image: "", zatca_uuid: viewInvoice.zatca_uuid || "", journal_entry_id: viewInvoice.journal_entry_id || "" }); setTimeout(() => printInvoice(), 100); }}>Ø·Ø¨Ø§Ø¹Ø©</GlassButton>
               )}
             </div>
           </GlassCard>
@@ -490,22 +490,22 @@ export default function InvoicesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <GlassCard className="p-8 w-full max-w-md mx-4 text-center">
             <div ref={printRef}>
-              <h2 className="text-xl font-semibold text-white/90 mb-2">تم ترحيل الفاتورة</h2>
-              <p className="text-emerald-300 text-sm mb-6">✓ تم الترحيل المحاسبي بنجاح</p>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">ØªÙ… ØªØ±Ø­ÙŠÙ„ Ø§Ù„ÙØ§ØªÙˆØ±Ø©</h2>
+              <p className="text-emerald-700 text-sm mb-6">âœ“ ØªÙ… Ø§Ù„ØªØ±Ø­ÙŠÙ„ Ø§Ù„Ù…Ø­Ø§Ø³Ø¨ÙŠ Ø¨Ù†Ø¬Ø§Ø­</p>
               <div className="flex flex-col gap-2 text-right text-sm mb-6">
-                <div><span className="text-white/40">ZATCA UUID:</span> <span className="text-white/60 text-xs font-mono">{postedResult.zatca_uuid}</span></div>
-                <div><span className="text-white/40">رقم القيد:</span> <span className="text-white/60 text-xs font-mono">{postedResult.journal_entry_id}</span></div>
+                <div><span className="text-gray-400">ZATCA UUID:</span> <span className="text-gray-600 text-xs font-mono">{postedResult.zatca_uuid}</span></div>
+                <div><span className="text-gray-400">Ø±Ù‚Ù… Ø§Ù„Ù‚ÙŠØ¯:</span> <span className="text-gray-600 text-xs font-mono">{postedResult.journal_entry_id}</span></div>
               </div>
               {postedResult.zatca_qr_image && (
                 <div className="flex justify-center mb-4">
                   <img src={postedResult.zatca_qr_image} alt="ZATCA QR" className="w-32 h-32" />
                 </div>
               )}
-              <div className="text-xs text-white/30">فاتورة ضريبية مطابقة لمتطلبات هيئة الزكاة والضريبة والجمارك</div>
+              <div className="text-xs text-gray-300">ÙØ§ØªÙˆØ±Ø© Ø¶Ø±ÙŠØ¨ÙŠØ© Ù…Ø·Ø§Ø¨Ù‚Ø© Ù„Ù…ØªØ·Ù„Ø¨Ø§Øª Ù‡ÙŠØ¦Ø© Ø§Ù„Ø²ÙƒØ§Ø© ÙˆØ§Ù„Ø¶Ø±ÙŠØ¨Ø© ÙˆØ§Ù„Ø¬Ù…Ø§Ø±Ùƒ</div>
             </div>
             <div className="flex items-center justify-center gap-3 mt-6">
-              {postedResult.zatca_qr_image && <GlassButton onClick={printInvoice}>طباعة الفاتورة</GlassButton>}
-              <GlassButton onClick={() => setPostedResult(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إغلاق</GlassButton>
+              {postedResult.zatca_qr_image && <GlassButton onClick={printInvoice}>Ø·Ø¨Ø§Ø¹Ø© Ø§Ù„ÙØ§ØªÙˆØ±Ø©</GlassButton>}
+              <GlassButton onClick={() => setPostedResult(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥ØºÙ„Ø§Ù‚</GlassButton>
             </div>
           </GlassCard>
         </div>
@@ -514,11 +514,11 @@ export default function InvoicesPage() {
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <GlassCard className="p-8 w-full max-w-md mx-4 text-center">
-            <p className="text-white/90 text-lg mb-2">حذف الفاتورة</p>
-            <p className="text-white/60 mb-6">{`هل أنت متأكد من حذف "${deleteConfirm.invoice_number}"؟`}</p>
+            <p className="text-gray-900 text-lg mb-2">Ø­Ø°Ù Ø§Ù„ÙØ§ØªÙˆØ±Ø©</p>
+            <p className="text-gray-600 mb-6">{`Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù "${deleteConfirm.invoice_number}"ØŸ`}</p>
             <div className="flex items-center justify-center gap-3">
-              <GlassButton onClick={() => deleteInvoice(deleteConfirm)} className="bg-red-500/20 hover:bg-red-500/30">تأكيد الحذف</GlassButton>
-              <GlassButton onClick={() => setDeleteConfirm(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+              <GlassButton onClick={() => deleteInvoice(deleteConfirm)} className="bg-red-500/20 hover:bg-red-500/30">ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù</GlassButton>
+              <GlassButton onClick={() => setDeleteConfirm(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">Ø¥Ù„ØºØ§Ø¡</GlassButton>
             </div>
           </GlassCard>
         </div>

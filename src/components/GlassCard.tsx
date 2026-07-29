@@ -5,7 +5,7 @@ type GlassCardProps = {
 
 export default function GlassCard({ children, className = "" }: GlassCardProps) {
   return (
-    <div className={`glass glass-hover ${className}`}>
+    <div className={`card card-hover ${className}`}>
       {children}
     </div>
   );
