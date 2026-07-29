@@ -5,7 +5,7 @@ ENV NODE_ENV=production
 RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 make g++
 
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 COPY . .
 
