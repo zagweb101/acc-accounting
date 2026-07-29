@@ -81,14 +81,14 @@ export default function PaymentsPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø§Ù„Ù…Ø¯ÙÙˆØ¹Ø§Øª</h1>
           <p className="text-gray-600">ØªØ³Ø¬ÙŠÙ„ Ø¯ÙØ¹Ø§Øª Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ â€” Ù…Ø¹ Ù‚ÙŠØ¯ Ù…Ø­Ø§Ø³Ø¨ÙŠ ØªÙ„Ù‚Ø§Ø¦ÙŠ</p>
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">

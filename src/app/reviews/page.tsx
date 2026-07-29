@@ -118,16 +118,16 @@ export default function Reviews() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-16" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-12 gap-6">
           <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-gray-900">Ù…ÙŠØ²Ø§Ù† Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© ÙˆØ£Ø¹Ù…Ø§Ø± Ø§Ù„Ø¯ÙŠÙˆÙ†</h1>
           <p className="text-lg text-gray-600 max-w-xl leading-relaxed">ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø°Ù…Ù… Ø§Ù„Ù…Ø¯ÙŠÙ†Ø© ÙˆØ§Ù„Ø¯Ø§Ø¦Ù†Ø© Ù…Ø¹ ØªØµÙ†ÙŠÙ Ø£Ø¹Ù…Ø§Ø± Ø§Ù„Ø¯ÙŠÙˆÙ†</p>
         </GlassCard>
       </section>
 
-      {error && <div className="max-w-6xl w-full"><div className="card px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div></div>}
+      {error && <div className="w-full"><div className="card px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div></div>}
       {kpi && (
-        <section className="max-w-6xl w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <section className="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
             { label: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø°Ù…Ù…", value: kpi.total_receivable, color: "text-gray-900" },
             { label: "ØªÙ… Ø§Ù„ØªØ­ØµÙŠÙ„", value: kpi.total_collected, color: "text-emerald-700" },
@@ -142,7 +142,7 @@ export default function Reviews() {
         </section>
       )}
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold text-gray-900">Ø§Ù„Ø°Ù…Ù… Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©</h2>
@@ -177,7 +177,7 @@ export default function Reviews() {
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Ø£Ø¹Ù…Ø§Ø± Ø§Ù„Ø¯ÙŠÙˆÙ† Ø§Ù„ØªÙØµÙŠÙ„ÙŠØ©</h2>
           <div className="overflow-hidden rounded-2xl bg-black/10">
@@ -209,7 +209,7 @@ export default function Reviews() {
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full grid sm:grid-cols-2 gap-6">
+      <section className="w-full grid sm:grid-cols-2 gap-6">
         <GlassCard className="p-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">ØªÙˆØ²ÙŠØ¹ Ø£Ø¹Ù…Ø§Ø± Ø§Ù„Ø¯ÙŠÙˆÙ†</h2>
           <ResponsiveContainer width="100%" height={320}>
@@ -238,7 +238,7 @@ export default function Reviews() {
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full grid sm:grid-cols-2 gap-6">
+      <section className="w-full grid sm:grid-cols-2 gap-6">
         <GlassCard className="p-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Ø§Ù„Ù†Ø³Ø¨Ø© Ø§Ù„Ù…Ø¦ÙˆÙŠØ©</h2>
           <ResponsiveContainer width="100%" height={320}>

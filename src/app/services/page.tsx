@@ -43,7 +43,7 @@ const services = [
 export default function Services() {
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-16">
-      <section className="max-w-3xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-12 gap-6">
           <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-gray-900">
             Our Services
@@ -54,7 +54,7 @@ export default function Services() {
         </GlassCard>
       </section>
 
-      <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
+      <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {services.map((service) => (
           <GlassCard key={service.title} className="p-8 flex flex-col gap-4">
             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl ${service.color}`}>
@@ -66,7 +66,7 @@ export default function Services() {
         ))}
       </section>
 
-      <section className="max-w-5xl w-full">
+      <section className="w-full">
         <GlassCard className="p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Pricing Plans</h2>
           <div className="overflow-hidden rounded-2xl bg-black/10">
@@ -98,7 +98,7 @@ export default function Services() {
         </GlassCard>
       </section>
 
-      <section className="max-w-3xl w-full">
+      <section className="w-full">
         <GlassCard className="p-10 flex flex-col items-center text-center gap-6">
           <h2 className="text-3xl font-semibold text-gray-900">Need a Custom Solution?</h2>
           <p className="text-gray-600 max-w-lg leading-relaxed">

@@ -3,7 +3,7 @@
 export default function About() {
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-16">
-      <section className="max-w-3xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-12 gap-6">
           <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-gray-900">
             About Us
@@ -14,7 +14,7 @@ export default function About() {
         </GlassCard>
       </section>
 
-      <section className="max-w-5xl w-full grid sm:grid-cols-2 gap-6">
+      <section className="w-full grid sm:grid-cols-2 gap-6">
         <GlassCard className="p-8 flex flex-col gap-4">
           <h2 className="text-2xl font-semibold text-gray-900">Our Mission</h2>
           <p className="text-gray-600 leading-relaxed">
@@ -41,7 +41,7 @@ export default function About() {
         </GlassCard>
       </section>
 
-      <section className="max-w-3xl w-full">
+      <section className="w-full">
         <GlassCard className="p-10 text-center">
           <h2 className="text-3xl font-semibold text-gray-900 mb-4">Our Journey</h2>
           <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
@@ -50,7 +50,7 @@ export default function About() {
         </GlassCard>
       </section>
 
-      <section className="max-w-4xl w-full">
+      <section className="w-full">
         <GlassCard className="p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Team Overview</h2>
           <div className="overflow-hidden rounded-2xl bg-black/10">

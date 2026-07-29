@@ -62,14 +62,14 @@ export default function AgingPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">ØªÙ‚Ø±ÙŠØ± Ø£Ø¹Ù…Ø§Ø± Ø§Ù„Ø¯ÙŠÙˆÙ†</h1>
           <p className="text-gray-600">ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø°Ù…Ù… Ø§Ù„Ù…Ø¯ÙŠÙ†Ø© ÙˆØ§Ù„Ø¯Ø§Ø¦Ù†Ø© Ø­Ø³Ø¨ ÙØªØ±Ø§Øª Ø§Ù„Ø§Ø³ØªØ­Ù‚Ø§Ù‚</p>
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">

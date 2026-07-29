@@ -212,14 +212,14 @@ export default function InvoicesPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø§Ù„ÙÙˆØ§ØªÙŠØ±</h1>
           <p className="text-gray-600">Ø¥Ø¯Ø§Ø±Ø© ÙÙˆØ§ØªÙŠØ± Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙˆØ§Ù„Ù…Ø´ØªØ±ÙŠØ§Øª Ù…Ø¹ Ø§Ù„ØªØ±Ø­ÙŠÙ„ Ø§Ù„Ù…Ø­Ø§Ø³Ø¨ÙŠ Ùˆ QR</p>
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">

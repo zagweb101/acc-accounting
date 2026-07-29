@@ -210,14 +210,14 @@ export default function JournalEntriesPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ù‚ÙŠÙˆØ¯ Ø§Ù„ÙŠÙˆÙ…ÙŠØ©</h1>
           <p className="text-gray-600">Ø¥Ø¯Ø§Ø±Ø© Ù‚ÙŠÙˆØ¯ Ø§Ù„ÙŠÙˆÙ…ÙŠØ© â€” ØªØ³Ø¬ÙŠÙ„ ÙˆØ¹Ø±Ø¶ ÙˆØªØ±Ø­ÙŠÙ„ Ø§Ù„Ù‚ÙŠÙˆØ¯ Ø§Ù„Ù…Ø­Ø§Ø³Ø¨ÙŠØ©</p>
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">

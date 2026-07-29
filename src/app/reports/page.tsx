@@ -131,14 +131,14 @@ export default function ReportsPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-7xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø§Ù„ØªÙ‚Ø§Ø±ÙŠØ± Ø§Ù„Ù…Ø§Ù„ÙŠØ©</h1>
           <p className="text-gray-600">ØªÙ‚Ø§Ø±ÙŠØ± Ù…ØªÙ‚Ø¯Ù…Ø© â€” Ù…ÙŠØ²Ø§Ù† Ù…Ø±Ø§Ø¬Ø¹Ø©ØŒ Ù‚Ø§Ø¦Ù…Ø© Ø¯Ø®Ù„ Ù…Ù‚Ø§Ø±Ù†Ø©ØŒ Ø±Ø¨Ø­ÙŠØ© Ù…Ø±Ø§ÙƒØ² Ø§Ù„ØªÙƒÙ„ÙØ©</p>
         </GlassCard>
       </section>
 
-      <section className="max-w-7xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1 mb-6 w-fit">
             <button onClick={() => setTab("trial")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "trial" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>Ù…ÙŠØ²Ø§Ù† Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø©</button>

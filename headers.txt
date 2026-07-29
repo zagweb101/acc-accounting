@@ -1,0 +1,10 @@
+HTTP/1.1 500 Internal Server Error
+Date: Wed, 29 Jul 2026 17:55:46 GMT
+Server: railway-hikari
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-railway-request-id: o2czPZdVSJKq2WeIWUN5dQ
+Transfer-Encoding: chunked
+x-hikari-trace: cdg1.8vsn
+x-railway-edge: cdg1
+Connection: keep-alive
+

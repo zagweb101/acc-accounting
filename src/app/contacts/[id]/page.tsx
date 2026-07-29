@@ -71,7 +71,7 @@ export default function ContactDetailPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-8">
           <div className="flex items-start justify-between">
             <div>
@@ -101,9 +101,9 @@ export default function ContactDetailPage() {
         </GlassCard>
       </section>
 
-      {error && <div className="max-w-6xl w-full card px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+      {error && <div className="w-full card px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1 mb-6 w-fit">
             {[

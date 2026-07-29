@@ -92,14 +92,14 @@ export default function ContactsPage() {
 
   return (
     <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">Ø¬Ù‡Ø§Øª Ø§Ù„Ø§ØªØµØ§Ù„</h1>
           <p className="text-gray-600">Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ ÙˆØ§Ù„Ù…ÙˆØ±Ø¯ÙŠÙ† â€” Ø§Ù„Ø£Ø±ØµØ¯Ø© ÙˆØ§Ù„Ø­Ø¯ÙˆØ¯ Ø§Ù„Ø§Ø¦ØªÙ…Ø§Ù†ÙŠØ©</p>
         </GlassCard>
       </section>
 
-      <section className="max-w-6xl w-full">
+      <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-4 flex-wrap mb-6">
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
