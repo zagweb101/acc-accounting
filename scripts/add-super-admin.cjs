@@ -19,6 +19,9 @@ function generateId() {
   });
 }
 
+const dir = path.dirname(DB_PATH);
+if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
 const db = new Database(DB_PATH);
 
 const existing = db.prepare("SELECT id FROM users WHERE username = ?").get("accsbc@hotmail.com");
