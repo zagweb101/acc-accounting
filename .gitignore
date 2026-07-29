@@ -35,10 +35,6 @@ yarn-error.log*
 .env.local
 .env.production
 
-# prisma generated
-/src/generated/
-/prisma/migrations/
-
 # data
 /data/
 
