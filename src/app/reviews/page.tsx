@@ -43,12 +43,12 @@ const statusBadge = (status: string) => {
     unpaid: "bg-red-500/15 border border-red-500/20 text-red-300 rounded-full px-3 py-1",
   };
   const labels: Record<string, string> = { paid: "مدفوع", unpaid: "غير مدفوع" };
-  return <span className={styles[status] || "bg-white/10 border border-white/10 rounded-full px-3 py-1"}>{labels[status] || status}</span>;
+  return <span className={styles[status] || "bg-gray-100 border border-gray-200 rounded-full px-3 py-1"}>{labels[status] || status}</span>;
 };
 
 const bucketBadge = (bucket: string) => {
   const styles: Record<string, string> = {
-    "0-30": "bg-white/10 border border-white/10 rounded-full px-3 py-1 text-gray-900",
+    "0-30": "bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-900",
     "31-60": "bg-amber-500/15 border border-amber-500/20 text-amber-700 rounded-full px-3 py-1",
     "61-90": "bg-orange-500/15 border border-orange-500/20 text-orange-300 rounded-full px-3 py-1",
     "90+": "bg-red-500/15 border border-red-500/20 text-red-300 rounded-full px-3 py-1",
@@ -214,10 +214,10 @@ export default function Reviews() {
           <h2 className="text-xl font-semibold text-gray-900 mb-6">توزيع أعمار الديون</h2>
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={agingChart} barCategoryGap="30%">
-              <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-              <XAxis dataKey="name" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} axisLine={false} tickLine={false} />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
+              <CartesianGrid stroke="#e5e7eb" vertical={false} />
+              <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
               <Bar dataKey="value" name="المبلغ" fill="#a78bfa" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -227,10 +227,10 @@ export default function Reviews() {
           <h2 className="text-xl font-semibold text-gray-900 mb-6">اتجاه التحصيل الشهري</h2>
           <ResponsiveContainer width="100%" height={320}>
             <LineChart data={monthlyData}>
-              <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-              <XAxis dataKey="name" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} axisLine={false} tickLine={false} />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
+              <CartesianGrid stroke="#e5e7eb" vertical={false} />
+              <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
               <Line type="monotone" dataKey="collected" name="محصل" stroke="#a78bfa" strokeWidth={2} dot={{ fill: "#a78bfa", r: 4 }} />
               <Line type="monotone" dataKey="outstanding" name="معلق" stroke="#34d399" strokeWidth={2} dot={{ fill: "#34d399", r: 4 }} />
             </LineChart>

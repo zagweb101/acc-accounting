@@ -91,7 +91,7 @@ export default function ContactsPage() {
   });
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">جهات الاتصال</h1>
@@ -107,7 +107,7 @@ export default function ContactsPage() {
             </select>
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
               {["all", "customer", "supplier", "both"].map(t => (
-                <button key={t} onClick={() => setFilter(t)} className={`px-4 py-1.5 rounded-xl text-sm font-medium transition-all ${filter === t ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>
+                <button key={t} onClick={() => setFilter(t)} className={`px-4 py-1.5 rounded-xl text-sm font-medium transition-all ${filter === t ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>
                   {t === "all" ? "الكل" : t === "customer" ? "عملاء" : t === "supplier" ? "موردين" : "الاثنين"}
                 </button>
               ))}

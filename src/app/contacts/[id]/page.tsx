@@ -70,7 +70,7 @@ export default function ContactDetailPage() {
   const typeColor = contact.type === "customer" ? "bg-emerald-50 text-emerald-700" : contact.type === "supplier" ? "bg-amber-50 text-amber-700" : "bg-violet-50 text-violet-700";
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="p-8">
           <div className="flex items-start justify-between">
@@ -111,7 +111,7 @@ export default function ContactDetailPage() {
               { k: "invoices", l: "الفواتير" },
               { k: "payments", l: "المدفوعات" },
             ].map(t => (
-              <button key={t.k} onClick={() => setTab(t.k)} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === t.k ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>{t.l}</button>
+              <button key={t.k} onClick={() => setTab(t.k)} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === t.k ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>{t.l}</button>
             ))}
           </div>
 
@@ -189,7 +189,7 @@ export default function ContactDetailPage() {
                           <td className="px-4 py-3 text-gray-800 font-mono text-xs">{(inv.total_amount as number).toFixed(2)}</td>
                           <td className="px-4 py-3 text-gray-600 font-mono text-xs">{(inv.paid_amount as number).toFixed(2)}</td>
                           <td className="px-4 py-3">
-                            <span className={`px-2 py-0.5 rounded-full text-xs ${inv.status === "paid" ? "bg-emerald-50 text-emerald-700" : inv.status === "unpaid" ? "bg-amber-50 text-amber-700" : "bg-white/10 text-gray-600"}`}>
+                            <span className={`px-2 py-0.5 rounded-full text-xs ${inv.status === "paid" ? "bg-emerald-50 text-emerald-700" : inv.status === "unpaid" ? "bg-amber-50 text-amber-700" : "bg-gray-100 text-gray-600"}`}>
                               {inv.status === "paid" ? "مدفوعة" : inv.status === "unpaid" ? "غير مدفوعة" : "مسودة"}
                             </span>
                           </td>

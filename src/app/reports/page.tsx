@@ -153,7 +153,7 @@ export default function ReportsPage() {
   const filteredTB = tbRows.filter(r => r.level > 1);
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">التقارير المالية</h1>
@@ -164,10 +164,10 @@ export default function ReportsPage() {
       <section className="w-full">
         <GlassCard className="p-6">
           <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1 mb-6 w-fit">
-            <button onClick={() => setTab("trial")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "trial" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ميزان المراجعة</button>
-            <button onClick={() => setTab("income")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "income" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>قائمة الدخل</button>
-            <button onClick={() => setTab("cc")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "cc" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ربحية مراكز التكلفة</button>
-            <button onClick={() => setTab("revenue")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "revenue" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>إيرادات حسب النشاط</button>
+            <button onClick={() => setTab("trial")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "trial" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ميزان المراجعة</button>
+            <button onClick={() => setTab("income")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "income" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>قائمة الدخل</button>
+            <button onClick={() => setTab("cc")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "cc" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ربحية مراكز التكلفة</button>
+            <button onClick={() => setTab("revenue")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "revenue" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>إيرادات حسب النشاط</button>
           </div>
 
           {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
@@ -177,8 +177,8 @@ export default function ReportsPage() {
             <div>
               <div className="flex items-center gap-4 flex-wrap mb-6">
                 <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-                  <button onClick={() => setTbActivityMode("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "single" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>نشاط واحد</button>
-                  <button onClick={() => setTbActivityMode("all")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "all" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>كل الأنشطة</button>
+                  <button onClick={() => setTbActivityMode("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "single" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>نشاط واحد</button>
+                  <button onClick={() => setTbActivityMode("all")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "all" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>كل الأنشطة</button>
                 </div>
                 {tbActivityMode === "single" && (
                   <select value={tbActivity} onChange={e => setTbActivity(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
@@ -252,8 +252,8 @@ export default function ReportsPage() {
             <div>
               <div className="flex items-center gap-4 flex-wrap mb-6">
                 <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-                  <button onClick={() => setIsType("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "single" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>فترة واحدة</button>
-                  <button onClick={() => setIsType("compare")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "compare" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مقارنة</button>
+                  <button onClick={() => setIsType("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "single" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>فترة واحدة</button>
+                  <button onClick={() => setIsType("compare")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "compare" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مقارنة</button>
                 </div>
                 <select value={isActivity} onChange={e => setIsActivity(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
                   {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}

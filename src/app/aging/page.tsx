@@ -15,7 +15,7 @@ type AgingRow = {
 type BucketSummary = { bucket: string; count: number; total: number };
 
 const bucketColors: Record<string, string> = {
-  "0-30": "bg-white/10",
+  "0-30": "bg-gray-100",
   "31-60": "bg-amber-50 border-amber-200 text-amber-700",
   "61-90": "bg-orange-500/15 border-orange-500/20 text-orange-300",
   "90+": "bg-red-50 border-red-200 text-red-600",
@@ -61,7 +61,7 @@ export default function AgingPage() {
   const label = tab === "sales" ? "ذمم عملاء (AR)" : "ذمم موردين (AP)";
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">تقرير أعمار الديون</h1>
@@ -76,8 +76,8 @@ export default function AgingPage() {
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => { setTab("sales"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ذمم عملاء (AR)</button>
-              <button onClick={() => { setTab("purchase"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ذمم موردين (AP)</button>
+              <button onClick={() => { setTab("sales"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ذمم عملاء (AR)</button>
+              <button onClick={() => { setTab("purchase"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ذمم موردين (AP)</button>
             </div>
             <select value={filterContact} onChange={e => setFilterContact(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
               <option value="">كل العملاء</option>
@@ -138,7 +138,7 @@ export default function AgingPage() {
                   {aging.map((row, i) => (
                     <tr key={row.id} className={`${i < aging.length - 1 ? "border-b border-gray-200" : ""} ${bucketColors[row.bucket] || ""}`}>
                       <td className="px-4 py-3 text-gray-900">
-                        <a href={`/contacts/${row.contact_id}`} className="text-gray-900 hover:text-white underline underline-offset-2 decoration-white/20">{row.contact_name}</a>
+                        <a href={`/contacts/${row.contact_id}`} className="text-gray-900 hover:text-gray-900 underline underline-offset-2 decoration-white/20">{row.contact_name}</a>
                       </td>
                       <td className="px-4 py-3 font-mono text-xs text-gray-700">{row.invoice_number}</td>
                       <td className="px-4 py-3 font-mono text-xs text-gray-500">{row.invoice_date}</td>
@@ -152,7 +152,7 @@ export default function AgingPage() {
                       <td className="px-4 py-3 font-mono text-xs text-gray-500">{row.paid_amount.toFixed(2)}</td>
                       <td className="px-4 py-3 font-mono text-xs font-semibold text-amber-700">{row.outstanding.toFixed(2)}</td>
                       <td className="px-4 py-3 text-center">
-                        <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${row.bucket === "0-30" ? "bg-white/10 text-gray-700" : row.bucket === "31-60" ? "bg-amber-50 text-amber-700" : row.bucket === "61-90" ? "bg-orange-500/20 text-orange-300" : "bg-red-50 text-red-600"}`}>
+                        <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${row.bucket === "0-30" ? "bg-gray-100 text-gray-700" : row.bucket === "31-60" ? "bg-amber-50 text-amber-700" : row.bucket === "61-90" ? "bg-orange-50 text-orange-700" : "bg-red-50 text-red-600"}`}>
                           {row.bucket}
                         </span>
                       </td>

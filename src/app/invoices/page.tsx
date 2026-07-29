@@ -211,7 +211,7 @@ export default function InvoicesPage() {
   }
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">الفواتير</h1>
@@ -226,8 +226,8 @@ export default function InvoicesPage() {
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => setTab("sales")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مبيعات</button>
-              <button onClick={() => setTab("purchase")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مشتريات</button>
+              <button onClick={() => setTab("sales")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مبيعات</button>
+              <button onClick={() => setTab("purchase")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مشتريات</button>
             </div>
             <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="input-field max-w-[140px] cursor-pointer">
               <option value="">كل الحالات</option>

@@ -94,7 +94,7 @@ export default function AccountsPage() {
   function openAddRoot() { setParentTarget(null); setEditTarget(null); setForm({ ...defaultAccount(), code: "" }); setShowForm(true); }
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">شجرة الحسابات</h1>

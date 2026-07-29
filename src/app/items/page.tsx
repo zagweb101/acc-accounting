@@ -130,7 +130,7 @@ export default function ItemsPage() {
   });
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">الأصناف</h1>
@@ -145,8 +145,8 @@ export default function ItemsPage() {
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
             <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => setTab("product")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "product" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>منتجات</button>
-              <button onClick={() => setTab("service")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "service" ? "bg-white/10 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>خدمات</button>
+              <button onClick={() => setTab("product")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "product" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>منتجات</button>
+              <button onClick={() => setTab("service")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "service" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>خدمات</button>
             </div>
             <div className="flex-1 min-w-[180px]"><GlassInput placeholder="بحث بالاسم أو SKU..." value={search} onChange={e => setSearch(e.target.value)} /></div>
             <GlassButton onClick={openAdd}>+ {tab === "product" ? "منتج" : "خدمة"}</GlassButton>

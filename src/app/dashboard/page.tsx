@@ -42,11 +42,11 @@ function KpiCard({ kpi }: { kpi: KPI }) {
     <div className="card rounded-2xl p-5">
       <div className="flex items-start justify-between mb-4">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-accent-subtle text-accent" style={{ backgroundColor: "rgba(129,140,248,0.15)", color: "#818cf8" }}>{kpi.icon}</div>
-        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${kpi.change >= 0 ? "bg-white/10 text-gray-700" : "bg-red-500/20 border border-red-500/30 text-red-300"}`}>
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${kpi.change >= 0 ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"}`}>
           {kpi.change >= 0 ? "↑" : "↓"} {Math.abs(kpi.change)}%
         </span>
       </div>
-      <p className="text-3xl font-bold text-white">{kpi.value.toLocaleString()}</p>
+      <p className="text-3xl font-bold text-gray-900">{kpi.value.toLocaleString()}</p>
       <p className="text-gray-500 text-sm mt-1">{kpi.label}</p>
     </div>
   );
@@ -84,7 +84,7 @@ export default function DashboardPage() {
   }, [initialized, filterActivity, filterFY, filterFrom, filterTo]);
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-8" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
           <h1 className="text-4xl font-semibold tracking-tight text-gray-900">لوحة التحكم</h1>
@@ -105,7 +105,7 @@ export default function DashboardPage() {
             </select>
             <input type="date" value={filterFrom} onChange={e => setFilterFrom(e.target.value)} className="input-field max-w-[160px]" placeholder="من" />
             <input type="date" value={filterTo} onChange={e => setFilterTo(e.target.value)} className="input-field max-w-[160px]" placeholder="إلى" />
-            {error && <span className="text-xs text-red-300">{error}</span>}
+            {error && <span className="text-xs text-red-600">{error}</span>}
           </div>
         </GlassCard>
       </section>
@@ -141,10 +141,10 @@ export default function DashboardPage() {
               ) : (
                 <ResponsiveContainer width="100%" height={280}>
                   <BarChart data={data.monthlyComparison} barCategoryGap="20%">
-                    <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-                    <XAxis dataKey="month" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
+                    <CartesianGrid stroke="#e5e7eb" vertical={false} />
+                    <XAxis dataKey="month" tick={{ fill: "#9ca3af", fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: "#9ca3af", fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
                     <Legend formatter={(value: string) => <span className="text-gray-500 text-xs">{value}</span>} />
                     {activities.filter(a => !filterActivity || a.id === filterActivity).map((a, i) => (
                       <Bar key={a.id} dataKey={a.name} name={a.name} fill={ACCENT_OPTS[i % ACCENT_OPTS.length]} radius={[6, 6, 0, 0]} maxBarSize={40} />
@@ -163,10 +163,10 @@ export default function DashboardPage() {
               ) : (
                 <ResponsiveContainer width="100%" height={260}>
                   <BarChart data={data.agingBuckets} barCategoryGap="30%">
-                    <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 12 }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
+                    <CartesianGrid stroke="#e5e7eb" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
                     <Bar dataKey="value" name="المستحق" radius={[8, 8, 0, 0]} maxBarSize={60}>
                       {data.agingBuckets.map((b, i) => (
                         <Cell key={i} fill={[ACCENT, "#6366f1", "#a5b4fc", "#4f46e5"][i]} />
