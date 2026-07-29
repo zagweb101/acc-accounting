@@ -1,0 +1,256 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import GlassCard from "@/components/GlassCard";
+import GlassButton from "@/components/GlassButton";
+import GlassInput from "@/components/GlassInput";
+
+type Activity = { id: string; name: string; code: string };
+type CostCenter = { id: string; activity_id: string; activity_name: string; name: string; code: string; parent_id: string | null; level: number; is_active: number };
+
+type ProfitRow = { id: string; name: string; code: string; level: number; revenue: number; expense: number; profit: number };
+type TreeNode = CostCenter & { children: TreeNode[] };
+
+function buildTree(items: CostCenter[]): TreeNode[] {
+  const map = new Map<string, TreeNode>();
+  const roots: TreeNode[] = [];
+  for (const item of items) map.set(item.id, { ...item, children: [] });
+  for (const item of items) {
+    const node = map.get(item.id)!;
+    if (item.parent_id && map.has(item.parent_id)) map.get(item.parent_id)!.children.push(node);
+    else roots.push(node);
+  }
+  return roots;
+}
+
+export default function CostCentersPage() {
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [activeActivity, setActiveActivity] = useState("");
+  const [centers, setCenters] = useState<CostCenter[]>([]);
+  const [profitRows, setProfitRows] = useState<ProfitRow[]>([]);
+  const [search, setSearch] = useState("");
+  const [error, setError] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const [showForm, setShowForm] = useState(false);
+  const [editTarget, setEditTarget] = useState<CostCenter | null>(null);
+  const [parentTarget, setParentTarget] = useState<CostCenter | null>(null);
+  const [formName, setFormName] = useState("");
+  const [formCode, setFormCode] = useState("");
+
+  const [deleteConfirm, setDeleteConfirm] = useState<CostCenter | null>(null);
+
+  const [dateFrom, setDateFrom] = useState("2026-01-01");
+  const [dateTo, setDateTo] = useState("2026-12-31");
+
+  useEffect(() => {
+    fetch("/api/activities").then(r => r.json()).then(d => {
+      setActivities(d.activities);
+      if (d.activities.length > 0) setActiveActivity(d.activities[0].id);
+    }).catch(() => setError("Failed to load activities"));
+  }, []);
+
+  useEffect(() => {
+    if (!activeActivity) return;
+    let cancelled = false;
+    fetch(`/api/cost-centers?activity_id=${activeActivity}`)
+      .then(r => r.json()).then(d => { if (!cancelled) setCenters(d.centers); })
+      .catch(() => { if (!cancelled) setError("Failed to load cost centers"); });
+    return () => { cancelled = true; };
+  }, [activeActivity, refreshKey]);
+
+  function loadProfit() {
+    if (!activeActivity) return;
+    fetch(`/api/cost-centers/profitability?activity_id=${activeActivity}&from=${dateFrom}&to=${dateTo}`)
+      .then(r => r.json()).then(d => setProfitRows(d.rows))
+      .catch(() => setError("Failed to load profitability"));
+  }
+
+  useEffect(() => {
+    if (!activeActivity) return;
+    let cancelled = false;
+    fetch(`/api/cost-centers/profitability?activity_id=${activeActivity}&from=${dateFrom}&to=${dateTo}`)
+      .then(r => r.json()).then(d => { if (!cancelled) setProfitRows(d.rows); })
+      .catch(() => { if (!cancelled) setError("Failed to load profitability"); });
+    return () => { cancelled = true; };
+  }, [activeActivity, dateFrom, dateTo, refreshKey]);
+
+  async function save() {
+    const url = editTarget ? `/api/cost-centers/${editTarget.id}` : "/api/cost-centers";
+    const method = editTarget ? "PUT" : "POST";
+    const body = editTarget
+      ? { name: formName, is_active: editTarget.is_active }
+      : { activity_id: activeActivity, parent_id: parentTarget?.id || null, name: formName, code: formCode || undefined };
+    try {
+      const r = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const d = await r.json();
+      if (!r.ok) { setError(d.error); return; }
+      setShowForm(false); setEditTarget(null); setParentTarget(null); setFormName(""); setFormCode(""); setError("");
+      setRefreshKey(k => k + 1);
+    } catch { setError("Failed to save"); }
+  }
+
+  async function remove(id: string) {
+    try {
+      const r = await fetch(`/api/cost-centers/${id}`, { method: "DELETE" });
+      const d = await r.json();
+      if (!r.ok) { setError(d.error); return; }
+      setDeleteConfirm(null); setError("");
+      setRefreshKey(k => k + 1);
+    } catch { setError("Failed to delete"); }
+  }
+
+  function openAddChild(parent: CostCenter) { setParentTarget(parent); setEditTarget(null); setFormName(""); setFormCode(""); setShowForm(true); }
+  function openEdit(c: CostCenter) { setEditTarget(c); setParentTarget(null); setFormName(c.name); setFormCode(""); setShowForm(true); }
+  function openAddRoot() { setParentTarget(null); setEditTarget(null); setFormName(""); setFormCode(""); setShowForm(true); }
+
+  const tree = buildTree(centers);
+
+  function renderNode(node: TreeNode, depth: number): React.ReactNode {
+    const matches = search ? node.code.includes(search) || node.name.includes(search) : true;
+    const childMatches = search ? node.children.some(c => c.code.includes(search) || c.name.includes(search)) : true;
+    if (search && !matches && !childMatches) return <></>;
+
+    return (
+      <div key={node.id}>
+        <div className={`glass flex items-center gap-3 px-4 py-2.5 text-sm`} style={{ marginInlineStart: `${depth * 24}px` }}>
+          <span className="font-mono text-white/90 text-xs w-20 shrink-0">{node.code}</span>
+          <span className="text-white/90 font-medium flex-1 truncate">{node.name}</span>
+          {depth === 0 && <span className="text-white/40 text-xs w-24 truncate">{node.activity_name}</span>}
+          <span className="text-white/40 text-xs w-8">{depth + 1}</span>
+          <span className={`text-[11px] px-2 py-0.5 rounded-full border ${node.is_active ? "text-emerald-300 bg-emerald-500/15 border-emerald-500/20" : "text-red-300 bg-red-500/15 border-red-500/20"}`}>
+            {node.is_active ? "نشط" : "غير نشط"}
+          </span>
+          <div className="flex items-center gap-1 shrink-0">
+            <button onClick={() => openAddChild(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white/90 transition-all text-sm" title="إضافة فرعي">+</button>
+            <button onClick={() => openEdit(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white/90 transition-all text-sm" title="تعديل">⚙</button>
+            <button onClick={() => setDeleteConfirm(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-red-500/20 text-white/60 hover:text-red-300 transition-all text-sm" title="حذف">✕</button>
+          </div>
+        </div>
+        {node.children.map(ch => renderNode(ch, depth + 1))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center px-8 py-16 gap-8" dir="rtl">
+      <section className="max-w-6xl w-full">
+        <GlassCard className="flex flex-col items-center text-center p-10 gap-4">
+          <h1 className="text-4xl font-semibold tracking-tight text-white/90">مراكز التكلفة</h1>
+          <p className="text-white/60">إدارة مراكز التكلفة — هيكل هرمي مع تقارير الربحية</p>
+        </GlassCard>
+      </section>
+
+      <section className="max-w-6xl w-full">
+        <GlassCard className="p-6">
+          <div className="flex items-center gap-4 flex-wrap mb-6">
+            <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="glass-input max-w-[250px] cursor-pointer">
+              {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
+            </select>
+            <div className="flex-1 min-w-[200px]"><GlassInput placeholder="بحث بالكود أو الاسم..." value={search} onChange={e => setSearch(e.target.value)} /></div>
+            <GlassButton onClick={openAddRoot}>+ مركز جديد</GlassButton>
+          </div>
+
+          {error && <div className="glass mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+
+          {centers.length === 0 ? (
+            <p className="text-white/40 text-center py-12">لا توجد مراكز تكلفة. أضف واحداً للبدء</p>
+          ) : (
+            <div className="flex flex-col gap-1">
+              {tree.map(node => renderNode(node, 0))}
+            </div>
+          )}
+        </GlassCard>
+      </section>
+
+      <section className="max-w-6xl w-full">
+        <GlassCard className="p-6">
+          <h2 className="text-xl font-semibold text-white/90 mb-4">تقرير ربحية مراكز التكلفة</h2>
+          <div className="flex items-center gap-4 flex-wrap mb-6">
+            <div className="flex flex-col gap-1">
+              <label className="text-white/40 text-xs">من تاريخ</label>
+              <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="glass-input max-w-[180px]" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-white/40 text-xs">إلى تاريخ</label>
+              <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="glass-input max-w-[180px]" />
+            </div>
+            <GlassButton onClick={loadProfit} className="mt-5">تحديث</GlassButton>
+          </div>
+          {profitRows.length === 0 ? (
+            <p className="text-white/40 text-sm">لا توجد بيانات للفترة المحددة</p>
+          ) : (
+            <div className="overflow-hidden rounded-2xl bg-black/10">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-white/[0.05] backdrop-blur-xl">
+                    <th className="text-right px-4 py-3 text-white/60 font-medium">الكود</th>
+                    <th className="text-right px-4 py-3 text-white/60 font-medium">المركز</th>
+                    <th className="text-right px-4 py-3 text-white/60 font-medium">الإيرادات</th>
+                    <th className="text-right px-4 py-3 text-white/60 font-medium">المصروفات</th>
+                    <th className="text-right px-4 py-3 text-white/60 font-medium">الربح / الخسارة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {profitRows.map((row, i) => {
+                    const isProfit = row.profit >= 0;
+                    return (
+                      <tr key={row.id} className={i < profitRows.length - 1 ? "border-b border-white/[0.06]" : ""}>
+                        <td className="px-4 py-3 text-white/60 font-mono text-xs">{row.code}</td>
+                        <td className="px-4 py-3 text-white/90">{row.name}</td>
+                        <td className="px-4 py-3 text-emerald-300 font-mono">{row.revenue.toLocaleString()} د.ك</td>
+                        <td className="px-4 py-3 text-red-300 font-mono">{row.expense.toLocaleString()} د.ك</td>
+                        <td className={`px-4 py-3 font-mono font-medium ${isProfit ? "text-emerald-300" : "text-red-300"}`}>
+                          {isProfit ? "+" : ""}{row.profit.toLocaleString()} د.ك
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </GlassCard>
+      </section>
+
+      {showForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <GlassCard className="p-8 w-full max-w-md mx-4">
+            <h2 className="text-xl font-semibold text-white/90 mb-6">
+              {editTarget ? `تعديل ${editTarget.name}` : parentTarget ? `إضافة فرعي لـ ${parentTarget.name}` : "إضافة مركز تكلفة"}
+            </h2>
+            <div className="flex flex-col gap-4">
+              {!editTarget && !parentTarget && (
+                <div className="flex flex-col gap-2">
+                  <label className="text-white/60 text-sm">الكود</label>
+                  <GlassInput value={formCode} onChange={e => setFormCode(e.target.value)} placeholder="مثال: CC-100" dir="ltr" />
+                </div>
+              )}
+              <div className="flex flex-col gap-2">
+                <label className="text-white/60 text-sm">الاسم</label>
+                <GlassInput value={formName} onChange={e => setFormName(e.target.value)} placeholder="اسم المركز" />
+              </div>
+              <div className="flex items-center gap-3 mt-2">
+                <GlassButton onClick={save}>{editTarget ? "حفظ" : "إضافة"}</GlassButton>
+                <GlassButton onClick={() => { setShowForm(false); setEditTarget(null); setParentTarget(null); setFormName(""); setFormCode(""); }} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+              </div>
+            </div>
+          </GlassCard>
+        </div>
+      )}
+
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <GlassCard className="p-8 w-full max-w-md mx-4 text-center">
+            <p className="text-white/90 text-lg mb-2">حذف مركز تكلفة</p>
+            <p className="text-white/60 mb-6">{`هل أنت متأكد من حذف "${deleteConfirm.name}" (${deleteConfirm.code})؟`}</p>
+            <div className="flex items-center justify-center gap-3">
+              <GlassButton onClick={() => remove(deleteConfirm.id)} className="bg-red-500/20 hover:bg-red-500/30">تأكيد الحذف</GlassButton>
+              <GlassButton onClick={() => setDeleteConfirm(null)} className="from-white/5 to-white/5 hover:from-white/10 hover:to-white/10">إلغاء</GlassButton>
+            </div>
+          </GlassCard>
+        </div>
+      )}
+    </div>
+  );
+}

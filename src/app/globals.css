@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #0a0a0f;
+  --color-foreground: #ffffff;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@utility glass {
+  background-color: rgb(255 255 255 / 0.07);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.1);
+}
+
+@utility glass-hover {
+  transition: all 0.3s;
+}
+
+.glass-hover:hover {
+  background-color: rgb(255 255 255 / 0.10);
+  border-color: rgb(255 255 255 / 0.18);
+}
+
+@utility glass-btn {
+  background-image: linear-gradient(to bottom right, rgb(139 92 246 / 0.2), rgb(59 130 246 / 0.2));
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  color: rgb(255 255 255);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.glass-btn:hover {
+  background-image: linear-gradient(to bottom right, rgb(139 92 246 / 0.3), rgb(59 130 246 / 0.3));
+  border-color: rgb(255 255 255 / 0.3);
+}
+
+@utility glass-input {
+  background-color: rgb(0 0 0 / 0.2);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  color: rgb(255 255 255);
+  outline: none;
+  width: 100%;
+}
+
+.glass-input::placeholder {
+  color: rgb(255 255 255 / 0.4);
+}
+
+.glass-input:focus {
+  border-color: rgb(167 139 250 / 0.5);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #0a0a0f;
+  color: rgb(255 255 255);
   font-family: Arial, Helvetica, sans-serif;
 }
+

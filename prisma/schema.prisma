@@ -1,0 +1,260 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ActivityType {
+  commercial
+  service
+  mixed
+}
+
+enum AccountType {
+  asset
+  liability
+  equity
+  revenue
+  expense
+}
+
+enum DebitCredit {
+  debit
+  credit
+}
+
+enum ContactType {
+  customer
+  supplier
+  both
+}
+
+enum ItemType {
+  product
+  service
+}
+
+enum JournalStatus {
+  draft
+  posted
+  reversed
+}
+
+enum InvoiceType {
+  sales
+  purchase
+}
+
+enum PaymentMethod {
+  cash
+  bank
+  transfer
+}
+
+model Activity {
+  id           String          @id @default(uuid()) @db.Uuid
+  name         String
+  code         String          @unique
+  type         ActivityType
+  vatNumber    String?         @map("vat_number")
+  isActive     Boolean         @default(true) @map("is_active")
+  createdAt    DateTime        @default(now()) @map("created_at")
+  fiscalYears  FiscalYear[]
+  costCenters  CostCenter[]
+  chartOfAccounts ChartOfAccount[]
+  contacts     Contact[]
+  items        Item[]
+  journalEntries JournalEntry[]
+  invoices     Invoice[]
+  payments     Payment[]
+
+  @@map("activities")
+}
+
+model FiscalYear {
+  id             String          @id @default(uuid()) @db.Uuid
+  activityId     String          @map("activity_id")
+  activity       Activity        @relation(fields: [activityId], references: [id])
+  name           String
+  startDate      DateTime        @map("start_date")
+  endDate        DateTime        @map("end_date")
+  isClosed       Boolean         @default(false) @map("is_closed")
+  journalEntries JournalEntry[]
+
+  @@map("fiscal_years")
+}
+
+model CostCenter {
+  id             String                @id @default(uuid()) @db.Uuid
+  activityId     String                @map("activity_id")
+  activity       Activity              @relation(fields: [activityId], references: [id])
+  name           String
+  code           String                @unique
+  parentId       String?               @map("parent_id")
+  parent         CostCenter?           @relation("CostCenterHierarchy", fields: [parentId], references: [id])
+  children       CostCenter[]          @relation("CostCenterHierarchy")
+  level          Int                   @default(1)
+  journalEntryLines JournalEntryLine[]
+
+  @@index([activityId])
+  @@index([parentId])
+  @@map("cost_centers")
+}
+
+model ChartOfAccount {
+  id             String                @id @default(uuid()) @db.Uuid
+  activityId     String?               @map("activity_id")
+  activity       Activity?             @relation(fields: [activityId], references: [id])
+  code           String
+  nameAr         String                @map("name_ar")
+  nameEn         String?               @map("name_en")
+  accountType    AccountType           @map("account_type")
+  parentId       String?               @map("parent_id")
+  parent         ChartOfAccount?       @relation("AccountHierarchy", fields: [parentId], references: [id])
+  children       ChartOfAccount[]      @relation("AccountHierarchy")
+  level          Int
+  nature         DebitCredit
+  isPostable     Boolean               @default(true) @map("is_postable")
+  isActive       Boolean               @default(true) @map("is_active")
+  journalEntryLines JournalEntryLine[]
+
+  @@unique([activityId, code])
+  @@index([activityId])
+  @@index([parentId])
+  @@index([code])
+  @@map("chart_of_accounts")
+}
+
+model Contact {
+  id             String                @id @default(uuid()) @db.Uuid
+  activityId     String                @map("activity_id")
+  activity       Activity              @relation(fields: [activityId], references: [id])
+  type           ContactType
+  name           String
+  taxNumber      String?               @map("tax_number")
+  phone          String?
+  balance        Float                 @default(0)
+  creditLimit    Float                 @default(0) @map("credit_limit")
+  createdAt      DateTime              @default(now()) @map("created_at")
+  journalEntryLines JournalEntryLine[]
+  invoices       Invoice[]
+  payments       Payment[]
+
+  @@index([activityId])
+  @@map("contacts")
+}
+
+model Item {
+  id             String                @id @default(uuid()) @db.Uuid
+  activityId     String                @map("activity_id")
+  activity       Activity              @relation(fields: [activityId], references: [id])
+  type           ItemType
+  name           String
+  sku            String?
+  costPrice      Float?                @map("cost_price")
+  salePrice      Float?                @map("sale_price")
+  vatRate        Float                 @default(15) @map("vat_rate")
+  stockQuantity  Float                 @default(0) @map("stock_quantity")
+  journalEntryLines JournalEntryLine[]
+
+  @@index([activityId])
+  @@map("items")
+}
+
+model JournalEntry {
+  id             String                @id @default(uuid()) @db.Uuid
+  entryNumber    String                @unique @map("entry_number")
+  activityId     String                @map("activity_id")
+  activity       Activity              @relation(fields: [activityId], references: [id])
+  fiscalYearId   String                @map("fiscal_year_id")
+  fiscalYear     FiscalYear            @relation(fields: [fiscalYearId], references: [id])
+  entryDate      DateTime              @map("entry_date")
+  description    String?
+  totalDebit     Float                 @map("total_debit")
+  totalCredit    Float                 @map("total_credit")
+  status         JournalStatus         @default(posted)
+  createdAt      DateTime              @default(now()) @map("created_at")
+  lines          JournalEntryLine[]
+  invoices       Invoice[]
+  payments       Payment[]
+
+  @@index([activityId, entryDate])
+  @@index([entryDate])
+  @@index([fiscalYearId])
+  @@map("journal_entries")
+}
+
+model JournalEntryLine {
+  id             String                @id @default(uuid()) @db.Uuid
+  journalEntryId String                @map("journal_entry_id")
+  journalEntry   JournalEntry          @relation(fields: [journalEntryId], references: [id], onDelete: Cascade)
+  accountId      String                @map("account_id")
+  account        ChartOfAccount        @relation(fields: [accountId], references: [id])
+  costCenterId   String?               @map("cost_center_id")
+  costCenter     CostCenter?           @relation(fields: [costCenterId], references: [id])
+  contactId      String?               @map("contact_id")
+  contact        Contact?              @relation(fields: [contactId], references: [id])
+  itemId         String?               @map("item_id")
+  item           Item?                 @relation(fields: [itemId], references: [id])
+  debit          Float                 @default(0)
+  credit         Float                 @default(0)
+  description    String?
+  dueDate        DateTime?             @map("due_date")
+
+  @@index([accountId])
+  @@index([costCenterId])
+  @@index([contactId])
+  @@index([dueDate])
+  @@index([journalEntryId])
+  @@map("journal_entry_lines")
+}
+
+model Invoice {
+  id             String                @id @default(uuid()) @db.Uuid
+  activityId     String                @map("activity_id")
+  activity       Activity              @relation(fields: [activityId], references: [id])
+  contactId      String                @map("contact_id")
+  contact        Contact               @relation(fields: [contactId], references: [id])
+  type           InvoiceType
+  invoiceNumber  String                @unique @map("invoice_number")
+  invoiceDate    DateTime              @map("invoice_date")
+  dueDate        DateTime              @map("due_date")
+  subtotal       Float
+  vatAmount      Float                 @map("vat_amount")
+  totalAmount    Float                 @map("total_amount")
+  paidAmount     Float                 @default(0) @map("paid_amount")
+  status         String                @default("unpaid")
+  zatcaUuid      String?               @map("zatca_uuid")
+  journalEntryId String?               @map("journal_entry_id")
+  journalEntry   JournalEntry?         @relation(fields: [journalEntryId], references: [id])
+  payments       Payment[]
+
+  @@index([activityId, dueDate, status])
+  @@index([activityId])
+  @@index([contactId])
+  @@index([dueDate])
+  @@map("invoices")
+}
+
+model Payment {
+  id             String                @id @default(uuid()) @db.Uuid
+  activityId     String                @map("activity_id")
+  activity       Activity              @relation(fields: [activityId], references: [id])
+  invoiceId      String                @map("invoice_id")
+  invoice        Invoice               @relation(fields: [invoiceId], references: [id])
+  contactId      String                @map("contact_id")
+  contact        Contact               @relation(fields: [contactId], references: [id])
+  amount         Float
+  paymentDate    DateTime              @map("payment_date")
+  method         PaymentMethod
+  journalEntryId String?               @map("journal_entry_id")
+  journalEntry   JournalEntry?         @relation(fields: [journalEntryId], references: [id])
+
+  @@index([activityId])
+  @@index([invoiceId])
+  @@index([contactId])
+  @@map("payments")
+}
