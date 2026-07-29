@@ -1,6 +1,5 @@
-FROM node:22-slim AS base
+FROM node:22-slim
 WORKDIR /app
-ENV NODE_ENV=production
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 make g++
 
@@ -9,6 +8,7 @@ RUN npm ci
 
 COPY . .
 
+ENV NODE_ENV=production
 ARG AUTH_SECRET
 ENV AUTH_SECRET=$AUTH_SECRET
 
