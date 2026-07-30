@@ -17,7 +17,7 @@ type BucketSummary = { bucket: string; count: number; total: number };
 const bucketColors: Record<string, string> = {
   "0-30": "bg-gray-100",
   "31-60": "bg-amber-50 border-amber-200 text-amber-700",
-  "61-90": "bg-orange-500/15 border-orange-500/20 text-orange-300",
+  "61-90": "bg-orange-50 border-orange-200 text-orange-700",
   "90+": "bg-red-50 border-red-200 text-red-600",
 };
 
@@ -75,9 +75,9 @@ export default function AgingPage() {
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
-            <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => { setTab("sales"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ذمم عملاء (AR)</button>
-              <button onClick={() => { setTab("purchase"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ذمم موردين (AP)</button>
+            <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+              <button onClick={() => { setTab("sales"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>ذمم عملاء (AR)</button>
+              <button onClick={() => { setTab("purchase"); setFilterBucket(""); }} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>ذمم موردين (AP)</button>
             </div>
             <select value={filterContact} onChange={e => setFilterContact(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
               <option value="">كل العملاء</option>
@@ -94,7 +94,7 @@ export default function AgingPage() {
             </select>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {["0-30", "31-60", "61-90", "90+"].map(b => {
@@ -102,7 +102,7 @@ export default function AgingPage() {
               return (
                 <div key={b} className={`card rounded-2xl p-4 border ${bucketColors[b] || "border-white/10"}`}>
                   <p className="text-xs text-gray-500">{b === "90+" ? `${b} يوم` : `${b} يوم`}</p>
-                  <p className={`text-2xl font-mono font-semibold mt-1 ${b === "0-30" ? "text-gray-800" : b === "31-60" ? "text-amber-700" : b === "61-90" ? "text-orange-300" : "text-red-300"}`}>
+                  <p className={`text-2xl font-mono font-semibold mt-1 ${b === "0-30" ? "text-gray-800" : b === "31-60" ? "text-amber-700" : b === "61-90" ? "text-orange-700" : "text-red-600"}`}>
                     {bs ? bs.total.toFixed(2) : "0.00"}
                   </p>
                   <p className="text-xs text-gray-400 mt-1">{bs ? `${bs.count} فاتورة` : "0 فواتير"}</p>
@@ -119,7 +119,7 @@ export default function AgingPage() {
           {aging.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد فواتير مستحقة</p>
           ) : (
-            <div className="overflow-x-auto rounded-2xl bg-black/10">
+            <div className="overflow-x-auto rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">
@@ -144,7 +144,7 @@ export default function AgingPage() {
                       <td className="px-4 py-3 font-mono text-xs text-gray-500">{row.invoice_date}</td>
                       <td className="px-4 py-3 font-mono text-xs text-gray-600">{row.due_date}</td>
                       <td className="px-4 py-3 font-mono text-xs font-semibold" dir="ltr">
-                        <span className={`${row.days_overdue > 90 ? "text-red-300" : row.days_overdue > 60 ? "text-orange-300" : row.days_overdue > 30 ? "text-amber-700" : "text-gray-700"}`}>
+                        <span className={`${row.days_overdue > 90 ? "text-red-600" : row.days_overdue > 60 ? "text-orange-700" : row.days_overdue > 30 ? "text-amber-700" : "text-gray-700"}`}>
                           {row.days_overdue}
                         </span>
                       </td>

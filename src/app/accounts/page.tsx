@@ -113,7 +113,7 @@ export default function AccountsPage() {
             <GlassButton onClick={() => setShowCopy(true)} className="">نسخ الشجرة</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {loading ? (
             <p className="text-gray-400 text-center py-12">جاري التحميل...</p>
@@ -163,10 +163,10 @@ export default function AccountsPage() {
               {editTarget && (
                 <div className="flex items-center gap-6">
                   <label className="flex items-center gap-2 text-gray-600 text-sm cursor-pointer">
-                    <input type="checkbox" checked={form.is_postable === 1} onChange={e => setForm({ ...form, is_postable: e.target.checked ? 1 : 0 })} className="accent-indigo-500" /> قابل للترحيل
+                    <input type="checkbox" checked={form.is_postable === 1} onChange={e => setForm({ ...form, is_postable: e.target.checked ? 1 : 0 })} className="accent-blue-500" /> قابل للترحيل
                   </label>
                   <label className="flex items-center gap-2 text-gray-600 text-sm cursor-pointer">
-                    <input type="checkbox" checked={form.is_active === 1} onChange={e => setForm({ ...form, is_active: e.target.checked ? 1 : 0 })} className="accent-indigo-500" /> نشط
+                    <input type="checkbox" checked={form.is_active === 1} onChange={e => setForm({ ...form, is_active: e.target.checked ? 1 : 0 })} className="accent-blue-500" /> نشط
                   </label>
                 </div>
               )}

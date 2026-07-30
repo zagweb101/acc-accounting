@@ -20,8 +20,8 @@ type DashData = {
   agingBuckets: AgingBucket[];
 };
 
-const ACCENT = "#818cf8";
-const ACCENT_OPTS = ["#818cf8", "#6366f1", "#a5b4fc", "#4f46e5"];
+const ACCENT = "#2563eb";
+const ACCENT_OPTS = ["#2563eb", "#2563eb", "#93c5fd", "#1d4ed8"];
 
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: { name: string; value: number; color: string }[]; label?: string }) {
   if (!active || !payload) return null;
@@ -41,7 +41,7 @@ function KpiCard({ kpi }: { kpi: KPI }) {
   return (
     <div className="card rounded-2xl p-5">
       <div className="flex items-start justify-between mb-4">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-accent-subtle text-accent" style={{ backgroundColor: "rgba(129,140,248,0.15)", color: "#818cf8" }}>{kpi.icon}</div>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-accent-subtle text-accent" style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#2563eb" }}>{kpi.icon}</div>
           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${kpi.change >= 0 ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-600"}`}>
           {kpi.change >= 0 ? "↑" : "↓"} {Math.abs(kpi.change)}%
         </span>
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
                     <Bar dataKey="value" name="المستحق" radius={[8, 8, 0, 0]} maxBarSize={60}>
                       {data.agingBuckets.map((b, i) => (
-                        <Cell key={i} fill={[ACCENT, "#6366f1", "#a5b4fc", "#4f46e5"][i]} />
+                        <Cell key={i} fill={[ACCENT, "#2563eb", "#93c5fd", "#1d4ed8"][i]} />
                       ))}
                     </Bar>
                   </BarChart>

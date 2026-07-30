@@ -33,17 +33,17 @@ export default function LoginPage() {
           <input
             value={username} onChange={e => setUsername(e.target.value)}
             placeholder="اسم المستخدم"
-            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-300 outline-none focus:border-[#818cf8]/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-300 outline-none focus:border-[#2563eb]/50 transition-all"
           />
           <input
             type="password" value={password} onChange={e => setPassword(e.target.value)}
             placeholder="كلمة المرور"
-            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-300 outline-none focus:border-[#818cf8]/50 transition-all"
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-300 outline-none focus:border-[#2563eb]/50 transition-all"
           />
           {error && <p className="text-red-400 text-sm text-center">{error}</p>}
           <button
             type="submit" disabled={loading}
-            className="w-full py-3 rounded-xl bg-[#818cf8] text-white font-medium hover:bg-[#6366f1] disabled:opacity-50 transition-all"
+            className="w-full py-3 rounded-xl bg-[#2563eb] text-white font-medium hover:bg-[#2563eb] disabled:opacity-50 transition-all"
           >
             {loading ? "...جاري" : "تسجيل الدخول"}
           </button>

@@ -225,9 +225,9 @@ export default function InvoicesPage() {
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
-            <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => setTab("sales")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مبيعات</button>
-              <button onClick={() => setTab("purchase")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مشتريات</button>
+            <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+              <button onClick={() => setTab("sales")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "sales" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>مبيعات</button>
+              <button onClick={() => setTab("purchase")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "purchase" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>مشتريات</button>
             </div>
             <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="input-field max-w-[140px] cursor-pointer">
               <option value="">كل الحالات</option>
@@ -241,12 +241,12 @@ export default function InvoicesPage() {
             <GlassButton onClick={openAdd}>+ {tab === "sales" ? "فاتورة مبيعات" : "فاتورة مشتريات"}</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {invoices.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد فواتير</p>
           ) : (
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">
@@ -273,9 +273,9 @@ export default function InvoicesPage() {
                       <td className="px-4 py-3 text-emerald-700 font-mono text-xs font-medium">{inv.total_amount.toFixed(2)}</td>
                       <td className="px-4 py-3">
                         <span className={`text-[11px] px-2 py-0.5 rounded-full border ${
-                          inv.status === "draft" ? "text-amber-700 bg-amber-500/15 border-amber-500/20" :
-                          inv.status === "paid" ? "text-emerald-700 bg-emerald-500/15 border-emerald-500/20" :
-                          "text-blue-700 bg-blue-500/15 border-blue-500/20"
+                          inv.status === "draft" ? "text-amber-700 bg-amber-50 border-amber-200" :
+                          inv.status === "paid" ? "text-emerald-700 bg-emerald-50 border-emerald-200" :
+                          "text-blue-700 bg-blue-50 border-blue-200"
                         }`}>
                           {inv.status === "draft" ? "مسودة" : inv.status === "paid" ? "مدفوعة" : "غير مدفوعة"}
                         </span>
@@ -287,7 +287,7 @@ export default function InvoicesPage() {
                             <>
                               <button onClick={() => { setPostedResult(null); postInvoice(inv.id); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 transition-all text-xs" title="ترحيل">✓</button>
                               <button onClick={() => openEdit(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs" title="تعديل">⚙</button>
-                              <button onClick={() => setDeleteConfirm(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs" title="حذف">✕</button>
+                              <button onClick={() => setDeleteConfirm(inv)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-600 transition-all text-xs" title="حذف">✕</button>
                             </>
                           )}
                         </div>
@@ -342,7 +342,7 @@ export default function InvoicesPage() {
                   <h3 className="text-gray-800 text-sm font-medium">بنود الفاتورة</h3>
                   <GlassButton onClick={() => setFormLines(p => [...p, newLine()])} className=" text-xs !px-3 !py-1">+ بند</GlassButton>
                 </div>
-                <div className="overflow-x-auto rounded-2xl bg-black/10">
+                <div className="overflow-x-auto rounded-2xl bg-gray-50">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-gray-50">
@@ -385,7 +385,7 @@ export default function InvoicesPage() {
                             <td className="px-3 py-1.5 text-gray-800 font-mono text-xs">{c.total.toFixed(2)}</td>
                             <td className="px-3 py-1.5">
                               {formLines.length > 1 && (
-                                <button onClick={() => setFormLines(p => p.filter(l => l._key !== line._key))} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-400 hover:text-red-300 transition-all text-xs">✕</button>
+                                <button onClick={() => setFormLines(p => p.filter(l => l._key !== line._key))} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-400 hover:text-red-600 transition-all text-xs">✕</button>
                               )}
                             </td>
                           </tr>
@@ -433,13 +433,13 @@ export default function InvoicesPage() {
               <div><span className="text-gray-400">التاريخ:</span> <span className="text-gray-800">{viewInvoice.invoice_date}</span></div>
               <div><span className="text-gray-400">استحقاق:</span> <span className="text-gray-800">{viewInvoice.due_date}</span></div>
               <div><span className="text-gray-400">الحالة:</span> <span className={`text-[11px] px-2 py-0.5 rounded-full border ${
-                viewInvoice.status === "draft" ? "text-amber-700 bg-amber-500/15 border-amber-500/20" :
-                viewInvoice.status === "paid" ? "text-emerald-700 bg-emerald-500/15 border-emerald-500/20" : "text-blue-700 bg-blue-500/15 border-blue-500/20"
+                viewInvoice.status === "draft" ? "text-amber-700 bg-amber-50 border-amber-200" :
+                viewInvoice.status === "paid" ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-blue-700 bg-blue-50 border-blue-200"
               }`}>{viewInvoice.status === "draft" ? "مسودة" : viewInvoice.status === "paid" ? "مدفوعة" : "غير مدفوعة"}</span></div>
               {viewInvoice.zatca_uuid && <div className="col-span-2"><span className="text-gray-400">ZATCA UUID:</span> <span className="text-gray-500 text-xs font-mono">{viewInvoice.zatca_uuid}</span></div>}
               {viewInvoice.notes && <div className="col-span-3"><span className="text-gray-400">ملاحظات:</span> <span className="text-gray-700">{viewInvoice.notes}</span></div>}
             </div>
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">

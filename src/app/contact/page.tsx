@@ -1,97 +1,61 @@
-﻿"use client";
-
-import { useState } from "react";
-import GlassCard from "@/components/GlassCard";
-import GlassButton from "@/components/GlassButton";
-import GlassInput from "@/components/GlassInput";
+﻿import GlassCard from "@/components/GlassCard";
 
 export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess("");
-    try {
-      const r = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, subject, message }) });
-      if (!r.ok) throw new Error("Failed to send");
-      setSuccess("Message sent! We will get back to you soon.");
-      setName(""); setEmail(""); setSubject(""); setMessage("");
-    } catch {
-      setSuccess("");
-    }
-    setLoading(false);
-  }
-
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-16">
+    <div className="flex flex-col px-8 py-16 gap-16">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-12 gap-6">
-          <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-gray-900">
-            Get in Touch
-          </h1>
-          <p className="text-lg text-gray-600 max-w-xl leading-relaxed">
-            Have a project in mind? We would love to hear from you. Send us a message and we will respond as soon as possible.
+          <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 text-2xl">◉</div>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900">اتصل بنا</h1>
+          <p className="text-lg text-gray-500 max-w-xl leading-relaxed">
+            فريقنا جاهز للإجابة على استفساراتك على مدار الساعة
           </p>
         </GlassCard>
       </section>
 
       <section className="w-full grid sm:grid-cols-2 gap-6">
-        <GlassCard className="p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Send a Message</h2>
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Name</label>
-                <GlassInput type="text" placeholder="Your name" value={name} onChange={e => setName(e.target.value)} required />
+        <GlassCard className="p-8 flex flex-col gap-6">
+          <h2 className="text-xl font-semibold text-gray-900">معلومات الاتصال</h2>
+          <div className="flex flex-col gap-4">
+            {[
+              { label: "البريد الإلكتروني", value: "info@acc-software.com", icon: "✉" },
+              { label: "الهاتف", value: "+966 11 503 0301", icon: "✆" },
+              { label: "الموقع", value: "الرياض، المملكة العربية السعودية", icon: "⌂" },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">{item.icon}</div>
+                <div>
+                  <p className="text-gray-400 text-xs">{item.label}</p>
+                  <p className="text-gray-800 text-sm">{item.value}</p>
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-gray-600 text-sm">Email</label>
-                <GlassInput type="email" placeholder="your@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-600 text-sm">Subject</label>
-              <GlassInput type="text" placeholder="How can we help?" value={subject} onChange={e => setSubject(e.target.value)} required />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-gray-600 text-sm">Message</label>
-              <textarea
-                className="input-field min-h-[120px] resize-none"
-                placeholder="Tell us about your project..."
-                rows={4}
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                required
-              />
-            </div>
-            {success && <p className="text-emerald-700 text-sm">{success}</p>}
-            <GlassButton type="submit" disabled={loading} className="mt-2 self-start">{loading ? "Sending..." : "Send Message"}</GlassButton>
-          </form>
+            ))}
+          </div>
         </GlassCard>
+        <GlassCard className="p-8 flex flex-col gap-6">
+          <h2 className="text-xl font-semibold text-gray-900">ساعات العمل</h2>
+          <div className="flex flex-col gap-4">
+            {[
+              { day: "الأحد - الخميس", time: "9:00 ص - 6:00 م" },
+              { day: "الجمعة", time: "مغلق" },
+              { day: "السبت", time: "10:00 ص - 2:00 م" },
+            ].map((item) => (
+              <div key={item.day} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                <span className="text-gray-800 text-sm">{item.day}</span>
+                <span className="text-gray-500 text-sm">{item.time}</span>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+      </section>
 
-        <div className="flex flex-col gap-6">
-          <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-violet-700">@</div>
-            <h3 className="text-gray-900 font-semibold">Email</h3>
-            <p className="text-gray-600 text-sm">hello@acc.design</p>
-          </GlassCard>
-          <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-700">âŒ‚</div>
-            <h3 className="text-gray-900 font-semibold">Location</h3>
-            <p className="text-gray-600 text-sm">San Francisco, CA</p>
-          </GlassCard>
-          <GlassCard className="p-6 flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-300">â˜</div>
-            <h3 className="text-gray-900 font-semibold">Phone</h3>
-            <p className="text-gray-600 text-sm">+1 (555) 123-4567</p>
-          </GlassCard>
-        </div>
+      <section className="w-full">
+        <GlassCard className="p-8">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">الدعم الفني</h2>
+          <p className="text-gray-500 text-sm leading-relaxed">
+            فريق الدعم الفني متاح على مدار الساعة طوال أيام الأسبوع عبر الهاتف والبريد الإلكتروني وواتساب. لا تتردد في التواصل معنا لأي استفسار أو مساعدة.
+          </p>
+        </GlassCard>
       </section>
     </div>
   );

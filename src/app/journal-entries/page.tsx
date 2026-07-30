@@ -53,9 +53,9 @@ type EntryLine = {
 };
 
 const statusColors: Record<string, string> = {
-  draft: "text-amber-700 bg-amber-500/15 border-amber-500/20",
-  posted: "text-emerald-700 bg-emerald-500/15 border-emerald-500/20",
-  reversed: "text-red-300 bg-red-500/15 border-red-500/20",
+  draft: "text-amber-700 bg-amber-50 border-amber-200",
+  posted: "text-emerald-700 bg-emerald-50 border-emerald-200",
+  reversed: "text-red-600 bg-red-50 border-red-200",
 };
 const statusLabels: Record<string, string> = { draft: "مسودة", posted: "مرحّل", reversed: "معكوس" };
 
@@ -236,14 +236,14 @@ export default function JournalEntriesPage() {
             <GlassButton onClick={() => { setFormLines([newLine(), newLine()]); setFormDate(new Date().toISOString().split("T")[0]); setFormDesc(""); setFormFY(fiscalYears[0]?.id || ""); setShowForm(true); }}>+ قيد جديد</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {loading ? (
             <p className="text-gray-400 text-center py-12">جاري التحميل...</p>
           ) : entries.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد قيود. أضف قيداً جديداً للبدء</p>
           ) : (
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">
@@ -277,13 +277,13 @@ export default function JournalEntriesPage() {
                           {entry.status === "draft" && (
                             <>
                               <button onClick={() => changeStatus(entry, "post")} disabled={actionLoading === entry.id} className="w-7 h-7 flex items-center justify-center rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 transition-all text-xs" title="ترحيل">✓</button>
-                              <button onClick={() => setConfirmDelete(entry)} disabled={actionLoading === entry.id} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs" title="حذف">✕</button>
+                              <button onClick={() => setConfirmDelete(entry)} disabled={actionLoading === entry.id} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-600 transition-all text-xs" title="حذف">✕</button>
                             </>
                           )}
                           {entry.status === "posted" && (
                             <>
                               <button onClick={() => changeStatus(entry, "unpost")} disabled={actionLoading === entry.id} className="w-7 h-7 flex items-center justify-center rounded-full bg-amber-50 hover:bg-amber-100 text-amber-700 transition-all text-xs" title="إلغاء الترحيل">↩</button>
-                              <button onClick={() => changeStatus(entry, "reverse")} disabled={actionLoading === entry.id} className="w-7 h-7 flex items-center justify-center rounded-full bg-red-500/10 hover:bg-red-500/25 text-red-300 transition-all text-xs" title="عكس">⟳</button>
+                              <button onClick={() => changeStatus(entry, "reverse")} disabled={actionLoading === entry.id} className="w-7 h-7 flex items-center justify-center rounded-full bg-red-500/10 hover:bg-red-500/25 text-red-600 transition-all text-xs" title="عكس">⟳</button>
                             </>
                           )}
                         </div>
@@ -324,7 +324,7 @@ export default function JournalEntriesPage() {
                   <h3 className="text-gray-800 text-sm font-medium">بنود القيد</h3>
                   <GlassButton onClick={addLine} className=" text-xs !px-3 !py-1">+ إضافة بند</GlassButton>
                 </div>
-                <div className="overflow-x-auto rounded-2xl bg-black/10">
+                <div className="overflow-x-auto rounded-2xl bg-gray-50">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-gray-50">
@@ -376,7 +376,7 @@ export default function JournalEntriesPage() {
                           </td>
                           <td className="px-3 py-1.5">
                             {formLines.length > 2 && (
-                              <button onClick={() => removeLine(line._key)} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-400 hover:text-red-300 transition-all text-xs">✕</button>
+                              <button onClick={() => removeLine(line._key)} className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-400 hover:text-red-600 transition-all text-xs">✕</button>
                             )}
                           </td>
                         </tr>
@@ -390,7 +390,7 @@ export default function JournalEntriesPage() {
                         <td className={`px-3 py-2 font-mono text-xs font-medium ${totals.credit > 0 ? "text-amber-700" : "text-gray-400"}`}>{totals.credit.toFixed(3)}</td>
                         <td colSpan={3} className="px-3 py-2">
                           {totals.debit > 0 || totals.credit > 0 ? (
-                            <span className={`text-xs ${balanced ? "text-emerald-700" : "text-red-300"}`}>
+                            <span className={`text-xs ${balanced ? "text-emerald-700" : "text-red-600"}`}>
                               {balanced ? "✓ متوازن" : `✗ غير متوازن (الفارق ${Math.abs(totals.debit - totals.credit).toFixed(3)})`}
                             </span>
                           ) : (
@@ -432,7 +432,7 @@ export default function JournalEntriesPage() {
               </div>
               {viewEntry.description && <div className="col-span-3"><span className="text-gray-400">الوصف:</span> <span className="text-gray-800">{viewEntry.description}</span></div>}
             </div>
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">

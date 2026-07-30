@@ -118,13 +118,13 @@ export default function CostCentersPage() {
           <span className="text-gray-900 font-medium flex-1 truncate">{node.name}</span>
           {depth === 0 && <span className="text-gray-400 text-xs w-24 truncate">{node.activity_name}</span>}
           <span className="text-gray-400 text-xs w-8">{depth + 1}</span>
-          <span className={`text-[11px] px-2 py-0.5 rounded-full border ${node.is_active ? "text-emerald-700 bg-emerald-500/15 border-emerald-500/20" : "text-red-300 bg-red-500/15 border-red-500/20"}`}>
+          <span className={`text-[11px] px-2 py-0.5 rounded-full border ${node.is_active ? "text-emerald-700 bg-emerald-50 border-emerald-200" : "text-red-600 bg-red-50 border-red-200"}`}>
             {node.is_active ? "نشط" : "غير نشط"}
           </span>
           <div className="flex items-center gap-1 shrink-0">
             <button onClick={() => openAddChild(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-sm" title="إضافة فرعي">+</button>
             <button onClick={() => openEdit(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-sm" title="تعديل">⚙</button>
-            <button onClick={() => setDeleteConfirm(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-sm" title="حذف">✕</button>
+            <button onClick={() => setDeleteConfirm(node)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-600 transition-all text-sm" title="حذف">✕</button>
           </div>
         </div>
         {node.children.map(ch => renderNode(ch, depth + 1))}
@@ -151,7 +151,7 @@ export default function CostCentersPage() {
             <GlassButton onClick={openAddRoot}>+ مركز جديد</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {centers.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد مراكز تكلفة. أضف واحداً للبدء</p>
@@ -180,7 +180,7 @@ export default function CostCentersPage() {
           {profitRows.length === 0 ? (
             <p className="text-gray-400 text-sm">لا توجد بيانات للفترة المحددة</p>
           ) : (
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">
@@ -199,8 +199,8 @@ export default function CostCentersPage() {
                         <td className="px-4 py-3 text-gray-600 font-mono text-xs">{row.code}</td>
                         <td className="px-4 py-3 text-gray-900">{row.name}</td>
                         <td className="px-4 py-3 text-emerald-700 font-mono">{row.revenue.toLocaleString()} د.ك</td>
-                        <td className="px-4 py-3 text-red-300 font-mono">{row.expense.toLocaleString()} د.ك</td>
-                        <td className={`px-4 py-3 font-mono font-medium ${isProfit ? "text-emerald-700" : "text-red-300"}`}>
+                        <td className="px-4 py-3 text-red-600 font-mono">{row.expense.toLocaleString()} د.ك</td>
+                        <td className={`px-4 py-3 font-mono font-medium ${isProfit ? "text-emerald-700" : "text-red-600"}`}>
                           {isProfit ? "+" : ""}{row.profit.toLocaleString()} د.ك
                         </td>
                       </tr>

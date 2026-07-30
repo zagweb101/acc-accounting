@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -32,7 +32,7 @@ function buildTree(accounts: Account[]): TreeNode[] {
 }
 
 const typeLabels: Record<string, string> = { asset: "أصل", liability: "خصم", equity: "حق ملكية", revenue: "إيراد", expense: "مصروف" };
-const typeColors: Record<string, string> = { asset: "text-emerald-300 bg-emerald-500/15 border-emerald-500/20", liability: "text-red-300 bg-red-500/15 border-red-500/20", equity: "text-blue-300 bg-blue-500/15 border-blue-500/20", revenue: "text-violet-300 bg-violet-500/15 border-violet-500/20", expense: "text-amber-300 bg-amber-500/15 border-amber-500/20" };
+const typeColors: Record<string, string> = { asset: "text-emerald-300 bg-emerald-500/15 border-emerald-500/20", liability: "text-red-300 bg-red-500/15 border-red-500/20", equity: "text-blue-300 bg-blue-500/15 border-blue-500/20", revenue: "text-blue-300 bg-blue-500/15 border-blue-500/20", expense: "text-amber-300 bg-amber-500/15 border-amber-500/20" };
 const natureLabels: Record<string, string> = { debit: "مدين", credit: "دائن" };
 
 type Props = {
@@ -65,7 +65,7 @@ function TreeNodeView({ node, depth, onAddChild, onEdit, onDelete, search }: { n
 
   return (
     <div>
-      <div className={`glass flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200 ${depth === 0 ? "border-violet-500/30" : ""}`} style={{ marginInlineStart: `${depth * 24}px` }}>
+      <div className={`glass flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200 ${depth === 0 ? "border-blue-500/30" : ""}`} style={{ marginInlineStart: `${depth * 24}px` }}>
         <button onClick={() => setExpanded(!expanded)} className="w-5 h-5 flex items-center justify-center text-white/40 hover:text-white/90 transition-colors shrink-0">
           {showExpander ? (expanded ? "▼" : "▶") : " "}
         </button>

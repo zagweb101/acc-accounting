@@ -105,9 +105,9 @@ export default function ContactsPage() {
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
-            <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
+            <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
               {["all", "customer", "supplier", "both"].map(t => (
-                <button key={t} onClick={() => setFilter(t)} className={`px-4 py-1.5 rounded-xl text-sm font-medium transition-all ${filter === t ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>
+                <button key={t} onClick={() => setFilter(t)} className={`px-4 py-1.5 rounded-xl text-sm font-medium transition-all ${filter === t ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>
                   {t === "all" ? "الكل" : t === "customer" ? "عملاء" : t === "supplier" ? "موردين" : "الاثنين"}
                 </button>
               ))}
@@ -116,7 +116,7 @@ export default function ContactsPage() {
             <GlassButton onClick={openAdd}>+ جهة اتصال</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {filtered.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد جهات اتصال. أضف واحدة للبدأ</p>
@@ -130,13 +130,13 @@ export default function ContactsPage() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <h3 className="text-gray-900 font-semibold text-base">{c.name}</h3>
-                        <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${c.type === "customer" ? "bg-emerald-50 text-emerald-700" : c.type === "supplier" ? "bg-amber-50 text-amber-700" : "bg-violet-50 text-violet-700"}`}>
+                        <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${c.type === "customer" ? "bg-emerald-50 text-emerald-700" : c.type === "supplier" ? "bg-amber-50 text-amber-700" : "bg-blue-50 text-blue-700"}`}>
                           {c.type === "customer" ? "عميل" : c.type === "supplier" ? "مورد" : "عميل ومورد"}
                         </span>
                       </div>
                       <div className="flex gap-1">
                         <button onClick={e => { e.preventDefault(); e.stopPropagation(); openEdit(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all text-xs">⚙</button>
-                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); setDeleteConfirm(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs">✕</button>
+                        <button onClick={e => { e.preventDefault(); e.stopPropagation(); setDeleteConfirm(c); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-600 transition-all text-xs">✕</button>
                       </div>
                     </div>
                     {c.tax_number && <p className="text-gray-400 text-xs font-mono mb-1">ضريبي: {c.tax_number}</p>}
@@ -144,7 +144,7 @@ export default function ContactsPage() {
                     <div className="flex items-center justify-between pt-3 border-t border-gray-200">
                       <div>
                         <p className="text-gray-400 text-xs">المستحق</p>
-                        <p className={`font-mono text-sm font-semibold ${overLimit ? "text-red-300" : overdue ? "text-amber-700" : "text-emerald-700"}`}>
+                        <p className={`font-mono text-sm font-semibold ${overLimit ? "text-red-600" : overdue ? "text-amber-700" : "text-emerald-700"}`}>
                           {c.outstanding.toFixed(2)}
                         </p>
                       </div>
@@ -155,7 +155,7 @@ export default function ContactsPage() {
                         </div>
                       )}
                     </div>
-                    {overLimit && <p className="text-red-300/70 text-xs mt-2">تجاوز الحد الائتماني</p>}
+                    {overLimit && <p className="text-red-600/70 text-xs mt-2">تجاوز الحد الائتماني</p>}
                   </a>
                 );
               })}

@@ -144,20 +144,20 @@ export default function ItemsPage() {
             <select value={activeActivity} onChange={e => setActiveActivity(e.target.value)} className="input-field max-w-[250px] cursor-pointer">
               {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
             </select>
-            <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-              <button onClick={() => setTab("product")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "product" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>منتجات</button>
-              <button onClick={() => setTab("service")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "service" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>خدمات</button>
+            <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+              <button onClick={() => setTab("product")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "product" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>منتجات</button>
+              <button onClick={() => setTab("service")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "service" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>خدمات</button>
             </div>
             <div className="flex-1 min-w-[180px]"><GlassInput placeholder="بحث بالاسم أو SKU..." value={search} onChange={e => setSearch(e.target.value)} /></div>
             <GlassButton onClick={openAdd}>+ {tab === "product" ? "منتج" : "خدمة"}</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {items.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد {tab === "product" ? "منتجات" : "خدمات"}. أضف واحداً للبدأ</p>
           ) : (
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">
@@ -182,7 +182,7 @@ export default function ItemsPage() {
                       {tab === "product" && <td className="px-4 py-3 text-amber-700 font-mono text-xs">{item.cost_price.toFixed(2)}</td>}
                       {tab === "product" && (
                         <td className="px-4 py-3">
-                          <span className={`font-mono text-xs ${item.stock_quantity <= item.reorder_level ? "text-red-300" : "text-gray-800"}`}>
+                          <span className={`font-mono text-xs ${item.stock_quantity <= item.reorder_level ? "text-red-600" : "text-gray-800"}`}>
                             {item.stock_quantity}
                           </span>
                         </td>
@@ -197,7 +197,7 @@ export default function ItemsPage() {
                           {item.type === "product" && (
                             <button onClick={() => { setShowStock(item); setStockMove({ quantity: 0, move_type: "adjustment", description: "" }); }} className="w-7 h-7 flex items-center justify-center rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 transition-all text-xs" title="حركة مخزون">📦</button>
                           )}
-                          <button onClick={() => setDeleteConfirm(item)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-300 transition-all text-xs" title="حذف">✕</button>
+                          <button onClick={() => setDeleteConfirm(item)} className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-50 hover:bg-red-500/20 text-gray-600 hover:text-red-600 transition-all text-xs" title="حذف">✕</button>
                         </div>
                       </td>
                     </tr>

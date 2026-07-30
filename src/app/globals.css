@@ -1,10 +1,18 @@
 @import "tailwindcss";
 
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+  --primary-border: #bfdbfe;
+  --primary-subtle: rgba(37, 99, 235, 0.08);
+}
+
 @theme inline {
   --color-background: #ffffff;
   --color-foreground: #111827;
-  --color-accent: #6366f1;
-  --color-accent-subtle: rgba(99, 102, 241, 0.1);
+  --color-accent: #2563eb;
+  --color-accent-subtle: rgba(37, 99, 235, 0.08);
   --font-sans: "Cairo", sans-serif;
   --font-mono: "Cairo", sans-serif;
 }
@@ -12,42 +20,61 @@
 @utility card {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 @utility card-hover {
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .card-hover:hover {
   border-color: #d1d5db;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 @utility btn {
-  background-color: #6366f1;
-  border: 1px solid #6366f1;
-  border-radius: 0.75rem;
-  padding: 0.625rem 1.25rem;
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
   color: #ffffff;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
+  font-size: 0.875rem;
 }
 
 .btn:hover {
-  background-color: #4f46e5;
-  border-color: #4f46e5;
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+@utility btn-outline {
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 0.875rem;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 @utility input-field {
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  padding: 0.625rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
   color: #111827;
   outline: none;
   width: 100%;
+  font-size: 0.875rem;
+  transition: all 0.15s;
 }
 
 .input-field::placeholder {
@@ -55,8 +82,23 @@
 }
 
 .input-field:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-subtle);
+}
+
+@utility table-wrap {
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+@utility badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 body {

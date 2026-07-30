@@ -39,8 +39,8 @@ type KPI = {
 
 const statusBadge = (status: string) => {
   const styles: Record<string, string> = {
-    paid: "bg-emerald-500/15 border border-emerald-500/20 text-emerald-700 rounded-full px-3 py-1",
-    unpaid: "bg-red-500/15 border border-red-500/20 text-red-300 rounded-full px-3 py-1",
+    paid: "bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-full px-3 py-1",
+    unpaid: "bg-red-50 border border-red-200 text-red-600 rounded-full px-3 py-1",
   };
   const labels: Record<string, string> = { paid: "مدفوع", unpaid: "غير مدفوع" };
   return <span className={styles[status] || "bg-gray-100 border border-gray-200 rounded-full px-3 py-1"}>{labels[status] || status}</span>;
@@ -49,9 +49,9 @@ const statusBadge = (status: string) => {
 const bucketBadge = (bucket: string) => {
   const styles: Record<string, string> = {
     "0-30": "bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-900",
-    "31-60": "bg-amber-500/15 border border-amber-500/20 text-amber-700 rounded-full px-3 py-1",
-    "61-90": "bg-orange-500/15 border border-orange-500/20 text-orange-300 rounded-full px-3 py-1",
-    "90+": "bg-red-500/15 border border-red-500/20 text-red-300 rounded-full px-3 py-1",
+    "31-60": "bg-amber-50 border border-amber-200 text-amber-700 rounded-full px-3 py-1",
+    "61-90": "bg-orange-50 border border-orange-200 text-orange-700 rounded-full px-3 py-1",
+    "90+": "bg-red-50 border border-red-200 text-red-600 rounded-full px-3 py-1",
   };
   return <span className={styles[bucket] || ""}>{bucket} يوم</span>;
 };
@@ -110,14 +110,14 @@ export default function Reviews() {
   ];
 
   const pieData = [
-    { name: "0-30 يوم", value: 30, color: "#60a5fa" },
+    { name: "0-30 يوم", value: 30, color: "#2563eb" },
     { name: "31-60 يوم", value: 20, color: "#f59e0b" },
     { name: "61-90 يوم", value: 15, color: "#f97316" },
-    { name: "90+ يوم", value: 35, color: "#a78bfa" },
+    { name: "90+ يوم", value: 35, color: "#ef4444" },
   ];
 
   return (
-    <div className="flex flex-col items-center px-8 py-16 gap-16" dir="rtl">
+    <div className="flex flex-col px-8 py-16 gap-16" dir="rtl">
       <section className="w-full">
         <GlassCard className="flex flex-col items-center text-center p-12 gap-6">
           <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-gray-900">ميزان المراجعة وأعمار الديون</h1>
@@ -125,13 +125,13 @@ export default function Reviews() {
         </GlassCard>
       </section>
 
-      {error && <div className="w-full"><div className="card px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div></div>}
+      {error && <div className="w-full"><div className="card px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div></div>}
       {kpi && (
         <section className="w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
             { label: "إجمالي الذمم", value: kpi.total_receivable, color: "text-gray-900" },
             { label: "تم التحصيل", value: kpi.total_collected, color: "text-emerald-700" },
-            { label: "متأخر 90+", value: Math.round(kpi.total_receivable * 0.35), color: "text-red-300" },
+            { label: "متأخر 90+", value: Math.round(kpi.total_receivable * 0.35), color: "text-red-600" },
             { label: "نسبة التحصيل", value: kpi.total_sales ? `${Math.round((kpi.total_collected / kpi.total_sales) * 100)}%` : "0%", color: "text-blue-700" },
           ].map((item) => (
             <GlassCard key={item.label} className="p-6 text-center flex flex-col gap-2">
@@ -148,7 +148,7 @@ export default function Reviews() {
             <h2 className="text-2xl font-semibold text-gray-900">الذمم المدينة</h2>
             <span className="text-gray-400 text-sm">{invoices.length} فاتورة</span>
           </div>
-          <div className="overflow-hidden rounded-2xl bg-black/10">
+          <div className="overflow-hidden rounded-2xl bg-gray-50">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50">
@@ -180,7 +180,7 @@ export default function Reviews() {
       <section className="w-full">
         <GlassCard className="p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">أعمار الديون التفصيلية</h2>
-          <div className="overflow-hidden rounded-2xl bg-black/10">
+          <div className="overflow-hidden rounded-2xl bg-gray-50">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50">
@@ -218,7 +218,7 @@ export default function Reviews() {
               <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
               <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
-              <Bar dataKey="value" name="المبلغ" fill="#a78bfa" radius={[8, 8, 0, 0]} />
+              <Bar dataKey="value" name="المبلغ" fill="#2563eb" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </GlassCard>
@@ -231,7 +231,7 @@ export default function Reviews() {
               <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: "#9ca3af", fontSize: 12 }} axisLine={false} tickLine={false} />
               <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f3f4f6" }} />
-              <Line type="monotone" dataKey="collected" name="محصل" stroke="#a78bfa" strokeWidth={2} dot={{ fill: "#a78bfa", r: 4 }} />
+              <Line type="monotone" dataKey="collected" name="محصل" stroke="#2563eb" strokeWidth={2} dot={{ fill: "#2563eb", r: 4 }} />
               <Line type="monotone" dataKey="outstanding" name="معلق" stroke="#34d399" strokeWidth={2} dot={{ fill: "#34d399", r: 4 }} />
             </LineChart>
           </ResponsiveContainer>
@@ -267,7 +267,7 @@ export default function Reviews() {
             {kpi && [
               { label: "إجمالي الذمم المدينة", value: `${kpi.total_receivable.toLocaleString()} د.ك`, color: "text-gray-900" },
               { label: "إجمالي المبيعات", value: `${kpi.total_sales.toLocaleString()} د.ك`, color: "text-emerald-700" },
-              { label: "الذمم الدائنة", value: `${kpi.total_payable.toLocaleString()} د.ك`, color: "text-red-300" },
+              { label: "الذمم الدائنة", value: `${kpi.total_payable.toLocaleString()} د.ك`, color: "text-red-600" },
               { label: "عدد العملاء", value: `${kpi.total_customers} عميل`, color: "text-blue-700" },
               { label: "الفواتير غير المدفوعة", value: `${kpi.unpaid_invoices} فاتورة`, color: "text-amber-700" },
             ].map((item) => (

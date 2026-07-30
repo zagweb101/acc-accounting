@@ -98,12 +98,12 @@ export default function PaymentsPage() {
             <GlassButton onClick={openAdd}>+ دفعة جديدة</GlassButton>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {payments.length === 0 ? (
             <p className="text-gray-400 text-center py-12">لا توجد مدفوعات. سجل دفعة جديدة</p>
           ) : (
-            <div className="overflow-hidden rounded-2xl bg-black/10">
+            <div className="overflow-hidden rounded-2xl bg-gray-50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50">
@@ -123,7 +123,7 @@ export default function PaymentsPage() {
                       <td className="px-4 py-3 text-gray-500 font-mono text-xs">{p.invoice_number || "—"}</td>
                       <td className="px-4 py-3 text-emerald-700 font-mono font-semibold text-xs">{p.amount.toFixed(2)}</td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-xs ${p.method === "cash" ? "bg-blue-50 text-blue-700" : p.method === "bank" ? "bg-violet-50 text-violet-700" : "bg-cyan-500/15 text-cyan-300"}`}>
+                        <span className={`px-2 py-0.5 rounded-full text-xs ${p.method === "cash" ? "bg-blue-50 text-blue-700" : p.method === "bank" ? "bg-blue-50 text-blue-700" : "bg-cyan-500/15 text-cyan-300"}`}>
                           {p.method === "cash" ? "نقداً" : p.method === "bank" ? "تحويل بنكي" : "حوالة"}
                         </span>
                       </td>

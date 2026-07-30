@@ -163,22 +163,22 @@ export default function ReportsPage() {
 
       <section className="w-full">
         <GlassCard className="p-6">
-          <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1 mb-6 w-fit">
-            <button onClick={() => setTab("trial")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "trial" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ميزان المراجعة</button>
-            <button onClick={() => setTab("income")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "income" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>قائمة الدخل</button>
-            <button onClick={() => setTab("cc")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "cc" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>ربحية مراكز التكلفة</button>
-            <button onClick={() => setTab("revenue")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "revenue" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>إيرادات حسب النشاط</button>
+          <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1 mb-6 w-fit">
+            <button onClick={() => setTab("trial")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "trial" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>ميزان المراجعة</button>
+            <button onClick={() => setTab("income")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "income" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>قائمة الدخل</button>
+            <button onClick={() => setTab("cc")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "cc" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>ربحية مراكز التكلفة</button>
+            <button onClick={() => setTab("revenue")} className={`px-5 py-1.5 rounded-xl text-sm font-medium transition-all ${tab === "revenue" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>إيرادات حسب النشاط</button>
           </div>
 
-          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-300 border-red-500/20">{error}</div>}
+          {error && <div className="card mb-4 px-4 py-3 text-sm text-red-600 border-red-500/20">{error}</div>}
 
           {/* ====== Trial Balance ====== */}
           {tab === "trial" && (
             <div>
               <div className="flex items-center gap-4 flex-wrap mb-6">
-                <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-                  <button onClick={() => setTbActivityMode("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "single" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>نشاط واحد</button>
-                  <button onClick={() => setTbActivityMode("all")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "all" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>كل الأنشطة</button>
+                <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                  <button onClick={() => setTbActivityMode("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "single" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>نشاط واحد</button>
+                  <button onClick={() => setTbActivityMode("all")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${tbActivityMode === "all" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>كل الأنشطة</button>
                 </div>
                 {tbActivityMode === "single" && (
                   <select value={tbActivity} onChange={e => setTbActivity(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
@@ -207,14 +207,14 @@ export default function ReportsPage() {
                       { key: "balance", label: "الرصيد" },
                     ])} className="text-xs">تصدير Excel</GlassButton>
                     <div className="flex items-center gap-6 text-sm">
-                      <span className="text-gray-600">مجموع الأرصدة المدينة: <span className="text-red-300 font-mono font-semibold">{tbTotals.debit.toFixed(2)}</span></span>
+                      <span className="text-gray-600">مجموع الأرصدة المدينة: <span className="text-red-600 font-mono font-semibold">{tbTotals.debit.toFixed(2)}</span></span>
                       <span className="text-gray-600">مجموع الأرصدة الدائنة: <span className="text-emerald-700 font-mono font-semibold">{tbTotals.credit.toFixed(2)}</span></span>
-                      <span className={`font-mono font-semibold ${tbTotals.debit === tbTotals.credit ? "text-emerald-700" : "text-red-300"}`}>
+                      <span className={`font-mono font-semibold ${tbTotals.debit === tbTotals.credit ? "text-emerald-700" : "text-red-600"}`}>
                         {tbTotals.debit === tbTotals.credit ? "✓ متوازن" : "✕ غير متوازن"}
                       </span>
                     </div>
                   </div>
-                  <div className="overflow-x-auto rounded-2xl bg-black/10 max-h-[500px] overflow-y-auto">
+                  <div className="overflow-x-auto rounded-2xl bg-gray-50 max-h-[500px] overflow-y-auto">
                     <table className="w-full text-sm">
                       <thead className="sticky top-0">
                         <tr className="bg-gray-100">
@@ -231,12 +231,12 @@ export default function ReportsPage() {
                           <tr key={r.account_id} className={`${i < filteredTB.length - 1 ? "border-b border-gray-200" : ""} ${r.level === 2 ? "" : "bg-gray-50"}`}>
                             <td className={`px-4 py-2.5 font-mono text-xs ${r.level > 2 ? "pr-8" : "text-gray-800"}`}>{r.code}</td>
                             <td className={`px-4 py-2.5 ${r.level > 2 ? "text-gray-700 pr-8" : "text-gray-900 font-medium"}`}>{r.name_ar}</td>
-                            <td className={`px-4 py-2.5 text-xs ${r.account_type === "asset" ? "text-blue-700" : r.account_type === "liability" ? "text-amber-700" : r.account_type === "equity" ? "text-violet-700" : r.account_type === "revenue" ? "text-emerald-700" : "text-red-300"}`}>
+                            <td className={`px-4 py-2.5 text-xs ${r.account_type === "asset" ? "text-blue-700" : r.account_type === "liability" ? "text-amber-700" : r.account_type === "equity" ? "text-blue-700" : r.account_type === "revenue" ? "text-emerald-700" : "text-red-600"}`}>
                               {r.account_type === "asset" ? "أصل" : r.account_type === "liability" ? "خصم" : r.account_type === "equity" ? "حق ملكية" : r.account_type === "revenue" ? "إيراد" : "مصروف"}
                             </td>
-                            <td className="px-4 py-2.5 font-mono text-xs text-red-300/80">{r.total_debit > 0 ? r.total_debit.toFixed(2) : "—"}</td>
-                            <td className="px-4 py-2.5 font-mono text-xs text-emerald-700/80">{r.total_credit > 0 ? r.total_credit.toFixed(2) : "—"}</td>
-                            <td className={`px-4 py-2.5 font-mono text-xs font-semibold text-left ${r.balance >= 0 ? "text-emerald-700" : "text-red-300"}`}>{r.balance.toFixed(2)}</td>
+                            <td className="px-4 py-2.5 font-mono text-xs text-red-600/80">{r.total_debit > 0 ? r.total_debit.toFixed(2) : "—"}</td>
+                            <td className="px-4 py-2.5 font-mono text-xs text-emerald-600">{r.total_credit > 0 ? r.total_credit.toFixed(2) : "—"}</td>
+                            <td className={`px-4 py-2.5 font-mono text-xs font-semibold text-left ${r.balance >= 0 ? "text-emerald-700" : "text-red-600"}`}>{r.balance.toFixed(2)}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -251,9 +251,9 @@ export default function ReportsPage() {
           {tab === "income" && (
             <div>
               <div className="flex items-center gap-4 flex-wrap mb-6">
-                <div className="flex items-center gap-1 bg-black/20 rounded-2xl p-1">
-                  <button onClick={() => setIsType("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "single" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>فترة واحدة</button>
-                  <button onClick={() => setIsType("compare")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "compare" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-400 hover:text-gray-700"}`}>مقارنة</button>
+                <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                  <button onClick={() => setIsType("single")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "single" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>فترة واحدة</button>
+                  <button onClick={() => setIsType("compare")} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${isType === "compare" ? "bg-gray-100 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-700"}`}>مقارنة</button>
                 </div>
                 <select value={isActivity} onChange={e => setIsActivity(e.target.value)} className="input-field max-w-[200px] cursor-pointer">
                   {activities.map(a => <option key={a.id} value={a.id}>{a.name} ({a.code})</option>)}
@@ -284,7 +284,7 @@ export default function ReportsPage() {
                         <p className="text-xs text-gray-400 mt-1">صافي الدخل</p>
                         <div className="flex gap-4 mt-2 text-xs text-gray-500">
                           <span>إيرادات: <span className="text-emerald-700">{isTotals.period.revenue.toFixed(2)}</span></span>
-                          <span>مصروفات: <span className="text-red-300">{isTotals.period.expenses.toFixed(2)}</span></span>
+                          <span>مصروفات: <span className="text-red-600">{isTotals.period.expenses.toFixed(2)}</span></span>
                         </div>
                       </GlassCard>
                       <GlassCard className="p-5">
@@ -293,19 +293,19 @@ export default function ReportsPage() {
                         <p className="text-xs text-gray-400 mt-1">صافي الدخل</p>
                         <div className="flex gap-4 mt-2 text-xs text-gray-500">
                           <span>إيرادات: <span className="text-emerald-700">{isTotals.compare.revenue.toFixed(2)}</span></span>
-                          <span>مصروفات: <span className="text-red-300">{isTotals.compare.expenses.toFixed(2)}</span></span>
+                          <span>مصروفات: <span className="text-red-600">{isTotals.compare.expenses.toFixed(2)}</span></span>
                         </div>
                       </GlassCard>
                     </div>
                   ) : (
                     <div className="flex gap-6 mb-6 px-2">
                       <div><span className="text-gray-600 text-sm">إجمالي الإيرادات: </span><span className="text-emerald-700 font-mono font-semibold">{isTotals.period.revenue.toFixed(2)}</span></div>
-                      <div><span className="text-gray-600 text-sm">إجمالي المصروفات: </span><span className="text-red-300 font-mono font-semibold">{isTotals.period.expenses.toFixed(2)}</span></div>
-                      <div><span className="text-gray-600 text-sm">صافي الدخل: </span><span className={`font-mono font-semibold ${isTotals.period.net >= 0 ? "text-emerald-700" : "text-red-300"}`}>{isTotals.period.net.toFixed(2)}</span></div>
+                      <div><span className="text-gray-600 text-sm">إجمالي المصروفات: </span><span className="text-red-600 font-mono font-semibold">{isTotals.period.expenses.toFixed(2)}</span></div>
+                      <div><span className="text-gray-600 text-sm">صافي الدخل: </span><span className={`font-mono font-semibold ${isTotals.period.net >= 0 ? "text-emerald-700" : "text-red-600"}`}>{isTotals.period.net.toFixed(2)}</span></div>
                     </div>
                   )}
 
-                  <div className="overflow-x-auto rounded-2xl bg-black/10 max-h-[500px] overflow-y-auto">
+                  <div className="overflow-x-auto rounded-2xl bg-gray-50 max-h-[500px] overflow-y-auto">
                     <table className="w-full text-sm">
                       <thead className="sticky top-0">
                         <tr className="bg-gray-100">
@@ -324,17 +324,17 @@ export default function ReportsPage() {
                             <td className="px-4 py-2.5 font-mono text-xs text-gray-500">{r.acc_code}</td>
                             <td className="px-4 py-2.5 text-gray-800">{r.acc_name}</td>
                             <td className="px-4 py-2.5 text-xs">
-                              <span className={`${r.account_type === "revenue" ? "text-emerald-700" : "text-red-300"}`}>
+                              <span className={`${r.account_type === "revenue" ? "text-emerald-700" : "text-red-600"}`}>
                                 {r.account_type === "revenue" ? "إيراد" : "مصروف"}
                               </span>
                             </td>
-                            <td className={`px-4 py-2.5 font-mono text-xs font-semibold ${r.account_type === "revenue" ? "text-emerald-700" : "text-red-300"}`}>{r.amount.toFixed(2)}</td>
+                            <td className={`px-4 py-2.5 font-mono text-xs font-semibold ${r.account_type === "revenue" ? "text-emerald-700" : "text-red-600"}`}>{r.amount.toFixed(2)}</td>
                             {isType === "compare" && <td className="px-4 py-2.5 font-mono text-xs text-gray-500">{r.compare_amount.toFixed(2)}</td>}
                             {isType === "compare" && (
-                              <td className={`px-4 py-2.5 font-mono text-xs ${r.diff >= 0 ? "text-emerald-700" : "text-red-300"}`}>{r.diff.toFixed(2)}</td>
+                              <td className={`px-4 py-2.5 font-mono text-xs ${r.diff >= 0 ? "text-emerald-700" : "text-red-600"}`}>{r.diff.toFixed(2)}</td>
                             )}
                             {isType === "compare" && (
-                              <td className={`px-4 py-2.5 font-mono text-xs ${r.diff_pct !== null ? (parseFloat(r.diff_pct) >= 0 ? "text-emerald-700" : "text-red-300") : "text-gray-400"}`}>
+                              <td className={`px-4 py-2.5 font-mono text-xs ${r.diff_pct !== null ? (parseFloat(r.diff_pct) >= 0 ? "text-emerald-700" : "text-red-600") : "text-gray-400"}`}>
                                 {r.diff_pct !== null ? `${r.diff_pct}%` : "—"}
                               </td>
                             )}
@@ -371,7 +371,7 @@ export default function ReportsPage() {
                     ])} className="text-xs">تصدير Excel</GlassButton>
                   </div>
 
-                  <div className="overflow-x-auto rounded-2xl bg-black/10">
+                  <div className="overflow-x-auto rounded-2xl bg-gray-50">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="bg-gray-100">
@@ -405,7 +405,7 @@ export default function ReportsPage() {
                           <div key={r.activity_id} className="flex items-center gap-4">
                             <span className="text-xs text-gray-500 w-20 truncate">{r.activity_name}</span>
                             <div className="flex-1 h-6 rounded-lg bg-gray-100 overflow-hidden">
-                              <div className="h-full rounded-lg bg-indigo-500 transition-all" style={{ width: `${pct}%` }} />
+                              <div className="h-full rounded-lg bg-blue-500 transition-all" style={{ width: `${pct}%` }} />
                             </div>
                             <span className="text-xs font-mono text-gray-600 w-24 text-left">{r.revenue.toFixed(2)}</span>
                           </div>
@@ -447,18 +447,18 @@ export default function ReportsPage() {
                           </div>
                           <div>
                             <p className="text-gray-400 text-xs">المصروفات</p>
-                            <p className="text-red-300 font-mono font-semibold text-lg">{cc.expense.toFixed(2)}</p>
+                            <p className="text-red-600 font-mono font-semibold text-lg">{cc.expense.toFixed(2)}</p>
                           </div>
                           <div>
                             <p className="text-gray-400 text-xs">صافي الربح</p>
-                            <p className={`font-mono font-semibold text-lg ${cc.profit >= 0 ? "text-emerald-700" : "text-red-300"}`}>{cc.profit.toFixed(2)}</p>
+                            <p className={`font-mono font-semibold text-lg ${cc.profit >= 0 ? "text-emerald-700" : "text-red-600"}`}>{cc.profit.toFixed(2)}</p>
                           </div>
                           <div>
                             <p className="text-gray-400 text-xs">الهامش</p>
-                            <p className={`font-mono font-semibold text-lg ${margin >= 0 ? "text-emerald-700" : "text-red-300"}`}>{margin.toFixed(1)}%</p>
+                            <p className={`font-mono font-semibold text-lg ${margin >= 0 ? "text-emerald-700" : "text-red-600"}`}>{margin.toFixed(1)}%</p>
                           </div>
                         </div>
-                        <div className="mt-4 w-full h-2 rounded-full bg-black/20 overflow-hidden">
+                        <div className="mt-4 w-full h-2 rounded-full bg-gray-100 overflow-hidden">
                           <div className={`h-full rounded-full transition-all ${margin >= 0 ? "bg-gradient-to-l from-emerald-500 to-emerald-400" : "bg-gradient-to-l from-red-500 to-red-400"}`}
                             style={{ width: `${Math.min(Math.abs(margin), 100)}%` }} />
                         </div>
